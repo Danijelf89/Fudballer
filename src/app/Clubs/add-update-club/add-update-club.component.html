@@ -1,0 +1,60 @@
+<div class="card-header addUpdateHeader">
+    {{operationsName}} club
+</div>
+
+<form [formGroup]="addUpdateForm">
+    <div>
+        <mat-form-field [floatLabel]="'auto'">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="clubName">
+            <span class="text-danger" *ngIf="clubName && clubName.invalid">
+                Name is required
+            </span>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field [floatLabel]="'auto'">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city">
+            <span class="text-danger" *ngIf="city && city.invalid">
+                City is required
+            </span>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field [floatLabel]="'auto'">
+            <mat-label>Budget</mat-label>
+            <input matInput type="number" formControlName="budget">
+            <span class="text-danger" *ngIf="budget && budget.invalid">
+                Budget is required
+            </span>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field [floatLabel]="'auto'">
+            <mat-label>Founded</mat-label>
+            <input matInput  formControlName="founded">
+            <span class="text-danger" *ngIf="founded && founded.invalid">
+                Founded is required
+            </span>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field [floatLabel]="'auto'">
+            <mat-label>Owner</mat-label>
+            <input matInput  formControlName="owner">
+            <span class="text-danger" *ngIf="owner && owner.invalid">
+                Owner is required
+            </span>
+        </mat-form-field>
+    </div>
+
+    <h2 style="text-align:center;"><button class="btn btn-primary" style="width:100px; margin-right:10px"
+            (click)='save()'>Ok</button> <button class="btn btn-primary" style="width:100px;"
+            (click)='cancel()'>Cancel</button></h2>
+
+</form>

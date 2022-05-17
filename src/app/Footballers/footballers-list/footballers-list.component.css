@@ -1,0 +1,31 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.min.css";
+
+
+
+
+.mainTableAndHeaders {
+    margin-right: 5px;
+    width: 100%;
+}
+
+.footballerHeader {
+    margin: 20px;
+    height: 15%;
+    text-align: center;
+    font-size: larger;
+    font-weight: 100;
+}
+
+
+.tableHeader {
+    padding: 2px;
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+.tableRows {
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+}

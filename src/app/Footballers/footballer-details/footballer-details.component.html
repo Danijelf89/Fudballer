@@ -1,0 +1,13 @@
+<div class="card-header detailsHeader">
+    Player details:
+</div>
+
+<p class="card-text">Name: {{selectedFootballer.name}}</p>
+<p class="card-text">Surname: {{selectedFootballer.surname}}</p>
+<p class="card-text">Position: {{selectedFootballer.position}}</p>
+<p class="card-text">Date of birth: {{selectedFootballer.dateOfBirth}}</p>
+<p class="card-text">Stars: <fu-starcomponent [rating]='selectedFootballer.rating'></fu-starcomponent>
+</p>
+<p class="card-text">Status: {{selectedFootballer.status}}</p>
+<p class="card-text">Club: {{selectedFootballer.club != null ? selectedFootballer.club.clubName : "-"}}</p>
+<p class="card-text">Price: {{selectedFootballer.price | currency:'EUR':'symbol':'1.2-2'}}</p>

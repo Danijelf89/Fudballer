@@ -1,0 +1,23 @@
+<div class='glavni'>
+  <div class="card-header">
+    <nav>
+      <ul>
+        <li> <button class="btn btn-primary" [routerLink]="['welcomePage']">Welcome </button></li>
+        <li> <button class="btn btn-primary" [routerLink]="['footballersList']">Footballers </button></li>
+        <li> <button class="btn btn-primary" [routerLink]="['clubList']">Clubs </button></li>
+      </ul>
+    </nav>
+
+  </div>
+
+
+  <div>
+
+    <router-outlet></router-outlet>
+  </div>
+
+
+</div>
+
+
+<div class="Footer">Footballer application</div>

@@ -1,0 +1,35 @@
+<div class="clubMain">
+    <div class="mainTableAndHeaders">
+        <div class="card-header clubHeader">
+            Clubs <button class="btn btn-primary" style="float: right;"
+                (click)="addClub()">Add new</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table tableHeader">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Budget</th>
+                        <th>Founded</th>
+                        <th>Owner</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody class="tableRows">
+                    <tr *ngFor="let item of clubs | async" >
+                        <td *ngIf="item.isDefault !=true">{{item.clubName}}</td>
+                        <td *ngIf="item.isDefault !=true">{{item.city}}</td>
+                        <td *ngIf="item.isDefault !=true">{{item.budget | currency:'EUR':'symbol':'1.2-2'}}</td>
+                        <td *ngIf="item.isDefault !=true">{{item.founded}}</td>
+                        <td *ngIf="item.isDefault !=true">{{item.owner}}</td>
+                        <td *ngIf="item.isDefault !=true"><button class="btn btn-primary" style="margin:5px;"
+                            (click) = 'updateClub(item)'> Update</button> <button
+                            class="btn btn-primary" style="margin:5px;" (click)='delete(item)'>Delete
+                        </button> <button class="btn btn-primary" (click)='openDetails(item)'>Details</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

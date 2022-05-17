@@ -1,0 +1,24 @@
+.Footer{
+    background-color: aliceblue;
+}
+
+
+.test{
+    width: 100%;
+    background-image: url('https://www.superiorwallpapers.com/download/gold-football-on-the-stadium-1920x1200.jpg');
+    height: 1000px;
+}
+
+.welcomeHeader{
+    text-align: center;
+}
+
+nav ul{
+    list-style-type: none;
+    text-align: left;
+}
+nav ul li{
+    display: inline-block;
+    margin-right: 5px;
+}
+

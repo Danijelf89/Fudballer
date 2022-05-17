@@ -1,0 +1,45 @@
+<div class="footballersMain">
+    <div class="mainTableAndHeaders">
+        <div class="card-header footballerHeader">
+            Footballers <button class="btn btn-primary" style="float: right;"
+                (click)="addFootballer()">Add new</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table tableHeader">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Position</th>
+                        <th>Date of birth</th>
+                        <th>Rating</th>
+                        <th>Price</th>
+                        <th>Club</th>
+                        <th>Status</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody class="tableRows">
+                    <tr *ngFor="let item of listOfFootballer | async">
+                        <td>{{item.name}}</td>
+                        <td>{{item.surname}}</td>
+                        <td>{{item.position}}</td>
+                        <td>{{item.dateOfBirth}}</td>
+                        <td>
+                            <fu-starcomponent [rating]='item.rating'></fu-starcomponent>
+                        </td>
+                        <td>{{item.price | currency:'EUR':'symbol':'1.2-2'}}</td>
+                        <td>{{item.club !=null ? item.club.clubName : ""}}</td>
+                        <td>{{item.status}}</td>
+                        <td><button class="btn btn-primary" style="margin:5px;"
+                            (click)="updateFootballer(item)"> Update</button> <button
+                                class="btn btn-primary" style="margin:5px;" (click)='delete(item)'>Delete
+                            </button> <button class="btn btn-primary" (click)='openDetails(item)'>Details</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+   
+</div>
