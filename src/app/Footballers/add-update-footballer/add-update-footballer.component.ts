@@ -1,12 +1,10 @@
 
 import { Component, Inject, OnInit } from "@angular/core";
 import { FootballersService } from "../footballers.service";
-import { IFootballers } from "../footballers.model";
 import { Club } from "src/app/Clubs/club";
 import { Subscription } from "rxjs";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { InfodialogComponent } from "src/app/shared/infodialog/infodialog.component";
 import { SpinnerComponentComponent } from "src/app/shared/spinner-component/spinner-component.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 

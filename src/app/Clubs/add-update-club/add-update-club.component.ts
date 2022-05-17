@@ -4,7 +4,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FootballersService } from 'src/app/Footballers/footballers.service';
-import { InfodialogComponent } from 'src/app/shared/infodialog/infodialog.component';
 import { SpinnerComponentComponent } from 'src/app/shared/spinner-component/spinner-component.component';
 
 import { Club } from '../club';
@@ -68,7 +67,7 @@ export class AddUpdateClubComponent implements OnInit {
   save(): void {
 
     if (this.addUpdateForm.valid === false) {
-      this.dialog.open(InfodialogComponent, { data: { name: 'Please fill all the mandatory fields' } });
+      //this.dialog.open(InfodialogComponent, { data: { name: 'Please fill all the mandatory fields' } });
       return;
     }
 
@@ -78,12 +77,12 @@ export class AddUpdateClubComponent implements OnInit {
       this.subscriptions.push(this.con.updateClub(this.club)
         .subscribe((res: any) => {
           dialogspinner.close();
-          this.dialog.open(InfodialogComponent, { data: { name: 'Item has been updated' }, width: "500px" });
+          //this.dialog.open(InfodialogComponent, { data: { name: 'Item has been updated' }, width: "500px" });
           this.dialogRef.close();
         },
           (error) => {
             dialogspinner.close();
-            this.dialog.open(InfodialogComponent, { data: { name: 'Something went wrong' }, width: "500px" });
+           // this.dialog.open(InfodialogComponent, { data: { name: 'Something went wrong' }, width: "500px" });
           }
         ));
     }
@@ -92,12 +91,12 @@ export class AddUpdateClubComponent implements OnInit {
       this.club = this.addUpdateForm.value;
       this.subscriptions.push(this.con.addNewClub(this.club).subscribe((res: any) => {
         dialogspinner.close();
-        this.dialog.open(InfodialogComponent, { data: { name: 'Item has been added' }, width: "500px" });
+       //this.dialog.open(InfodialogComponent, { data: { name: 'Item has been added' }, width: "500px" });
         this.dialogRef.close();
       },
         (error) => {
           dialogspinner.close();
-          this.dialog.open(InfodialogComponent, { data: { name: 'Something went wrong' }, width: "500px" });
+         // this.dialog.open(InfodialogComponent, { data: { name: 'Something went wrong' }, width: "500px" });
         }
       ));
     }
