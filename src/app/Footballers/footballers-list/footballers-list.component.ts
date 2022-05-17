@@ -72,15 +72,11 @@ export class FootballersList extends Base implements OnInit {
     });
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe;
-  }
-
   getFootballers() {
     let dialog = this.mat.open(SpinnerComponentComponent, { disableClose: true });
-    this.subscriptions =  this.service.getFootballers().subscribe(res => {
+    this.service.getFootballers().subscribe(res => {
       this.listOfFootballer = res;
-    });
+    }).unsubscribe;
     dialog.close();
   }
 }

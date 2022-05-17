@@ -1,19 +1,25 @@
+import { OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { SpinnerComponentComponent } from "./spinner-component/spinner-component.component";
 
-export class Base {
+export class Base{
 
     constructor(public dialog: MatDialog, public snackBar: MatSnackBar) { }
-
+   
     delete(method: Observable<any>, listForDelete: Array<any>, id: number): Array<any> {
 
         let dialogSpinner = this.startSpinner();
         method.subscribe((res: any) => {
 
             dialogSpinner.close();
-            this.snackBar.open("Item has been deleted", "");
+            this.snackBar.open("Item has been deleted", "", {
+                duration : 2000,
+                verticalPosition: 'top', // 'top' | 'bottom'
+                horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
+                panelClass: ['red-snackbar'],
+            });
             var index = listForDelete.findIndex(x => x.id);
             listForDelete.splice(index, 1);
             return listForDelete;
@@ -21,11 +27,16 @@ export class Base {
         },
             (error: any) => {
                 dialogSpinner.close();
-                this.snackBar.open("Something went wrong", "");
+                this.snackBar.open("Something went wrong", "", {
+                    duration : 2000,
+                    verticalPosition: 'top', // 'top' | 'bottom'
+                    horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
+                    panelClass: ['red-snackbar'],
+                });
                 return listForDelete;
             }
 
-        );
+        ).unsubscribe;
         return listForDelete;
     }
 
@@ -35,7 +46,12 @@ export class Base {
         method.subscribe((res: any) => {
 
             dialogSpinner.close();
-            this.snackBar.open("Item has been updated", "");
+            this.snackBar.open("Item has been updated", "", {
+                duration : 2000,
+                verticalPosition: 'top', // 'top' | 'bottom'
+                horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
+                panelClass: ['red-snackbar'],
+            });
             var index = listForupdate.findIndex(x => x.id === item.id);
             listForupdate[index] = item;
             return listForupdate;
@@ -43,21 +59,31 @@ export class Base {
         },
             (error: any) => {
                 dialogSpinner.close();
-                this.snackBar.open("Something went wrong", "");
+                this.snackBar.open("Something went wrong", "", {
+                    duration : 2000,
+                    verticalPosition: 'top', // 'top' | 'bottom'
+                    horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
+                    panelClass: ['red-snackbar'],
+                });
                 return listForupdate;
             }
 
-        );
+        ).unsubscribe;
         return listForupdate;
     }
 
     add(method: Observable<any>, listForAdd: Array<any>, item: any): Array<any> {
 
         let dialogSpinner = this.startSpinner();
-        method.subscribe((res: any) => {
+            method.subscribe((res: any) => {
 
             dialogSpinner.close();
-            this.snackBar.open("Item has been added", "");
+            this.snackBar.open("Item has been added", "", {
+                duration : 2000,
+                verticalPosition: 'top', // 'top' | 'bottom'
+                horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
+                panelClass: ['red-snackbar'],
+            });
             //item.status = this.setStatus(item.club.clubName);
             listForAdd.push(item);
             return listForAdd;
@@ -65,11 +91,16 @@ export class Base {
         },
             (error: any) => {
                 dialogSpinner.close();
-                this.snackBar.open("Something went wrong", "");
+                this.snackBar.open("Something went wrong", "", {
+                    duration : 2000,
+                    verticalPosition: 'top', // 'top' | 'bottom'
+                    horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
+                    panelClass: ['red-snackbar'],
+                });
                 return listForAdd;
             }
 
-        );
+        ).unsubscribe;
         return listForAdd;
     }
 
@@ -82,7 +113,7 @@ export class Base {
         return 'Free agent';
     }
 
-    startSpinner() : any{
-       return this.dialog.open(SpinnerComponentComponent, { disableClose: true });
+    startSpinner(): any {
+        return this.dialog.open(SpinnerComponentComponent, { disableClose: true });
     }
 }

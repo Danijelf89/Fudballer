@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FootballersService } from 'src/app/Footballers/footballers.service';
@@ -17,12 +18,10 @@ import { Club } from '../club';
 export class AddUpdateClubComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<AddUpdateClubComponent>, private con: FootballersService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private snack : MatSnackBar) { }
 
   operationsName: string = '';
-  club: Club = {} as Club;
-  subscriptions: Subscription[] = [];
-
+  
   addUpdateForm = new FormGroup({
     clubName: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
@@ -55,7 +54,7 @@ export class AddUpdateClubComponent implements OnInit {
   ngOnInit(): void {
     this.operationsName = this.data.operation;
 
-    if (this.operationsName === "Update") {
+    if (Object.keys(this.data.club).length !== 0) {
       this.addUpdateForm.patchValue({
         clubName: this.data.club.clubName, city: this.data.club.city,
         budget: this.data.club.budget, founded: this.data.club.founded,
@@ -67,46 +66,17 @@ export class AddUpdateClubComponent implements OnInit {
   save(): void {
 
     if (this.addUpdateForm.valid === false) {
-      //this.dialog.open(InfodialogComponent, { data: { name: 'Please fill all the mandatory fields' } });
+      this.snack.open('Please fill all the mandatory fields');
       return;
     }
 
-    if (this.operationsName === "Update") {
-      this.club = this.addUpdateForm.value;
-      let dialogspinner = this.dialog.open(SpinnerComponentComponent, { disableClose: true });
-      this.subscriptions.push(this.con.updateClub(this.club)
-        .subscribe((res: any) => {
-          dialogspinner.close();
-          //this.dialog.open(InfodialogComponent, { data: { name: 'Item has been updated' }, width: "500px" });
-          this.dialogRef.close();
-        },
-          (error) => {
-            dialogspinner.close();
-           // this.dialog.open(InfodialogComponent, { data: { name: 'Something went wrong' }, width: "500px" });
-          }
-        ));
-    }
-    else {
-      let dialogspinner = this.dialog.open(SpinnerComponentComponent, { disableClose: true });
-      this.club = this.addUpdateForm.value;
-      this.subscriptions.push(this.con.addNewClub(this.club).subscribe((res: any) => {
-        dialogspinner.close();
-       //this.dialog.open(InfodialogComponent, { data: { name: 'Item has been added' }, width: "500px" });
-        this.dialogRef.close();
-      },
-        (error) => {
-          dialogspinner.close();
-         // this.dialog.open(InfodialogComponent, { data: { name: 'Something went wrong' }, width: "500px" });
-        }
-      ));
-    }
+    this.dialogRef.close({item : this.addUpdateForm.value})
   }
 
   cancel() {
-    this.dialogRef.close();
+    this.dialogRef.close({item : {}});
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

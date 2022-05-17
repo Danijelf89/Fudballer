@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subscription } from 'rxjs';
 import { FootballersService } from 'src/app/Footballers/footballers.service';
+import { Base } from 'src/app/shared/base';
 import { DeleteComponent } from 'src/app/shared/delete/delete.component';
 import { SpinnerComponentComponent } from 'src/app/shared/spinner-component/spinner-component.component';
 import { AddUpdateClubComponent } from '../add-update-club/add-update-club.component';
@@ -13,50 +15,56 @@ import { ClubDetailsComponent } from '../club-details/club-details.component';
   templateUrl: './clubs-list.component.html',
   styleUrls: ['./clubs-list.component.css']
 })
-export class ClubsListComponent implements OnInit {
+export class ClubsListComponent extends Base implements OnInit {
 
-  constructor(public service: FootballersService, private dialogRef: MatDialog) { }
+  constructor(public service: FootballersService, public mat: MatDialog, public snack: MatSnackBar) {
+    super(mat, snack);
+  }
 
-  clubs: Observable<Club[]> = new Observable;
-  subscriptions: Subscription[] = [];
+  clubs: Club[] = [];
+  subscriptions: Subscription = new Subscription;
 
   ngOnInit(): void {
 
     this.getClubs();
   }
 
-  delete(item: Club) {
-    let di = this.dialogRef.open(DeleteComponent, { data: { item, name: 'club' }, width: '500px', disableClose: true });
+  deleteClub(item: Club) {
+    let di = this.dialog.open(DeleteComponent, { data: { message: 'Are you sure you want do delete this club?', name: item.clubName }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
-      this.getClubs();
+      if (res.result === true) {
+        this.clubs = super.delete(this.service.deleteClub(item.id), this.clubs, item.id);
+      }
     });
   }
 
   openDetails(item: Club) {
-    this.dialogRef.open(ClubDetailsComponent, { data: item, width: '500px' });
+    this.dialog.open(ClubDetailsComponent, { data: item, width: '500px' });
   }
 
   updateClub(item: Club) {
-    let di = this.dialogRef.open(AddUpdateClubComponent, { data: { club: item, operation: 'Update' }, width: '500px', disableClose: true });
+    let di = this.dialog.open(AddUpdateClubComponent, { data: { club: item, operation: 'Update club' }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
-      this.getClubs();
+      if (Object.keys(res.item).length !== 0) {
+        this.clubs = super.update(this.service.updateClub(res.item), this.clubs, res.item);
+      }
     });
   }
 
   addClub() {
-    let di = this.dialogRef.open(AddUpdateClubComponent, { data: { operation: 'Add' }, width: '500px', disableClose: true });
+    let di = this.dialog.open(AddUpdateClubComponent, { data: { club: {}, operation: 'Add new club' }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
-      this.getClubs();
+      if (Object.keys(res.item).length !== 0) {
+        this.clubs = super.add(this.service.addNewClub(res.item), this.clubs, res.item);
+      }
     });
   }
 
-  getClubs(){
-    let dialog =  this.dialogRef.open(SpinnerComponentComponent, {disableClose : true});
-    this.clubs = this.service.getClubs();
+  getClubs() {
+    let dialog = this.dialog.open(SpinnerComponentComponent, { disableClose: true });
+    this.service.getClubs().subscribe(res => {
+      this.clubs = res;
+    }).unsubscribe;
     dialog.close();
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }
