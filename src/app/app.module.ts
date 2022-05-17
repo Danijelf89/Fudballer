@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { DeleteComponent } from './shared/delete/delete.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { InfodialogComponent } from './shared/infodialog/infodialog.component';
 import { SpinnerComponentComponent } from './shared/spinner-component/spinner-component.component';
 import { StarcomponentComponent } from './shared/starcomponent/starcomponent.component';
@@ -50,6 +51,7 @@ import { StarcomponentComponent } from './shared/starcomponent/starcomponent.com
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: 'footballersList', component: FootballersList },
       { path: 'welcomePage', component: WelcomeComponent },

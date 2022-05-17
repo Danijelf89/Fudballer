@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dial
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { InfodialogComponent } from "src/app/shared/infodialog/infodialog.component";
 import { SpinnerComponentComponent } from "src/app/shared/spinner-component/spinner-component.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 
 @Component({
@@ -19,13 +20,11 @@ import { SpinnerComponentComponent } from "src/app/shared/spinner-component/spin
 
 export class AddOrUpdateFootballer implements OnInit {
     constructor(public dialogRef: MatDialogRef<AddOrUpdateFootballer>, private con: FootballersService,
-        @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private fb: FormBuilder
+        @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private fb: FormBuilder,private snack : MatSnackBar
     ) { }
 
     operationsName: string = '';
-    footbaler: IFootballers = {} as IFootballers;
-    //moze sa new subsciption
-    subscriptions: Subscription[] = [];
+    subscriptions: Subscription = new Subscription;
     lisClubs: Club[] = [];
 
     addUpdateForm = new FormGroup({
@@ -72,7 +71,7 @@ export class AddOrUpdateFootballer implements OnInit {
 
         let dialogspinner = this.dialog.open(SpinnerComponentComponent, { disableClose: true });
         this.operationsName = this.data.operation;
-        if (this.operationsName === "Update") {
+        if (Object.keys(this.data.footballer).length !== 0) {
             this.addUpdateForm.patchValue({
                 name: this.data.footballer.name, surname: this.data.footballer.surname,
                 position: this.data.footballer.position, dateOfBirth: this.data.footballer.dateOfBirth,
@@ -80,64 +79,29 @@ export class AddOrUpdateFootballer implements OnInit {
                 clubId: this.data.footballer.clubId, id: this.data.footballer.id, club: this.data.footballer.club
             });
         }
-        this.subscriptions.push(this.con.getClubs().subscribe(res => {
+        this.subscriptions = this.con.getClubs().subscribe(res => {
             this.lisClubs = res;
-        }));
+        });
 
         dialogspinner.close()
     }
 
-    //vratiti u komponentu
     save(): void {
         if (this.addUpdateForm.valid === false) {
-            this.dialog.open(InfodialogComponent, { data: { name: 'Please fill all the mandatory fields' } });
+
+            this.snack.open("Please fill all the mandatory fields");
             return;
         }
 
-        if (this.operationsName === "Update") {
-            this.footbaler = this.addUpdateForm.value;
-            let dialogspinner = this.dialog.open(SpinnerComponentComponent, { disableClose: true });
+        this.dialogRef.close({item : this.addUpdateForm.value});
 
-            this.subscriptions.push(this.con.updateFootballer(this.footbaler).
-                subscribe((res: any) => {
-                    this.dialog.open(InfodialogComponent, { data: { name: 'Item has been updated' }, width: "500px" });
-                    this.dialogRef.close();
-                    dialogspinner.close();
-                    return;
-                },
-                    (error) => {
-                        this.dialog.open(InfodialogComponent, { data: { name: 'Something went wrong' }, width: "500px" });
-                        dialogspinner.close();
-                        return;
-                    }
-                ));
-        }
-        else {
-
-            let dialogspinner = this.dialog.open(SpinnerComponentComponent, { disableClose: true });
-            this.footbaler = this.addUpdateForm.value;
-            this.footbaler.clubId = this.addUpdateForm.value.club.id;
-            this.subscriptions.push(this.con.addNewFootballer(this.footbaler).subscribe((res: any) => {
-                dialogspinner.close();
-                this.dialog.open(InfodialogComponent, { data: { name: 'Item has been added' }, width: "500px" });
-                this.dialogRef.close();
-                return;
-
-            },
-                (error) => {
-                    dialogspinner.close();
-                    this.dialog.open(InfodialogComponent, { data: { name: 'Something went wrong' }, width: "500px" });
-                    return;
-                }
-            ));
-        }
     }
 
     cancel() {
-        this.dialogRef.close();
+        this.dialogRef.close({item : {}});
     }
 
     ngOnDestroy() {
-        this.subscriptions.forEach(subscription => subscription.unsubscribe());
+        this.subscriptions.unsubscribe;
     }
 }

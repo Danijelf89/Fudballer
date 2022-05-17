@@ -10,6 +10,9 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { AddOrUpdateFootballer } from "../add-update-footballer/add-update-footballer.component";
 import { DeleteComponent } from "src/app/shared/delete/delete.component";
 import { SpinnerComponentComponent } from "src/app/shared/spinner-component/spinner-component.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Base } from "src/app/shared/base";
+import { basename } from "path";
 
 
 @Component({
@@ -19,13 +22,15 @@ import { SpinnerComponentComponent } from "src/app/shared/spinner-component/spin
 
 })
 
-export class FootballersList implements OnInit {
+export class FootballersList extends Base implements OnInit {
 
-  constructor(public service: FootballersService, private dialogRef: MatDialog) { }
+  constructor(public service: FootballersService, public mat: MatDialog, snack: MatSnackBar) {
+    super(mat, snack);
+  }
 
-  listOfFootballer: Observable<IFootballers[]> = new Observable;
-  subscriptions: Subscription[] = [];
-  showSpinner : boolean = false;
+  listOfFootballer: IFootballers[] = [];
+  subscriptions: Subscription = new Subscription;
+  showSpinner: boolean = false;
 
   ngOnInit() {
 
@@ -33,39 +38,49 @@ export class FootballersList implements OnInit {
   }
 
   openDetails(item: IFootballers) {
-    this.dialogRef.open(FootballerDetails, { data: item, width: '500px' });
+    this.mat.open(FootballerDetails, { data: item, width: '500px' });
   }
 
-  delete(item: IFootballers) {
-    
-    let di = this.dialogRef.open(DeleteComponent, { data: { item, name: 'footballer' }, width: '500px', disableClose: true });
+  deleteFootballer(item: IFootballers) {
+    let di = this.mat.open(DeleteComponent, { data: { message: 'Are you sure you want do delete this footballer?', name: item.name + " " + item.surname }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
-      this.getFootballers();
-    });
-   
+      if (res.result === true) {
+        this.listOfFootballer = super.delete(this.service.deleteFootballer(item.id), this.listOfFootballer, item.id);
+      }
+    })
   }
 
   addFootballer() {
-    let di = this.dialogRef.open(AddOrUpdateFootballer, { data: { operation: 'Add' }, width: "500px", disableClose: true });
+    let di = this.mat.open(AddOrUpdateFootballer, { data: { footballer : {}, operation: 'Add new footballer' }, width: "500px", disableClose: true });
     di.afterClosed().subscribe(res => {
-      this.getFootballers();
+      if(Object.keys(res.item).length !== 0){
+        res.item.clubId = res.item.club.id;
+        res.item.status = super.setStatus(res.item.club.clubName);
+        this.listOfFootballer = super.add(this.service.addNewFootballer(res.item), this.listOfFootballer, res.item);
+
+      }
     });
   }
 
   updateFootballer(item: IFootballers) {
-    let di = this.dialogRef.open(AddOrUpdateFootballer, { data: { footballer: item, operation: 'Update' }, width: "500px", disableClose: true });
+    let di = this.mat.open(AddOrUpdateFootballer, { data: { footballer: item, operation: 'Update footballer' }, width: "500px", disableClose: true });
     di.afterClosed().subscribe(res => {
-      this.getFootballers();
+      if (Object.keys(res.item).length !== 0) {
+        res.item.status = super.setStatus(res.item.club.clubName);
+        this.listOfFootballer = super.update(this.service.updateFootballer(res.item), this.listOfFootballer, res.item);
+      }
     });
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions.unsubscribe;
   }
 
-  getFootballers(){
-    let dialog =  this.dialogRef.open(SpinnerComponentComponent, {disableClose : true});
-    this.listOfFootballer = this.service.getFootballers();
+  getFootballers() {
+    let dialog = this.mat.open(SpinnerComponentComponent, { disableClose: true });
+    this.subscriptions =  this.service.getFootballers().subscribe(res => {
+      this.listOfFootballer = res;
+    });
     dialog.close();
   }
 }
