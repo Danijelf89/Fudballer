@@ -18,7 +18,6 @@ export class Base{
                 duration : 2000,
                 verticalPosition: 'top', // 'top' | 'bottom'
                 horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
-                panelClass: ['red-snackbar'],
             });
             var index = listForDelete.findIndex(x => x.id);
             listForDelete.splice(index, 1);
@@ -31,7 +30,6 @@ export class Base{
                     duration : 2000,
                     verticalPosition: 'top', // 'top' | 'bottom'
                     horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
-                    panelClass: ['red-snackbar'],
                 });
                 return listForDelete;
             }
@@ -50,7 +48,6 @@ export class Base{
                 duration : 2000,
                 verticalPosition: 'top', // 'top' | 'bottom'
                 horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
-                panelClass: ['red-snackbar'],
             });
             var index = listForupdate.findIndex(x => x.id === item.id);
             listForupdate[index] = item;
@@ -63,7 +60,6 @@ export class Base{
                     duration : 2000,
                     verticalPosition: 'top', // 'top' | 'bottom'
                     horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
-                    panelClass: ['red-snackbar'],
                 });
                 return listForupdate;
             }
@@ -82,7 +78,6 @@ export class Base{
                 duration : 2000,
                 verticalPosition: 'top', // 'top' | 'bottom'
                 horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
-                panelClass: ['red-snackbar'],
             });
             //item.status = this.setStatus(item.club.clubName);
             listForAdd.push(item);
@@ -95,7 +90,6 @@ export class Base{
                     duration : 2000,
                     verticalPosition: 'top', // 'top' | 'bottom'
                     horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
-                    panelClass: ['red-snackbar'],
                 });
                 return listForAdd;
             }
@@ -107,9 +101,7 @@ export class Base{
     setStatus(club: string): string {
         if (club !== "-") {
             return 'Under contract'
-
         }
-
         return 'Free agent';
     }
 
