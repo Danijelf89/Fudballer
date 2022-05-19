@@ -28,7 +28,7 @@ export class ClubsListComponent extends Base implements OnInit {
 
   ngOnInit(): void {
 
-    //this.getClubs();
+    this.getClubs();
   }
   
   deleteClub(item: Club) {

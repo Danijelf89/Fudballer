@@ -48,9 +48,9 @@ describe('ClubsListComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ClubsListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+   // fixture = TestBed.createComponent(ClubsListComponent);
+    //component = fixture.componentInstance;
+   // fixture.detectChanges();
     service = TestBed.get(FootballersService);
   });
 
@@ -59,7 +59,7 @@ describe('ClubsListComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
 
-   // let proSpy = spyOn(service, 'getClubs').and.returnValue(of(mockList));
+    //let proSpy = spyOn(service, 'getClubs').and.returnValue(of(mockList));
    //fixture.detectChanges();
 
     //expect(proSpy).toHaveBeenCalled();
