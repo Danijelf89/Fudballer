@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subscription } from 'rxjs';
 import { FootballersService } from 'src/app/Footballers/footballers.service';
@@ -21,14 +21,16 @@ export class ClubsListComponent extends Base implements OnInit {
     super(mat, snack);
   }
 
+  dialogRef : any;
+
   clubs: Club[] = [];
   subscriptions: Subscription = new Subscription;
 
   ngOnInit(): void {
 
-    this.getClubs();
+    //this.getClubs();
   }
-
+  
   deleteClub(item: Club) {
     let di = this.dialog.open(DeleteComponent, { data: { message: 'Are you sure you want do delete this club?', name: item.clubName }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
@@ -39,7 +41,7 @@ export class ClubsListComponent extends Base implements OnInit {
   }
 
   openDetails(item: Club) {
-    this.dialog.open(ClubDetailsComponent, { data: item, width: '500px' });
+    this.mat.open(ClubDetailsComponent, { data: item, width: '500px' });
   }
 
   updateClub(item: Club) {
@@ -51,6 +53,8 @@ export class ClubsListComponent extends Base implements OnInit {
     });
   }
 
+  
+
   addClub() {
     let di = this.dialog.open(AddUpdateClubComponent, { data: { club: {}, operation: 'Add new club' }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
@@ -61,10 +65,16 @@ export class ClubsListComponent extends Base implements OnInit {
   }
 
   getClubs() {
-    let dialog = this.dialog.open(SpinnerComponentComponent, { disableClose: true });
-    this.service.getClubs().subscribe(res => {
+    //this.dialogRef = this.dialog.open(SpinnerComponentComponent, { disableClose: true });
+
+    let spinnDialog = this.startSpinner();
+    this.subscriptions = this.service.getClubs().subscribe(res => {
       this.clubs = res;
-    }).unsubscribe;
-    dialog.close();
+    });
+   this.closeSpinner(spinnDialog);
   }
+
+ngOnDestroy(){
+ // this.subscriptions.unsubscribe;
+}
 }

@@ -1,7 +1,11 @@
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Base } from './base';
 
 describe('Base', () => {
   it('should create an instance', () => {
-    expect(new Base()).toBeTruthy();
+    mat : MatDialog;
+    sna : MatSnackBar
+  //  expect(new Base(this.mat, sna)).toBeTruthy();
   });
 });

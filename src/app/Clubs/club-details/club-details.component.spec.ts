@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ClubDetailsComponent } from './club-details.component';
 
@@ -8,7 +9,8 @@ describe('ClubDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClubDetailsComponent ]
+      declarations: [ ClubDetailsComponent ],
+      providers: [MatDialogModule, { provide: MAT_DIALOG_DATA, useValue: {} }, { provide: MatDialogRef, useValue: {} }]
     })
     .compileComponents();
   });
@@ -20,6 +22,7 @@ describe('ClubDetailsComponent', () => {
   });
 
   it('should create', () => {
+    
     expect(component).toBeTruthy();
   });
 });

@@ -14,7 +14,7 @@ import { IgxComboModule } from "igniteui-angular";
 import { ClubsListComponent } from './Clubs/clubs-list/clubs-list.component';
 import { ClubDetailsComponent } from './Clubs/club-details/club-details.component';
 import { AddUpdateClubComponent } from './Clubs/add-update-club/add-update-club.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { DeleteComponent } from './shared/delete/delete.component';

@@ -13,6 +13,7 @@ import { SpinnerComponentComponent } from "src/app/shared/spinner-component/spin
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Base } from "src/app/shared/base";
 import { basename } from "path";
+import { MatPaginator } from "@angular/material/paginator";
 
 
 @Component({
@@ -31,6 +32,7 @@ export class FootballersList extends Base implements OnInit {
   listOfFootballer: IFootballers[] = [];
   subscriptions: Subscription = new Subscription;
   showSpinner: boolean = false;
+
 
   ngOnInit() {
 

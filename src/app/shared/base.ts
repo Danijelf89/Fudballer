@@ -1,5 +1,5 @@
 import { OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Observable, Subscription } from "rxjs";
 import { SpinnerComponentComponent } from "./spinner-component/spinner-component.component";
@@ -73,7 +73,7 @@ export class Base{
         let dialogSpinner = this.startSpinner();
             method.subscribe((res: any) => {
 
-            dialogSpinner.close();
+            this.closeSpinner(dialogSpinner);
             this.snackBar.open("Item has been added", "", {
                 duration : 2000,
                 verticalPosition: 'top', // 'top' | 'bottom'
@@ -85,7 +85,7 @@ export class Base{
 
         },
             (error: any) => {
-                dialogSpinner.close();
+                this.closeSpinner(dialogSpinner);
                 this.snackBar.open("Something went wrong", "", {
                     duration : 2000,
                     verticalPosition: 'top', // 'top' | 'bottom'
@@ -107,5 +107,9 @@ export class Base{
 
     startSpinner(): any {
         return this.dialog.open(SpinnerComponentComponent, { disableClose: true });
+    }
+
+    closeSpinner(spinnerRef : any){
+        spinnerRef.close();
     }
 }
