@@ -21,10 +21,10 @@ export class DeleteComponent implements OnInit {
   }
 
   no() {
-    this.dialogRef.close({ result: false });
+    this.dialogRef.close(false);
   }
 
   yes() {
-    this.dialogRef.close({ result: true });
+    this.dialogRef.close(true);
   }
 }

@@ -21,20 +21,19 @@ export class ClubsListComponent extends Base implements OnInit {
     super(mat, snack);
   }
 
-  dialogRef : any;
-
   clubs: Club[] = [];
   subscriptions: Subscription = new Subscription;
 
+   
   ngOnInit(): void {
 
     this.getClubs();
   }
   
   deleteClub(item: Club) {
-    let di = this.dialog.open(DeleteComponent, { data: { message: 'Are you sure you want do delete this club?', name: item.clubName }, width: '500px', disableClose: true });
-    di.afterClosed().subscribe(res => {
-      if (res.result === true) {
+    let dialogRef = this.mat.open(DeleteComponent, { data: { message: 'Are you sure you want do delete this club?', name: item.clubName }, width: '500px', disableClose: true });
+    dialogRef.afterClosed().subscribe((res : boolean) => {
+      if (res === true) {
         this.clubs = super.delete(this.service.deleteClub(item.id), this.clubs, item.id);
       }
     });
@@ -48,7 +47,7 @@ export class ClubsListComponent extends Base implements OnInit {
     let di = this.dialog.open(AddUpdateClubComponent, { data: { club: item, operation: 'Update club' }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
       if (Object.keys(res.item).length !== 0) {
-        this.clubs = super.update(this.service.updateClub(res.item), this.clubs, res.item);
+        this.clubs = this.update(this.service.updateClub(res.item), this.clubs, res.item);
       }
     });
   }
@@ -58,8 +57,12 @@ export class ClubsListComponent extends Base implements OnInit {
   addClub() {
     let di = this.dialog.open(AddUpdateClubComponent, { data: { club: {}, operation: 'Add new club' }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
+
+      console.log('ovo je dobio od testa', Object.keys(res.item).length);
       if (Object.keys(res.item).length !== 0) {
-        this.clubs = super.add(this.service.addNewClub(res.item), this.clubs, res.item);
+        console.log('usao');
+        this.clubs = this.add(this.service.addNewClub(res.item), this.clubs, res.item);
+        console.log('izasao');
       }
     });
   }

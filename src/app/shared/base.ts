@@ -13,7 +13,7 @@ export class Base{
         let dialogSpinner = this.startSpinner();
         method.subscribe((res: any) => {
 
-            dialogSpinner.close();
+            this.closeSpinner(dialogSpinner);
             this.snackBar.open("Item has been deleted", "", {
                 duration : 2000,
                 verticalPosition: 'top', // 'top' | 'bottom'

@@ -12,6 +12,8 @@ import { EMPTY, of } from 'rxjs';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatdialogMock } from 'src/app/shared/utmocks/matdialog-mock';
+import { DeleteComponent } from 'src/app/shared/delete/delete.component';
+import { atmDollar } from '@igniteui/material-icons-extended';
 
 
 
@@ -38,8 +40,8 @@ describe('ClubsListComponent', () => {
       ],
 
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-      providers: [FootballersService ,{provide: MatDialogRef, useValue: {}}, 
-        {provide: HttpClient, useValue: jasmine.createSpyObj<HttpClient>(['get']) }
+      providers: [{provide: MatDialogRef, useValue: {}}, 
+        {provide: FootballersService, useClass : FootballersService }
         , { provide: MatSnackBar, useValue: {} }, { provide: MatDialog, useClass: MatdialogMock }]
     })
     .compileComponents();
@@ -59,16 +61,22 @@ describe('ClubsListComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
 
-    //let proSpy = spyOn(service, 'getClubs').and.returnValue(of(mockList));
-   //fixture.detectChanges();
+    let proSpy = spyOn(service, 'getClubs').and.returnValue(of(mockList));
+    let Spy = spyOn(app, 'getClubs').and.callThrough();
 
-    //expect(proSpy).toHaveBeenCalled();
+    
+    app.ngOnInit();
 
-   console.log('appFootballer',app.clubs);
-   console.log('mock',mockList);
+    expect(Spy).toHaveBeenCalled();
+    expect(Spy).toHaveBeenCalledTimes(1);
+    expect(Spy).toHaveBeenCalledBefore(proSpy);
 
-   //expect(app.clubs.length).toBeGreaterThan(0);
-    //expect(dialog.open.calls.count()).toBe(1);
+    expect(proSpy).toHaveBeenCalled();
+    expect(proSpy).toHaveBeenCalledTimes(1);
+    expect(app.clubs).toBeDefined();
+    expect(app.clubs.length).toBeGreaterThan(0);
+    expect(app.clubs.length).toBeGreaterThanOrEqual(proSpy.length);
+
   });
 
   it('should get clubs',() =>{
@@ -89,5 +97,80 @@ describe('ClubsListComponent', () => {
     expect(app.clubs.length).toBeGreaterThan(0);
     expect(app.clubs.length).toBeGreaterThanOrEqual(proSpy.length);
     
+  });
+
+  it('should delete', ()=>{
+    const fixture = TestBed.createComponent(ClubsListComponent);
+    const app = fixture.componentInstance;
+
+    let spy  = spyOn(app.mat, 'open')
+    .and
+    .returnValue({
+        afterClosed: () => of(true)
+    } as MatDialogRef<typeof app>);
+
+app.deleteClub(mockList[0]);
+
+expect(spy).toHaveBeenCalled();
+expect(spy).toHaveBeenCalledTimes(2);
+
+  });
+
+  it('should open details', ()=>{
+    const fixture = TestBed.createComponent(ClubsListComponent);
+    const app = fixture.componentInstance;
+
+    let sp = spyOn(app.dialog, 'open');
+
+    app.openDetails(mockList[0]);
+
+    expect(sp).toHaveBeenCalled();
+    expect(sp).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call add', ()=>{
+    const fixture = TestBed.createComponent(ClubsListComponent);
+    const app = fixture.componentInstance;
+
+    let spy  = spyOn(app.mat, 'open')
+    .and
+    .returnValue({
+        afterClosed: () => of({item : mockList[0]}
+         
+        )
+    } as MatDialogRef<typeof app>);
+
+    console.log('add test', spy);
+
+    let s = spyOn(app, 'add');
+
+    app.addClub();
+
+    expect(s).toHaveBeenCalled();
+    expect(s).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call update', ()=>{
+    const fixture = TestBed.createComponent(ClubsListComponent);
+    const app = fixture.componentInstance;
+
+    let spy  = spyOn(app.mat, 'open')
+    .and
+    .returnValue({
+        afterClosed: () => of({item : mockList[0]}
+         
+        )
+    } as MatDialogRef<typeof app>);
+
+    let s = spyOn(app, 'update');
+
+    app.updateClub(mockList[0]);
+
+    expect(s).toHaveBeenCalled();
+    expect(s).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
   })
 });

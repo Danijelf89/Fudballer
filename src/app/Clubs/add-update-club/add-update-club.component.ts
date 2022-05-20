@@ -18,7 +18,7 @@ import { Club } from '../club';
 export class AddUpdateClubComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<AddUpdateClubComponent>, private con: FootballersService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private snack : MatSnackBar) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, public snack : MatSnackBar) { }
 
   operationsName: string = '';
   
@@ -29,6 +29,7 @@ export class AddUpdateClubComponent implements OnInit {
     founded: new FormControl('', Validators.required),
     owner: new FormControl('', Validators.required),
     id : new FormControl(0),
+    isDefault : new FormControl(false),
   });
 
   get clubName() {
