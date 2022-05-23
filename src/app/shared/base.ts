@@ -43,7 +43,7 @@ export class Base{
         let dialogSpinner = this.startSpinner();
         method.subscribe((res: any) => {
 
-            dialogSpinner.close();
+            this.closeSpinner(dialogSpinner);
             this.snackBar.open("Item has been updated", "", {
                 duration : 2000,
                 verticalPosition: 'top', // 'top' | 'bottom'
@@ -51,6 +51,7 @@ export class Base{
             });
             var index = listForupdate.findIndex(x => x.id === item.id);
             listForupdate[index] = item;
+            console.log('ovo vrati update iz metode', listForupdate);
             return listForupdate;
 
         },

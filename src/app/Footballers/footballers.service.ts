@@ -25,7 +25,7 @@ export class FootballersService {
           return this.HttpClient.post<IFootballers>(environment.addFootballerUrl, fotballer);
      }
 
-     updateFootballer(footballer: IFootballers) {
+     updateFootballer(footballer: IFootballers) :Observable<any> {
           return this.HttpClient.put<IFootballers>(environment.updateFootballerUrl, footballer)
      }
 
@@ -43,7 +43,7 @@ export class FootballersService {
           return this.HttpClient.post<Club>(environment.addClubUrl, club);
      }
 
-     updateClub(club: Club) {
+     updateClub(club: Club) : Observable<any> {
           return this.HttpClient.put<Club>(environment.updateClubUrl, club)
      }
 }
