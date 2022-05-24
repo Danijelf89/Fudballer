@@ -23,7 +23,9 @@ export const environment = {
   getClubsUrl : GET_CLUBS_URL,
   deleteClubUrl : DELETE_CLUB_URL,
   addClubUrl : ADD_CLUB_URL,
-  updateClubUrl : UPDATE_CLUB_URL
+  updateClubUrl : UPDATE_CLUB_URL,
+
+  test : 5555,
 };
 
 /*

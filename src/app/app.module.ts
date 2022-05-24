@@ -27,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SpinnerComponentComponent } from './shared/spinner-component/spinner-component.component';
 import { StarcomponentComponent } from './shared/starcomponent/starcomponent.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     DeleteComponent,
     SpinnerComponentComponent,
     StarcomponentComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

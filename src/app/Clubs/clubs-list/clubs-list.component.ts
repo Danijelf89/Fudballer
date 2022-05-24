@@ -8,6 +8,7 @@ import { FootballersService } from 'src/app/Footballers/footballers.service';
 import { Base } from 'src/app/shared/base';
 import { DeleteComponent } from 'src/app/shared/delete/delete.component';
 import { SpinnerComponentComponent } from 'src/app/shared/spinner-component/spinner-component.component';
+import { environment } from 'src/environments/environment';
 import { AddUpdateClubComponent } from '../add-update-club/add-update-club.component';
 import { Club } from '../club';
 import { ClubDetailsComponent } from '../club-details/club-details.component';
@@ -35,6 +36,7 @@ export class ClubsListComponent extends Base implements OnInit {
   ngOnInit(): void {
 
     this.getClubs();
+    console.log('paginacija', environment.test);
   }
 
   ngAfterViewInit(){

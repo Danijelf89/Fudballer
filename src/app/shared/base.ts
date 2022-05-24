@@ -9,13 +9,15 @@ import { SpinnerComponentComponent } from "./spinner-component/spinner-component
 @Component({
     template: ''
   })
-export abstract class Base{
+export class Base{
 
     constructor(public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
     dataSourceBase = new MatTableDataSource<any>();
     displayedColumnsBase : string[] = [];
     @ViewChild('paginator') paginator! : MatPaginator;
+
+    pagginatorPageSizeFootballers : number = 0;
 
    
     delete(method: Observable<any>, listForDelete: Array<any>, id: number){

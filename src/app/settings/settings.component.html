@@ -1,0 +1,22 @@
+<div class="ng-container">
+    <div class="card-header">
+        Settings
+    </div>
+
+    <form [formGroup]="settingsForm">
+        <div>
+            <mat-form-field [floatLabel]="'auto'">
+                <mat-label>Footballers page size</mat-label>
+                <input matInput formControlName="pageSizeFootballers">
+                <span class="text-danger" *ngIf="pageSizeFootballers && pageSizeFootballers.invalid">
+                    Name is required
+                </span>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <h2><button mat-button style="margin-right: 5px;" (click)="save()">Save</button>
+    <button mat-button (click)="cancel()">Cancell</button></h2>
+
+</div>
+
