@@ -6,4 +6,5 @@ export interface Club {
     founded : string;
     owner : string
     isDefault : boolean
+    creationDate : Date
 }

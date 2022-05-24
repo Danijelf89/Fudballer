@@ -91,6 +91,7 @@ export class FootballersList extends Base implements OnInit {
     let dialog = this.mat.open(SpinnerComponentComponent, { disableClose: true });
     this.service.getFootballers().subscribe(res => {
       this.listOfFootballer = res;
+      this.sortListByDate(this.listOfFootballer);
      this.dataSourceBase.data = this.listOfFootballer;
     }).unsubscribe;
     dialog.close();

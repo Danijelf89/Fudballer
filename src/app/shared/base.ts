@@ -31,6 +31,7 @@ export abstract class Base{
             });
             var index = listForDelete.findIndex(x => x.id === id);
             listForDelete.splice(index, 1);
+            this.sortListByDate(listForDelete);
             this.dataSourceBase = new MatTableDataSource(listForDelete);
             this.dataSourceBase.paginator = this.paginator;
            // return new MatTableDataSource(listForDelete);
@@ -63,6 +64,7 @@ export abstract class Base{
             });
             var index = listForupdate.findIndex(x => x.id === item.id);
             listForupdate[index] = item;
+            this.sortListByDate(listForupdate);
             this.dataSourceBase.data = listForupdate;
             this.dataSourceBase.paginator = this.paginator;
 
@@ -94,8 +96,10 @@ export abstract class Base{
             });
             //item.status = this.setStatus(item.club.clubName);
             listForAdd.push(item);
+            this.sortListByDate(listForAdd);
             this.dataSourceBase = new MatTableDataSource(listForAdd);
             this.dataSourceBase.paginator = this.paginator;
+            
 
         },
             (error: any) => {
@@ -126,4 +130,11 @@ export abstract class Base{
     closeSpinner(spinnerRef : any){
         spinnerRef.close();
     }
+
+     sortListByDate(list : any){
+        const sorter = (a : any, b : any) => {
+            return new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime();
+         }
+        list.sort(sorter);
+     }
 }

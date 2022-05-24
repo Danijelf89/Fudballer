@@ -35,7 +35,6 @@ export class ClubsListComponent extends Base implements OnInit {
   ngOnInit(): void {
 
     this.getClubs();
-    
   }
 
   ngAfterViewInit(){
@@ -88,14 +87,7 @@ export class ClubsListComponent extends Base implements OnInit {
          // this.changeDetectorRefs.detectChanges();
   
          // this.dataSource = new MatTableDataSource(this.clubs);
-          
-        
 
-       
-
-      
-       
-       
       }
     });
   }
@@ -111,7 +103,11 @@ export class ClubsListComponent extends Base implements OnInit {
     let spinnDialog = this.startSpinner();
     this.subscriptions = this.service.getClubs().subscribe(res => {
       this.clubs = res;
+
+      this.sortListByDate(this.clubs);
       this.dataSourceBase.data = this.clubs;
+
+     
     });
    this.closeSpinner(spinnDialog);
   }

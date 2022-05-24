@@ -35,6 +35,7 @@ export class AddOrUpdateFootballer implements OnInit {
         clubId: new FormControl(0, Validators.required),
         club: new FormControl(null, Validators.required),
         id: new FormControl(0),
+        creationDate : new FormControl(Date)
     });
 
     get name() {
@@ -90,6 +91,10 @@ export class AddOrUpdateFootballer implements OnInit {
             this.snack.open("Please fill all the mandatory fields");
             return;
         }
+
+        this.addUpdateForm.patchValue({
+            creationDate: new Date,
+          });
 
         this.dialogRef.close({item : this.addUpdateForm.value});
 

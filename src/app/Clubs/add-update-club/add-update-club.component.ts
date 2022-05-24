@@ -30,6 +30,7 @@ export class AddUpdateClubComponent implements OnInit {
     owner: new FormControl('', Validators.required),
     id : new FormControl(0),
     isDefault : new FormControl(false),
+    creationDate : new FormControl(Date.UTC)
   });
 
   get clubName() {
@@ -71,7 +72,12 @@ export class AddUpdateClubComponent implements OnInit {
       return;
     }
 
+    this.addUpdateForm.patchValue({
+      creationDate: new Date,
+    });
     this.dialogRef.close({item : this.addUpdateForm.value})
+
+    console.log('Added', this.addUpdateForm.value);
   }
 
   cancel() {

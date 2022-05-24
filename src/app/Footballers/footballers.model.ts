@@ -11,4 +11,5 @@ export interface IFootballers {
         clubId: number;
         club: Club;
         status: string;
+        creationDate : Date
 }
