@@ -27,11 +27,20 @@ export class FootballersList extends Base implements OnInit {
 
   constructor(public service: FootballersService, public mat: MatDialog, snack: MatSnackBar) {
     super(mat, snack);
+
+    this.displayedColumnsBase = ['name', 'surname', 'position', 'dateOfBirth', 'rating', 'price', 'club', 'status', 'actions'];
   }
 
   listOfFootballer: IFootballers[] = [];
   subscriptions: Subscription = new Subscription;
   showSpinner: boolean = false;
+
+  clickedRows = new Set<IFootballers>();
+
+   
+
+
+  
 
 
   ngOnInit() {
@@ -43,11 +52,15 @@ export class FootballersList extends Base implements OnInit {
     this.mat.open(FootballerDetails, { data: item, width: '500px' });
   }
 
+  onclickedRow(item :any){
+
+  }
+
   deleteFootballer(item: IFootballers) {
     let di = this.mat.open(DeleteComponent, { data: { message: 'Are you sure you want do delete this footballer?', name: item.name + " " + item.surname }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
       if (res.result === true) {
-        this.listOfFootballer = super.delete(this.service.deleteFootballer(item.id), this.listOfFootballer, item.id);
+        super.delete(this.service.deleteFootballer(item.id), this.listOfFootballer, item.id);
       }
     })
   }
@@ -58,7 +71,7 @@ export class FootballersList extends Base implements OnInit {
       if(Object.keys(res.item).length !== 0){
         res.item.clubId = res.item.club.id;
         res.item.status = super.setStatus(res.item.club.clubName);
-        this.listOfFootballer = super.add(this.service.addNewFootballer(res.item), this.listOfFootballer, res.item);
+        super.add(this.service.addNewFootballer(res.item), this.listOfFootballer, res.item);
 
       }
     });
@@ -69,7 +82,7 @@ export class FootballersList extends Base implements OnInit {
     di.afterClosed().subscribe(res => {
       if (Object.keys(res.item).length !== 0) {
         res.item.status = super.setStatus(res.item.club.clubName);
-        this.listOfFootballer = super.update(this.service.updateFootballer(res.item), this.listOfFootballer, res.item);
+        super.update(this.service.updateFootballer(res.item), this.listOfFootballer, res.item);
       }
     });
   }
@@ -78,6 +91,7 @@ export class FootballersList extends Base implements OnInit {
     let dialog = this.mat.open(SpinnerComponentComponent, { disableClose: true });
     this.service.getFootballers().subscribe(res => {
       this.listOfFootballer = res;
+     this.dataSourceBase.data = this.listOfFootballer;
     }).unsubscribe;
     dialog.close();
   }

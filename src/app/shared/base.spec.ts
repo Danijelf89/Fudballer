@@ -60,9 +60,7 @@ describe('Base', () => {
     let spinnerCloseSpy = spyOn(b, 'closeSpinner').and.callThrough();
     let spinnerOpenSpy = spyOn(b, 'startSpinner').and.callThrough();
 
-    let returnedList : Club[] = [];
-
-    returnedList =  b.delete(service.deleteClub(club.id),testGet, club.id);
+    b.delete(service.deleteClub(club.id),testGet, club.id);
 
     expect(proSpy).toHaveBeenCalled();
     expect(proSpy).toHaveBeenCalledTimes(1);
@@ -73,7 +71,7 @@ describe('Base', () => {
     expect(spSnack).toHaveBeenCalled();
     expect(spSnack).toHaveBeenCalledTimes(1);
 
-    expect(testGet).toEqual(returnedList);
+    expect(testGet).toEqual(b.dataSourceBase.data);
 
     expect(spinnerCloseSpy).toHaveBeenCalled();
     expect(spinnerCloseSpy).toHaveBeenCalledTimes(1);
@@ -104,7 +102,7 @@ describe('Base', () => {
 
    let mockCall = spyOn(service,'deleteClub').and.returnValue(throwError({status : 404}));
     
-    returnedList =  b.delete(service.deleteClub(club.id),testGet, club.id);
+    b.delete(service.deleteClub(club.id),testGet, club.id);
 
     expect(mockCall).toHaveBeenCalled();
   });
@@ -135,10 +133,10 @@ describe('Base', () => {
 
     let returnedList : Club[] = [];
 
-    returnedList =  b.add(service.addNewClub(club),testGet, club.id);
+    b.add(service.addNewClub(club),testGet, club.id);
 
     console.log(returnedList);
-    expect(returnedList.length).toBeGreaterThanOrEqual(testGet.length);
+    expect(b.dataSourceBase.data.length).toBeGreaterThanOrEqual(testGet.length);
 
     expect(sp).toHaveBeenCalled();
     expect(sp).toHaveBeenCalledTimes(1);
@@ -181,12 +179,12 @@ describe('Base', () => {
 
     let returnedList : Club[] = [];
 
-    returnedList =  b.update(service.updateClub(club), testGet, club);
+    b.update(service.updateClub(club), testGet, club);
 
     console.log(returnedList);
-    expect(returnedList.length).toBeGreaterThanOrEqual(testGet.length);
+    expect(b.dataSourceBase.data.length).toBeGreaterThanOrEqual(testGet.length);
 
-    let updatedClub = returnedList.find(x=> x.id === club.id);
+    let updatedClub = b.dataSourceBase.data.find(x=> x.id === club.id);
 
     
     expect(updatedClub).toBe(club);
@@ -264,7 +262,7 @@ describe('Base', () => {
    let mockCall = spyOn(service,'addNewClub').and.returnValue(throwError(() => new Error('Error 400')));
    let mockCallerror = spyOn(b,'add').and.callThrough();
     
-    returnedList =  b.add(service.addNewClub(club),testGet, club.id);
+    b.add(service.addNewClub(club),testGet, club.id);
 
     expect(mockCall).toHaveBeenCalled();
     expect(mockCallerror).toThrowError();
@@ -291,7 +289,7 @@ describe('Base', () => {
    let mockCall = spyOn(service,'updateClub').and.returnValue(throwError(() => new Error('Error 400')));
    let mockCallerror = spyOn(b,'update').and.callThrough();
     
-    returnedList =  b.update(service.updateClub(club),testGet, club.id);
+    b.update(service.updateClub(club),testGet, club.id);
 
     expect(mockCall).toHaveBeenCalled();
     expect(mockCallerror).toThrowError();

@@ -21,8 +21,12 @@ import { DeleteComponent } from './shared/delete/delete.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+
 import { SpinnerComponentComponent } from './shared/spinner-component/spinner-component.component';
 import { StarcomponentComponent } from './shared/starcomponent/starcomponent.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -50,6 +54,9 @@ import { StarcomponentComponent } from './shared/starcomponent/starcomponent.com
     MatSelectModule,
     MatInputModule,
     MatSnackBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatButtonModule,
     RouterModule.forRoot([
       { path: 'footballersList', component: FootballersList },
       { path: 'welcomePage', component: WelcomeComponent },

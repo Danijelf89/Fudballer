@@ -1,14 +1,24 @@
-import { OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatPaginator } from "@angular/material/paginator";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatTableDataSource } from "@angular/material/table";
 import { Observable, Subscription } from "rxjs";
 import { SpinnerComponentComponent } from "./spinner-component/spinner-component.component";
 
-export class Base{
+@Component({
+    template: ''
+  })
+export abstract class Base{
 
     constructor(public dialog: MatDialog, public snackBar: MatSnackBar) { }
+
+    dataSourceBase = new MatTableDataSource<any>();
+    displayedColumnsBase : string[] = [];
+    @ViewChild('paginator') paginator! : MatPaginator;
+
    
-    delete(method: Observable<any>, listForDelete: Array<any>, id: number): Array<any> {
+    delete(method: Observable<any>, listForDelete: Array<any>, id: number){
 
         let dialogSpinner = this.startSpinner();
         method.subscribe((res: any) => {
@@ -19,9 +29,11 @@ export class Base{
                 verticalPosition: 'top', // 'top' | 'bottom'
                 horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
             });
-            var index = listForDelete.findIndex(x => x.id);
+            var index = listForDelete.findIndex(x => x.id === id);
             listForDelete.splice(index, 1);
-            return listForDelete;
+            this.dataSourceBase = new MatTableDataSource(listForDelete);
+            this.dataSourceBase.paginator = this.paginator;
+           // return new MatTableDataSource(listForDelete);
 
         },
             (error: any) => {
@@ -35,10 +47,10 @@ export class Base{
             }
 
         ).unsubscribe;
-        return listForDelete;
+        //return new MatTableDataSource(listForDelete);
     }
 
-    update(method: Observable<any>, listForupdate: Array<any>, item: any): Array<any> {
+    update(method: Observable<any>, listForupdate: Array<any>, item: any) {
 
         let dialogSpinner = this.startSpinner();
         method.subscribe((res: any) => {
@@ -51,8 +63,8 @@ export class Base{
             });
             var index = listForupdate.findIndex(x => x.id === item.id);
             listForupdate[index] = item;
-            console.log('ovo vrati update iz metode', listForupdate);
-            return listForupdate;
+            this.dataSourceBase.data = listForupdate;
+            this.dataSourceBase.paginator = this.paginator;
 
         },
             (error: any) => {
@@ -62,14 +74,14 @@ export class Base{
                     verticalPosition: 'top', // 'top' | 'bottom'
                     horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
                 });
-                return listForupdate;
+               // return listForupdate;
             }
 
         ).unsubscribe;
-        return listForupdate;
+       // return listForupdate;
     }
 
-    add(method: Observable<any>, listForAdd: Array<any>, item: any): Array<any> {
+    add(method: Observable<any>, listForAdd: Array<any>, item: any){
 
         let dialogSpinner = this.startSpinner();
             method.subscribe((res: any) => {
@@ -82,7 +94,8 @@ export class Base{
             });
             //item.status = this.setStatus(item.club.clubName);
             listForAdd.push(item);
-            return listForAdd;
+            this.dataSourceBase = new MatTableDataSource(listForAdd);
+            this.dataSourceBase.paginator = this.paginator;
 
         },
             (error: any) => {
@@ -92,11 +105,11 @@ export class Base{
                     verticalPosition: 'top', // 'top' | 'bottom'
                     horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
                 });
-                return listForAdd;
+                //return listForAdd;
             }
 
         ).unsubscribe;
-        return listForAdd;
+        //return listForAdd;
     }
 
     setStatus(club: string): string {

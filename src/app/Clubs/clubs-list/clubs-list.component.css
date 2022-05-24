@@ -32,3 +32,49 @@
     padding: 10px;
     border-radius: 5px;
 }
+
+
+.demo-table {
+   width: 100%;
+    
+
+    border: 100px;
+    border-color: red;
+    background-color: aliceblue;
+    justify-content: center;
+   
+  }
+
+  .mat-elevation-z8{
+      width: 50%;
+  }
+
+  .child {
+   
+   
+    /* Center horizontally*/
+    margin: 0 auto;
+    
+  }
+  
+  .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-row:hover .mat-cell {
+    border-color: currentColor;
+  }
+  
+  .demo-row-is-clicked {
+    font-weight: bold;
+  }
+
+  .mat-row:hover {
+    background-color: rgba(235, 13, 13, 0.795);
+  }
+
+  .mat-row:hover {
+    background-color: rgba(61, 13, 235, 0.329);
+  }
