@@ -1,3 +1,5 @@
+<div class="card-header">
+
 <div class="card-header addUpdateHeader">
     {{operationsName}}
 </div>
@@ -53,8 +55,15 @@
         </mat-form-field>
     </div>
 
-    <h2 style="text-align:center;"><button class="btn btn-primary" style="width:100px; margin-right:10px"
-            (click)='save()'>Ok</button> <button class="btn btn-primary" style="width:100px;"
+   
+
+        <h2 style="text-align:center;"><button mat-fab color="primary" style="width:100px; margin-right:10px"
+            (click)='save()'>Ok</button> <button mat-button color="warn"  style="width:100px;"
             (click)='cancel()'>Cancel</button></h2>
 
+   
+    
+
 </form>
+
+</div>

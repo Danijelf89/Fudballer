@@ -41,8 +41,8 @@ export class Base{
         },
             (error: any) => {
                 dialogSpinner.close();
-                this.snackBar.open("Something went wrong", "", {
-                    duration : 2000,
+                this.snackBar.open("Something went wrong or you do not have permission for this action", "", {
+                    duration : 5000,
                     verticalPosition: 'top', // 'top' | 'bottom'
                     horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
                 });

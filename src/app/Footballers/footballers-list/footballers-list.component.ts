@@ -14,6 +14,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { Base } from "src/app/shared/base";
 import { basename } from "path";
 import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
 
 
 @Component({
@@ -31,6 +32,7 @@ export class FootballersList extends Base implements OnInit {
     this.displayedColumnsBase = ['name', 'surname', 'position', 'dateOfBirth', 'rating', 'price', 'club', 'status', 'actions'];
   }
 
+  @ViewChild(MatSort) sort! : MatSort;
   listOfFootballer: IFootballers[] = [];
   subscriptions: Subscription = new Subscription;
   showSpinner: boolean = false;
@@ -48,6 +50,12 @@ export class FootballersList extends Base implements OnInit {
     this.getFootballers();
   }
 
+  ngAfterViewInit(){
+    this.dataSourceBase.paginator = this.paginator;
+    
+    this.dataSourceBase.sort = this.sort;
+  }
+
   openDetails(item: IFootballers) {
     this.mat.open(FootballerDetails, { data: item, width: '500px' });
   }
@@ -58,12 +66,14 @@ export class FootballersList extends Base implements OnInit {
 
   deleteFootballer(item: IFootballers) {
     let di = this.mat.open(DeleteComponent, { data: { message: 'Are you sure you want do delete this footballer?', name: item.name + " " + item.surname }, width: '500px', disableClose: true });
-    di.afterClosed().subscribe(res => {
-      if (res.result === true) {
+    di.afterClosed().subscribe((res : boolean) => {
+      if (res === true) {
         super.delete(this.service.deleteFootballer(item.id), this.listOfFootballer, item.id);
       }
     })
   }
+
+ 
 
   addFootballer() {
     let di = this.mat.open(AddOrUpdateFootballer, { data: { footballer : {}, operation: 'Add new footballer' }, width: "500px", disableClose: true });

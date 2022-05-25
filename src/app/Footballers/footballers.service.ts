@@ -46,4 +46,8 @@ export class FootballersService {
      updateClub(club: Club) : Observable<any> {
           return this.HttpClient.put<Club>(environment.updateClubUrl, club)
      }
+
+     getAuthorisation(data : any) : Observable<any>{
+          return this.HttpClient.post<any>("https://localhost:44307/auth/login", data);
+     }
 }

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
 import { FootballersService } from 'src/app/Footballers/footballers.service';
@@ -26,7 +27,7 @@ export class ClubsListComponent extends Base implements OnInit {
     this.displayedColumnsBase = ['clubName', 'city', 'budget', 'founded', 'owner', 'actions'];
   }
 
-  
+  @ViewChild(MatSort) sort! : MatSort;
   clickedRows = new Set<Club>();
 
   clubs: Club[] = [];
@@ -36,11 +37,14 @@ export class ClubsListComponent extends Base implements OnInit {
   ngOnInit(): void {
 
     this.getClubs();
-    console.log('paginacija', environment.test);
+    
+    
   }
 
   ngAfterViewInit(){
     this.dataSourceBase.paginator = this.paginator;
+    
+    this.dataSourceBase.sort = this.sort;
   }
   
   deleteClub(item: Club) {

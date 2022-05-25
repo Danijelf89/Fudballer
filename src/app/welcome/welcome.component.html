@@ -1,6 +1,26 @@
-<div class="header welcomeHeader" style="text-align:center;">Welcome to the Footballers Angular test application</div>
-<body>
-    <div class="header test">
 
-    </div>
-</body>
+
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Hover Effect</title>
+    
+  </head>
+  <body>
+    <figure class="container">
+      <img src="https://img.asmedia.epimg.net/resizer/jXBtNEtn9wP_nRy9I3S10kYeK-M=/360x203/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/5AIR4UFTGNHZZD56EJOFJYA5RM.jpg" alt="sample89" />
+      <figcaption>
+        <h3>Footballers</h3>
+      </figcaption>
+      <a [routerLink]="['clubList']"></a>
+    </figure>
+    <figure class="container">
+      <img src="https://icons.iconarchive.com/icons/giannis-zographos/english-football-club/icons-390.jpg" alt="sample94" />
+      <figcaption>
+        <h3>Clubs</h3>
+      </figcaption>
+      <a [routerLink]="['clubList']"></a>
+    </figure>
+  </body>

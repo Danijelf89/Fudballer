@@ -1,26 +1,22 @@
-<div class='glavni'>
-  <div class="card-header">
-    <nav>
-      <ul>
-        <li> <button class="btn btn-primary" [routerLink]="['welcomePage']">Welcome </button></li>
-        <li> <button class="btn btn-primary" [routerLink]="['footballersList']">Footballers </button></li>
-        <li> <button class="btn btn-primary" [routerLink]="['clubList']">Clubs </button></li>
-        <button mat-button  (click)="openSettings()" style="float: right">Settings</button>
-      </ul>
+<div class="card-header glavni">
+
      
-    </nav>
-
    
+      <ul>
+        <button mat-button matTooltip="Login" *ngIf="showSignIn" (click)="logIn()" style="float: right"><mat-icon>dashboard</mat-icon></button>
+        <button mat-button matTooltip="LogOut" *ngIf="showLogOut" (click)="logout()" style="float: right"><mat-icon>dashboard</mat-icon></button>
+        <button mat-button matTooltip="Settings"  (click)="openSettings()" style="float: right"><mat-icon>settings</mat-icon></button>
+      </ul>
 
-  </div>
+<div>
+  <mat-label>loged in user : {{user}}</mat-label>
+</div>
+     
+</div>
 
 
-  <div>
-
-    <router-outlet></router-outlet>
-  </div>
-
-
+<div>
+  <router-outlet></router-outlet>
 </div>
 
 

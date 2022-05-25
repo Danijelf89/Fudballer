@@ -6,35 +6,35 @@
 
         <div class="card-header child mat-elevation-z8" >
 
-            <table mat-table [dataSource]="dataSourceBase" class="demo-table" >
+            <table mat-table [dataSource]="dataSourceBase" matSort  class="demo-table" >
 
                 <!-- Position Column -->
                 <ng-container matColumnDef="clubName">
-                    <th mat-header-cell *matHeaderCellDef>Name</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="">Name</th>
                     <td mat-cell *matCellDef="let element">{{element.clubName}}</td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="city">
-                    <th mat-header-cell *matHeaderCellDef>City</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="">City</th>
                     <td mat-cell *matCellDef="let element">{{element.city}}</td>
                 </ng-container>
 
                 <!-- Weight Column -->
                 <ng-container matColumnDef="budget">
-                    <th mat-header-cell *matHeaderCellDef>Budget</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Budget</th>
                     <td mat-cell *matCellDef="let element">{{element.budget}}</td>
                 </ng-container>
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="founded">
-                    <th mat-header-cell *matHeaderCellDef>Founded</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Founded</th>
                     <td mat-cell *matCellDef="let element">{{element.founded}}</td>
                 </ng-container>
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="owner">
-                    <th mat-header-cell *matHeaderCellDef>Owner</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner</th>
                     <td mat-cell *matCellDef="let element">{{element.owner}}</td>
                 </ng-container>
 

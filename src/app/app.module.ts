@@ -28,6 +28,16 @@ import { SpinnerComponentComponent } from './shared/spinner-component/spinner-co
 import { StarcomponentComponent } from './shared/starcomponent/starcomponent.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SettingsComponent } from './settings/settings.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { LoginComponent } from './login/login.component';
+import {JwtModule} from '@auth0/angular-jwt';
+import { AuthguardService } from './authguard.service';
+
+export function tokkentGetter(){
+  return localStorage.getItem("jwt")
+}
 
 @NgModule({
   declarations: [
@@ -43,6 +53,8 @@ import { SettingsComponent } from './settings/settings.component';
     SpinnerComponentComponent,
     StarcomponentComponent,
     SettingsComponent,
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -59,14 +71,26 @@ import { SettingsComponent } from './settings/settings.component';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatSortModule,
+    MatIconModule,
+    MatTooltipModule,
     RouterModule.forRoot([
-      { path: 'footballersList', component: FootballersList },
-      { path: 'welcomePage', component: WelcomeComponent },
-      { path: 'clubList', component: ClubsListComponent },
+      { path: 'welcomePage/footballersList', component: FootballersList , canActivate: [AuthguardService]},
+      { path: 'welcomePage', component: WelcomeComponent , canActivate: [AuthguardService]},
+      { path: 'welcomePage/clubList', component: ClubsListComponent , canActivate: [AuthguardService]},
+      { path: 'logIn', component: LoginComponent},
     ]),
+
+    JwtModule.forRoot({
+        config:{
+          tokenGetter : tokkentGetter,
+          allowedDomains : ["localhost:44307"],
+          disallowedRoutes : []
+        }
+    }),
     BrowserAnimationsModule
   ],
-  providers: [FootballersService],
+  providers: [FootballersService, AuthguardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
