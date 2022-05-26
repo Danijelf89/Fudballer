@@ -38,7 +38,7 @@ export class FootballersList extends Base implements OnInit {
   showSpinner: boolean = false;
 
   clickedRows = new Set<IFootballers>();
-
+  isVisibleByRole : boolean = true;
    
 
 
@@ -48,6 +48,8 @@ export class FootballersList extends Base implements OnInit {
   ngOnInit() {
 
     this.getFootballers();
+    this.isVisibleByRole = localStorage.getItem("role") != null && localStorage.getItem("role") == "Admin" ? false : true;
+
   }
 
   ngAfterViewInit(){

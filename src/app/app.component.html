@@ -8,10 +8,14 @@
         <button mat-button matTooltip="Settings"  (click)="openSettings()" style="float: right"><mat-icon>settings</mat-icon></button>
       </ul>
 
-<div>
-  <mat-label>loged in user : {{user}}</mat-label>
-</div>
-     
+
+  <mat-toolbar  [class.hidden]="showLogin">
+    <mat-toolbar-row >
+        <span class="span" >{{message}}</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
 </div>
 
 

@@ -3,7 +3,7 @@
 <div class="footballersMain">
     <div class="mainTableAndHeaders">
         <div class="card-header footballerHeader">
-            Footballers <button mat-button  style="float: right;" (click)="addFootballer()" matTooltip="Add new footballer"><mat-icon>person_add</mat-icon></button>
+            Footballers <button [hidden]="isVisibleByRole" mat-button  style="float: right;" (click)="addFootballer()" matTooltip="Add new footballer"><mat-icon>library_add</mat-icon></button>
         </div>
         <div class="card-header child mat-elevation-z8" >
         <table mat-table [dataSource]="dataSourceBase" matSort class="demo-table">
@@ -60,11 +60,11 @@
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>Actions </th>
-                <td mat-cell *matCellDef="let row">
-                    <button mat-button  (click)="updateFootballer(row)" matTooltip="Update footballer"><mat-icon>edit</mat-icon></button>
-                    <button mat-button  (click)="openDetails(row)" matTooltip="Open footballer details"><mat-icon>details</mat-icon></button>
-                    <button mat-button  (click)="deleteFootballer(row)" style="width: 30px;" matTooltip="Delete footballer"> <mat-icon>delete</mat-icon></button>
+                <th mat-header-cell *matHeaderCellDef [hidden]="isVisibleByRole">Actions</th>
+                <td mat-cell *matCellDef="let row" [hidden]="isVisibleByRole">
+                    <button mat-button [hidden]="isVisibleByRole" (click)="updateFootballer(row)" matTooltip="Update footballer"><mat-icon>edit</mat-icon></button>
+                    <button mat-button  [hidden]="isVisibleByRole"(click)="openDetails(row)" matTooltip="Open footballer details"><mat-icon>details</mat-icon></button>
+                    <button mat-button [hidden]="isVisibleByRole" (click)="deleteFootballer(row)" style="width: 30px;" matTooltip="Delete footballer"> <mat-icon>delete</mat-icon></button>
                 </td>
             </ng-container>
 

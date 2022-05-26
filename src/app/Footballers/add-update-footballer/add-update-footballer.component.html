@@ -1,91 +1,106 @@
-<div class="card-header addUpdateHeader">
-    {{operationsName}}
+<div fxLayout="center center" fxFlexFill class="main-div">
+    <mat-card fxFlex="200">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <span class="span">{{operationsName}}</span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <form [formGroup]="addUpdateForm">
+            <div>
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name">
+                    <span class="text-danger" *ngIf="name && name.invalid">
+                        Name is required
+                    </span>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>Surname</mat-label>
+                    <input matInput formControlName="surname">
+                    <span class="text-danger" *ngIf="surname && surname.invalid">
+                        Surname is required
+                    </span>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>Position</mat-label>
+                    <input matInput formControlName="position">
+                    <span class="text-danger" *ngIf="position && position.invalid">
+                        Position is required
+                    </span>
+
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>Birth</mat-label>
+                    <input matInput formControlName="dateOfBirth">
+                    <span class="text-danger" *ngIf="dateOfBirth && dateOfBirth.invalid">
+                        Date is required
+                    </span>
+
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>Rating</mat-label>
+                    <input matInput type="number" formControlName="rating" required>
+                    <span class="text-danger" *ngIf="rating && rating.invalid">
+                        Rating is required and must be between 0 and 6
+                    </span>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>Price</mat-label>
+                    <input matInput type="number" formControlName="price">
+                    <span class="text-danger" *ngIf="price && price.invalid">
+                        Price is required
+                    </span>
+
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>Club</mat-label>
+                    <mat-select formControlName="club" aria-required="true">
+                        <mat-option *ngFor="let n of lisClubs" [value]="n">{{n.clubName}}
+                        </mat-option>
+                    </mat-select>
+                    <span class="text-danger" *ngIf="club && club.invalid">
+                        Club is required
+                    </span>
+                </mat-form-field>
+            </div>
+
+           
+
+          
+            <mat-toolbar color="primary">
+                <mat-toolbar-row>
+                    <span class="span"><button mat-fab color="primary" style="width:100px; margin-right:10px"
+                            (click)='save()'>
+                            <mat-icon>thumb_up</mat-icon>
+
+                            Ok
+                        </button> <button mat-fab color="warn" style="width:100px;" (click)="cancel()">
+                            <mat-icon>cancel</mat-icon>Cancel
+                        </button></span>
+                </mat-toolbar-row>
+            </mat-toolbar>
+       
+
+
+        </form>
+    </mat-card>
 </div>
-
-<form [formGroup]="addUpdateForm">
-    <div>
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name">
-            <span class="text-danger" *ngIf="name && name.invalid">
-                Name is required
-            </span>
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>Surname</mat-label>
-            <input matInput formControlName="surname">
-            <span class="text-danger" *ngIf="surname && surname.invalid">
-                Surname is required
-            </span>
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>Position</mat-label>
-            <input matInput formControlName="position">
-            <span class="text-danger" *ngIf="position && position.invalid">
-                Position is required
-            </span>
-
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>Birth</mat-label>
-            <input matInput formControlName="dateOfBirth">
-            <span class="text-danger" *ngIf="dateOfBirth && dateOfBirth.invalid">
-                Date is required
-            </span>
-
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>Rating</mat-label>
-            <input matInput type="number" formControlName="rating" required>
-            <span class="text-danger" *ngIf="rating && rating.invalid">
-                Rating is required and must be between 0 and 6
-            </span>
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>Price</mat-label>
-            <input matInput type="number" formControlName="price">
-            <span class="text-danger" *ngIf="price && price.invalid">
-                Price is required
-            </span>
-
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>Club</mat-label>
-            <mat-select formControlName="club" aria-required="true">
-                <mat-option *ngFor="let n of lisClubs" [value]="n">{{n.clubName}}
-                </mat-option>
-            </mat-select>
-            <span class="text-danger" *ngIf="club && club.invalid">
-                Club is required
-            </span>
-        </mat-form-field>
-    </div>
-
-</form>
-
-
-
-<h2 style="text-align:center;"><button mat-fab color="primary" style="width:100px; margin-right:10px"
-        (click)='save()'>
-        <mat-icon>thumb_up</mat-icon>
-        
-        Ok</button> <button mat-fab color="warn" style="width:100px;"
-        (click)="cancel()">Cancel</button></h2>

@@ -31,9 +31,12 @@ import { SettingsComponent } from './settings/settings.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './login/login.component';
 import {JwtModule} from '@auth0/angular-jwt';
 import { AuthguardService } from './authguard.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 export function tokkentGetter(){
   return localStorage.getItem("jwt")
@@ -74,6 +77,9 @@ export function tokkentGetter(){
     MatSortModule,
     MatIconModule,
     MatTooltipModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatCardModule,
     RouterModule.forRoot([
       { path: 'welcomePage/footballersList', component: FootballersList , canActivate: [AuthguardService]},
       { path: 'welcomePage', component: WelcomeComponent , canActivate: [AuthguardService]},

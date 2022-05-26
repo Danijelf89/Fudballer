@@ -15,10 +15,30 @@ export class AppComponent implements OnInit {
   showLogOut : boolean = true;
 
   user : string = '';
+  role : string = '';
+  showLogin : boolean = false;
+  message : string = '';
 
   constructor(private route : Router, public mat: MatDialog){}
 
   ngOnInit(): void {
+
+    this.showLogOut = localStorage.getItem("jwt") ? true : false;
+    this.showSignIn = localStorage.getItem("jwt") ? false : true;
+
+    let user = localStorage.getItem("userName");
+     
+       this.user = user!;
+
+       let role = localStorage.getItem("role");
+     
+       this.role = role != null ? role : '';
+
+       this.showLogin =false;
+
+       console.log('show login', this.showLogin)
+
+       this.message = this.user != null ? 'User: ' + this.user +' '+ 'Role: '+this.role : 'LogIn';
 
   }
 
@@ -30,19 +50,33 @@ export class AppComponent implements OnInit {
     let dialog = this.mat.open(LoginComponent);
     dialog.afterClosed().subscribe(res=>{
      
+      let user = localStorage.getItem("userName");
      
-       this.user = res.userName;
-       if(this.user !== ''){
-        this.showSignIn = false;
-        this.showLogOut = true;
-       } 
+       this.user = user != null ? user : '';
+
+       let role = localStorage.getItem("role");
+     
+       this.role = role != null ? role : '';
+       
+        this.showLogOut = localStorage.getItem("jwt") ? true : false;
+        this.showSignIn = localStorage.getItem("jwt") ? false : true;
+
+        this.message = this.user != '' ? 'User: ' + this.user +' '+ 'Role: '+this.role : 'LogIn';
+      
     })
   }
  
   logout(){
     localStorage.removeItem("jwt");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("role");
+    this.user = '';
+    this.role = '';
     this.route.navigate(["/"]);
-    this.showSignIn = true;
-    this.showLogOut = false;
+    this.showLogOut = localStorage.getItem("jwt") ? true : false;
+    this.showSignIn = localStorage.getItem("jwt") ? false : true;
+    this.showLogin =false;
+
+    this.message = 'LogIn';
   }
 }

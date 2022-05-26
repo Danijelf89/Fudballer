@@ -33,11 +33,13 @@ export class ClubsListComponent extends Base implements OnInit {
   clubs: Club[] = [];
   subscriptions: Subscription = new Subscription;
   selectedClub = {} as Club;
+
+  isVisibleByRole : boolean = true;
   
   ngOnInit(): void {
 
     this.getClubs();
-    
+    this.isVisibleByRole = localStorage.getItem("role") != null && localStorage.getItem("role") == "Admin" ? false : true;
     
   }
 

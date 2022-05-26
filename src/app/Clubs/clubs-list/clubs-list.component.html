@@ -1,7 +1,7 @@
 <div class="clubMain">
     <div class="mainTableAndHeaders">
         <div class="card-header clubHeader">
-            Clubs <button class="btn btn-primary" style="float: right;" (click)="addClub()">Add new</button>
+            Clubs <button [hidden]="isVisibleByRole" mat-button  style="float: right;" (click)="addClub()" matTooltip="Add new club"><mat-icon>library_add</mat-icon></button>
         </div>
 
         <div class="card-header child mat-elevation-z8" >
@@ -39,12 +39,12 @@
                 </ng-container>
 
                 <!-- Symbol Column -->
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>Actions </th>
-                    <td mat-cell *matCellDef="let row">
-                        <button mat-button (click)="updateClub(row)">Edit</button>
-                        <button mat-button (click)="openDetails(row)">Details</button>
-                        <button mat-button (click)="deleteClub(row)">Delete</button>
+                <ng-container matColumnDef="actions" >
+                    <th mat-header-cell *matHeaderCellDef [hidden]="isVisibleByRole">Actions </th>
+                    <td mat-cell *matCellDef="let row" [hidden]="isVisibleByRole">
+                        <button mat-button [hidden]="isVisibleByRole" (click)="updateClub(row)" matTooltip="Update footballer"><mat-icon>edit</mat-icon></button>
+                        <button mat-button [hidden]="isVisibleByRole" (click)="openDetails(row)" matTooltip="Open club details"><mat-icon>details</mat-icon></button>
+                        <button mat-button [hidden]="isVisibleByRole" (click)="deleteClub(row)" matTooltip="Delete club"><mat-icon>delete</mat-icon></button>
                     </td>
                 </ng-container>
 

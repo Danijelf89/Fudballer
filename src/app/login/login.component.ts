@@ -35,7 +35,11 @@ export class LoginComponent implements OnInit {
   ok(){
     this.con.getAuthorisation(this.loginForm.value).subscribe(res =>{
       const token = (<any>res).token;
+      const userName = res.user;
       localStorage.setItem("jwt", token);
+      localStorage.setItem("userName", userName);
+      localStorage.setItem("role", res.role);
+
       this.invalidLogin = false;
       this.dialogRef.close(this.loginForm.value);
       this.router.navigate(['welcomePage']);
