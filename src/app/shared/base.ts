@@ -13,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core'
 export class Base {
 
     constructor(public dialog: MatDialog, public snackBar: MatSnackBar) {
-      
+      test
 
     }
 
