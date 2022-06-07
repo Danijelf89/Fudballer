@@ -35,9 +35,15 @@ export class LoginComponent implements OnInit {
   ok(){
     this.con.getAuthorisation(this.loginForm.value).subscribe(res =>{
       const token = (<any>res).token;
-      const userName = res.user;
+      const name = res.name;
+      const surname = res.surname;
+
+console.log('name', name);
+console.log('surname', surname);
+
       localStorage.setItem("jwt", token);
-      localStorage.setItem("userName", userName);
+      localStorage.setItem("name", name);
+      localStorage.setItem("surname", surname);
       localStorage.setItem("role", res.role);
 
       this.invalidLogin = false;

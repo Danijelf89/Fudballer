@@ -1,27 +1,39 @@
-<div class="card-header glavni">
+<div class="glavni">
+  <ul>
+    <button mat-button matTooltip="Login" *ngIf="showSignIn" (click)="logIn()" style="float: right">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+    <button mat-button matTooltip="LogOut" *ngIf="showLogOut" (click)="logout()" style="float: right">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+    <button mat-button [matTooltip]="settingsTooltip" (click)="openSettings()" style="float: right">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <label style="float: right">
+      <mat-select #langselect (selectionChange)="onLanguageChanged(langselect.value)" [placeholder]="languagePlaceholder">
+        <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}
+        </mat-option>
+      </mat-select>
 
-     
-   
-      <ul>
-        <button mat-button matTooltip="Login" *ngIf="showSignIn" (click)="logIn()" style="float: right"><mat-icon>dashboard</mat-icon></button>
-        <button mat-button matTooltip="LogOut" *ngIf="showLogOut" (click)="logout()" style="float: right"><mat-icon>dashboard</mat-icon></button>
-        <button mat-button matTooltip="Settings"  (click)="openSettings()" style="float: right"><mat-icon>settings</mat-icon></button>
-      </ul>
-
-
-  <mat-toolbar  [class.hidden]="showLogin">
-    <mat-toolbar-row >
-        <span class="span" >{{message}}</span>
-    </mat-toolbar-row>
-</mat-toolbar>
-
-
+    </label>
+    <button mat-button matTooltip="{{'HOME.Home' | translate}}" [hidden]="isVisibleByRole"
+      [routerLink]="['welcomePage']" style="float: left">
+      <mat-icon>home</mat-icon>
+    </button>
+  </ul>
 </div>
 
+  <div>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span class="span">{{message}}</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
 
 <div>
   <router-outlet></router-outlet>
 </div>
 
 
-<div class="Footer">Footballer application</div>
+<div class="Footer">{{'HOME.Footer' | translate}}</div>

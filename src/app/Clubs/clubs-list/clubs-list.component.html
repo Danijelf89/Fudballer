@@ -1,66 +1,100 @@
 <div class="clubMain">
     <div class="mainTableAndHeaders">
         <div class="card-header clubHeader">
-            Clubs <button [hidden]="isVisibleByRole" mat-button  style="float: right;" (click)="addClub()" matTooltip="Add new club"><mat-icon>library_add</mat-icon></button>
+            {{'HOME.Clubs' | translate}} <button [hidden]="isVisibleByRole" mat-button style="float: right;"
+                (click)="addClub()" matTooltip="{{ 'HOME.Add' | translate }}">
+                <mat-icon>library_add</mat-icon>
+            </button>
         </div>
 
-        <div class="card-header child mat-elevation-z8" >
-
-            <table mat-table [dataSource]="dataSourceBase" matSort  class="demo-table" >
-
+        <div class="card-header child mat-elevation-z8">
+            <table mat-table [dataSource]="dataSourceBase" matSort multiTemplateDataRows class="mat-elevation-z8"
+                class="demo-table">
                 <!-- Position Column -->
                 <ng-container matColumnDef="clubName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="">Name</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="">{{'HOME.Name' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{element.clubName}}</td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="city">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="">City</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="">{{'HOME.City' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{element.city}}</td>
                 </ng-container>
 
                 <!-- Weight Column -->
                 <ng-container matColumnDef="budget">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Budget</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Budget' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{element.budget}}</td>
                 </ng-container>
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="founded">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Founded</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Founded' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{element.founded}}</td>
                 </ng-container>
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="owner">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Owner' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{element.owner}}</td>
                 </ng-container>
 
                 <!-- Symbol Column -->
-                <ng-container matColumnDef="actions" >
-                    <th mat-header-cell *matHeaderCellDef [hidden]="isVisibleByRole">Actions </th>
-                    <td mat-cell *matCellDef="let row" [hidden]="isVisibleByRole">
-                        <button mat-button [hidden]="isVisibleByRole" (click)="updateClub(row)" matTooltip="Update footballer"><mat-icon>edit</mat-icon></button>
-                        <button mat-button [hidden]="isVisibleByRole" (click)="openDetails(row)" matTooltip="Open club details"><mat-icon>details</mat-icon></button>
-                        <button mat-button [hidden]="isVisibleByRole" (click)="deleteClub(row)" matTooltip="Delete club"><mat-icon>delete</mat-icon></button>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef >{{'HOME.Actions' | translate}} </th>
+                    <td mat-cell *matCellDef="let row" >
+                        <button mat-button [hidden]="isVisibleByRole" (click)="updateClub(row)"
+                        matTooltip="{{ 'HOME.Update' | translate }}">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-button  (click)="openListOfFootballers(row)"
+                        matTooltip="{{ 'HOME.FootballerList' | translate }}">
+                            <mat-icon>details</mat-icon>
+                        </button>
+                        <button mat-button [hidden]="isVisibleByRole" (click)="deleteClub(row)"
+                        matTooltip="{{ 'HOME.Delete' | translate }}">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                <ng-container matColumnDef="expandedDetail">
+                    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsBase.length">
+                        <div class="example-element-detail"
+                            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                            <div class="example-element-diagram">
+
+                                <mat-card class="example-card">
+
+                                    <mat-card-title-group>
+
+                                        <img mat-card-lg-image src={{element.pictureUrl}}>
+                                        <mat-card-title>{{element.clubName}}</mat-card-title>
+                                        <mat-card-subtitle>{{'HOME.City' | translate}}: {{element.city}}</mat-card-subtitle>
+                                        <mat-card-subtitle>{{'HOME.Budget' | translate}}: {{element.budget}}</mat-card-subtitle>
+                                        <mat-card-subtitle>{{'HOME.Founded' | translate}}: {{element.founded}}</mat-card-subtitle>
+                                        <mat-card-subtitle>{{'HOME.Owner' | translate}}: {{element.owner}}</mat-card-subtitle>
+                                    </mat-card-title-group>
+                                </mat-card>
+                            </div>
+
+                        </div>
                     </td>
                 </ng-container>
 
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsBase"></tr>
-                <tr mat-row (click)="onclickedRow(row)" [class.demo-row-is-clicked]="clickedRows.has(row)"
-                    *matRowDef="let row; columns: displayedColumnsBase;"></tr>
+                <tr mat-row *matRowDef="let element; columns: displayedColumnsBase;" class="example-element-row"
+                    [class.example-expanded-row]="expandedElement === element"
+                    (click)="expandedElement = expandedElement === element ? null : element">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
             </table>
-
-            <mat-paginator #paginator [length]="100" showFirstLastButtons="true"
-              [pageSize]="5"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
+            <mat-paginator #paginator [length]="100" showFirstLastButtons="true" [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
             </mat-paginator>
-        </div>
-
-
+        </div>>
 
     </div>
 

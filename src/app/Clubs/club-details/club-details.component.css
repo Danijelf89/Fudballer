@@ -2,11 +2,53 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
 
-.detailsHeader{
-    width: 100%;
-    font-size: large;
-    height: 10%;
 
-    border-color: brown;
-    border-width: 50%;
+
+.demo-table {
+  
+
+    width: auto;
+    border: 100px;
+    border-color: red;
+    background-color: aliceblue;
+    justify-content: center;
+
+
+
 }
+
+.mat-elevation-z8 {
+    width: 70%;
+}
+
+.tableHeader {
+    padding: 2px;
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+.tableRows {
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.demo-table 
+{
+    width: 450px;
+    border-collapse:separate;
+    border-spacing:0 5px;
+}
+
+.content{
+    padding: 16px;
+    overflow: auto;
+    height: 70vh;
+    width: 70vw;
+}
+
+.body{
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+  }

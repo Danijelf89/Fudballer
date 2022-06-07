@@ -2,61 +2,33 @@
 @import "~font-awesome/css/font-awesome.min.css";
 
 
-.clubMain {
-    flex-wrap: wrap;
-    display: flex;
-    margin: 10px;
-}
-
-.mainTableAndHeaders {
-    margin-right: 5px;
-    width: 100%;
-}
-
 .clubHeader {
-    margin-top: 4%;
+    margin-top: 5px;
     margin-bottom: 2%;
-    height: 15%;
+    height: 50px;
     text-align: center;
     font-size: larger;
     font-weight: 100;
 }
 
-.tableHeader {
-    padding: 2px;
-    border: 2px solid blue;
-    border-radius: 5px;
-}
 
-.tableRows {
-    border: 1px solid red;
-    padding: 10px;
-    border-radius: 5px;
-}
 
 
 .demo-table {
     width: 100%;
-
-
     border: 100px;
     border-color: red;
     background-color: aliceblue;
     justify-content: center;
-
+   
 }
 
 .mat-elevation-z8 {
     width: 70%;
-}
-
-.child {
-
-
-    /* Center horizontally*/
     margin: 0 auto;
-
 }
+
+
 
 .mat-row .mat-cell {
     border-bottom: 1px solid transparent;
@@ -79,3 +51,34 @@
 .mat-row:hover {
     background-color: rgba(61, 13, 235, 0.329);
 }
+
+
+table {
+    width: 100%;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+
+   
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  
+  .example-card {
+    max-width: 400px;
+    margin-bottom: 8px;
+  }
+
+  .example-card-image {
+    margin: 0;
+    height: 100%;
+  }

@@ -11,6 +11,13 @@ const GET_CLUBS_URL = 'https://localhost:44307/clubs/GetClubs';
 const DELETE_CLUB_URL = 'https://localhost:44307/clubs/DeleteClub/';
 const ADD_CLUB_URL = 'https://localhost:44307/clubs/AddNewClub';
 const UPDATE_CLUB_URL ='https://localhost:44307/clubs/UpdateClub';
+const GET_CLUBS_FOOTBALLERS_URL = 'https://localhost:44307/clubs/GetClubsFootballers/';
+
+
+const GET_USERS_URL ='https://localhost:44307/auth/GetUsers';
+const ADD_NEW_USER = 'https://localhost:44307/auth/AddNewUser';
+const UPDATE_USER = 'https://localhost:44307/auth/UpdateUser';
+const DELETE_USER = 'https://localhost:44307/auth/DeleteUser/';
 
 export const environment = {
   production: false,
@@ -24,6 +31,12 @@ export const environment = {
   deleteClubUrl : DELETE_CLUB_URL,
   addClubUrl : ADD_CLUB_URL,
   updateClubUrl : UPDATE_CLUB_URL,
+  getClubsFootbalersUrl : GET_CLUBS_FOOTBALLERS_URL,
+
+  getUsersUrl : GET_USERS_URL,
+  addNewUserUrl : ADD_NEW_USER,
+  updateUser : UPDATE_USER,
+  deleteUser : DELETE_USER,
 
   test : 5555,
 };

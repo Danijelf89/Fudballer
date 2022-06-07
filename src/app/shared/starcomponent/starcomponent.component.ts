@@ -14,7 +14,7 @@ export class StarcomponentComponent implements OnChanges {
   hideStars: boolean = this.rating == 0 ? true : false;
 
   ngOnChanges(): void {
-    this.cropWidth = this.rating * 75 / 5;
+    this.cropWidth = this.rating * 65 / 5;
     this.hideStars = this.rating == 0 || this.rating == null ? true : false;
   }
 }

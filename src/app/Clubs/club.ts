@@ -1,3 +1,5 @@
+import { IFootballers } from "../Footballers/footballers.model";
+
 export interface Club {
     id : number,
     clubName : string;
@@ -7,4 +9,5 @@ export interface Club {
     owner : string
     isDefault : boolean
     creationDate : Date
+    pictureUrl : string
 }

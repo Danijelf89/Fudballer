@@ -35,7 +35,8 @@ export class AddOrUpdateFootballer implements OnInit {
         clubId: new FormControl(0, Validators.required),
         club: new FormControl(null, Validators.required),
         id: new FormControl(0),
-        creationDate : new FormControl(Date)
+        creationDate : new FormControl(Date),
+        pictureUrl : new FormControl(''),
     });
 
     get name() {
@@ -73,7 +74,9 @@ export class AddOrUpdateFootballer implements OnInit {
         if (Object.keys(this.data.footballer).length !== 0) {
             this.addUpdateForm.patchValue({
                 name: this.data.footballer.name, surname: this.data.footballer.surname,
-                position: this.data.footballer.position, dateOfBirth: this.data.footballer.dateOfBirth,
+                position: this.data.footballer.position,
+                pictureUrl: this.data.footballer.pictureUrl,
+                dateOfBirth: this.data.footballer.dateOfBirth,
                 rating: this.data.footballer.rating, price: this.data.footballer.price,
                 clubId: this.data.footballer.clubId, id: this.data.footballer.id, club: this.data.footballer.club
             });

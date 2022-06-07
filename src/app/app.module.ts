@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FootballersService } from './Footballers/footballers.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FootballerDetails } from './Footballers/footballer-details/footballer-details.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { IgxComboModule } from "igniteui-angular";
@@ -23,7 +23,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-
 import { SpinnerComponentComponent } from './shared/spinner-component/spinner-component.component';
 import { StarcomponentComponent } from './shared/starcomponent/starcomponent.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -37,9 +36,18 @@ import { LoginComponent } from './login/login.component';
 import {JwtModule} from '@auth0/angular-jwt';
 import { AuthguardService } from './authguard.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { UsersComponent } from './users/users.component';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { AddUpdateUserComponent } from './users/add-update-user/add-update-user.component'
 
 export function tokkentGetter(){
   return localStorage.getItem("jwt")
+}
+
+export function HttpLoaderFactory(http : HttpClient){
+  return new TranslateHttpLoader(http);
+
 }
 
 @NgModule({
@@ -57,6 +65,8 @@ export function tokkentGetter(){
     StarcomponentComponent,
     SettingsComponent,
     LoginComponent,
+    UsersComponent,
+    AddUpdateUserComponent,
     
   ],
   imports: [
@@ -80,10 +90,19 @@ export function tokkentGetter(){
     FlexLayoutModule,
     MatToolbarModule,
     MatCardModule,
+    TranslateModule.forRoot({
+      loader : {
+        provide : TranslateLoader,
+        useFactory : HttpLoaderFactory,
+        deps : [HttpClient]
+      }
+    }),
+   
     RouterModule.forRoot([
       { path: 'welcomePage/footballersList', component: FootballersList , canActivate: [AuthguardService]},
       { path: 'welcomePage', component: WelcomeComponent , canActivate: [AuthguardService]},
       { path: 'welcomePage/clubList', component: ClubsListComponent , canActivate: [AuthguardService]},
+      { path: 'welcomePage/users', component: UsersComponent , canActivate: [AuthguardService]},
       { path: 'logIn', component: LoginComponent},
     ]),
 

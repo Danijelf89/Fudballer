@@ -15,21 +15,31 @@ import { Base } from "src/app/shared/base";
 import { basename } from "path";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { TranslateService } from '@ngx-translate/core'
+
 
 
 @Component({
 
   templateUrl: "./footballers-list.component.html",
-  styleUrls: ['./footballers-list.component.css']
+  styleUrls: ['./footballers-list.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 
 })
 
 export class FootballersList extends Base implements OnInit {
 
-  constructor(public service: FootballersService, public mat: MatDialog, snack: MatSnackBar) {
+  constructor(public service: FootballersService, public mat: MatDialog, snack: MatSnackBar, public translate: TranslateService ) {
     super(mat, snack);
 
-    this.displayedColumnsBase = ['name', 'surname', 'position', 'dateOfBirth', 'rating', 'price', 'club', 'status', 'actions'];
+    this.displayedColumnsBase = ['name', 'surname', 'position', 'dateOfBirth', 'club', 'actions'];
   }
 
   @ViewChild(MatSort) sort! : MatSort;
@@ -39,11 +49,9 @@ export class FootballersList extends Base implements OnInit {
 
   clickedRows = new Set<IFootballers>();
   isVisibleByRole : boolean = true;
-   
+  expandedElement = {} as IFootballers;
 
-
-  
-
+  canExpand : boolean = true;
 
   ngOnInit() {
 
@@ -58,17 +66,18 @@ export class FootballersList extends Base implements OnInit {
     this.dataSourceBase.sort = this.sort;
   }
 
-  openDetails(item: IFootballers) {
-    this.mat.open(FootballerDetails, { data: item, width: '500px' });
-  }
+  
 
   onclickedRow(item :any){
 
   }
 
   deleteFootballer(item: IFootballers) {
-    let di = this.mat.open(DeleteComponent, { data: { message: 'Are you sure you want do delete this footballer?', name: item.name + " " + item.surname }, width: '500px', disableClose: true });
+    this.canExpand = false;
+    
+    let di = this.mat.open(DeleteComponent, { data: { message: this.translate.instant('HOME.DeleteFootballer'), name: item.name + " " + item.surname }, width: '500px', disableClose: true });
     di.afterClosed().subscribe((res : boolean) => {
+      this.canExpand = true;
       if (res === true) {
         super.delete(this.service.deleteFootballer(item.id), this.listOfFootballer, item.id);
       }
@@ -78,7 +87,7 @@ export class FootballersList extends Base implements OnInit {
  
 
   addFootballer() {
-    let di = this.mat.open(AddOrUpdateFootballer, { data: { footballer : {}, operation: 'Add new footballer' }, width: "500px", disableClose: true });
+    let di = this.mat.open(AddOrUpdateFootballer, { data: { footballer : {}, operation: this.translate.instant('HOME.AddFootballer') }, width: "500px", disableClose: true });
     di.afterClosed().subscribe(res => {
       if(Object.keys(res.item).length !== 0){
         res.item.clubId = res.item.club.id;
@@ -90,7 +99,7 @@ export class FootballersList extends Base implements OnInit {
   }
 
   updateFootballer(item: IFootballers) {
-    let di = this.mat.open(AddOrUpdateFootballer, { data: { footballer: item, operation: 'Update footballer' }, width: "500px", disableClose: true });
+    let di = this.mat.open(AddOrUpdateFootballer, { data: { footballer: item, operation: this.translate.instant('HOME.UpdateFootballer') }, width: "500px", disableClose: true });
     di.afterClosed().subscribe(res => {
       if (Object.keys(res.item).length !== 0) {
         res.item.status = super.setStatus(res.item.club.clubName);

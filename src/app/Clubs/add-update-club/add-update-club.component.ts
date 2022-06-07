@@ -30,7 +30,8 @@ export class AddUpdateClubComponent implements OnInit {
     owner: new FormControl('', Validators.required),
     id : new FormControl(0),
     isDefault : new FormControl(false),
-    creationDate : new FormControl(Date.UTC)
+    creationDate : new FormControl(Date.UTC),
+    pictureUrl : new FormControl('')
   });
 
   get clubName() {
@@ -57,12 +58,11 @@ export class AddUpdateClubComponent implements OnInit {
     this.operationsName = this.data.operation;
 
     if (Object.keys(this.data.club).length !== 0) {
-      this.addUpdateForm.patchValue({
-        clubName: this.data.club.clubName, city: this.data.club.city,
-        budget: this.data.club.budget, founded: this.data.club.founded,
-        owner: this.data.club.owner, id: this.data.club.id,
-    });
+      this.addUpdateForm.patchValue(this.data.club);
+    
     }
+
+    
   }
 
   save(): void {

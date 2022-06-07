@@ -2,6 +2,10 @@
 @import "~font-awesome/css/font-awesome.min.css";
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
+.mainTableAndHeaders {
+    margin-right: 5px;
+    width: 100%;
+}
 
 .footballerHeader {
     margin-top: 5px;
@@ -10,6 +14,7 @@
     text-align: center;
     font-size: larger;
     font-weight: 100;
+    text-decoration-color: red;
 }
 
 
@@ -69,47 +74,4 @@
 
 .mat-row:hover {
     background-color: rgba(61, 13, 235, 0.329);
-}
-
-
-table {
-    width: 100%;
-  }
-  
-  tr.example-detail-row {
-    height: 0;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: whitesmoke;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
-  
-  .example-element-row td {
-    border-bottom-width: 0;
-  }
-  
-  .example-element-detail {
-    overflow: hidden;
-    display: flex;
-   
-  }
-  
-  .example-card {
-    max-width: 400px;
-    margin-bottom: 8px;
-    
-  }
-
-  .example-card-image {
-    margin: 0;
-    height: 100%;
-    width: 100%;
-  }
-
-  .detailsText{
-    margin-left: 40%;     
 }

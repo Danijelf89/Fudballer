@@ -1,82 +1,107 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="footballersMain">
-    <div class="mainTableAndHeaders">
+   
         <div class="card-header footballerHeader">
-            Footballers <button [hidden]="isVisibleByRole" mat-button  style="float: right;" (click)="addFootballer()" matTooltip="Add new footballer"><mat-icon>library_add</mat-icon></button>
+            {{'HOME.FootbalerTitle' | translate}} <button [hidden]="isVisibleByRole" mat-button style="float: right;" (click)="addFootballer()"
+            matTooltip="{{ 'HOME.Add' | translate }}">
+                <mat-icon>library_add</mat-icon>
+            </button>
         </div>
-        <div class="card-header child mat-elevation-z8" >
-        <table mat-table [dataSource]="dataSourceBase" matSort class="demo-table">
+        <div class="card-header child mat-elevation-z8">
+            <table mat-table [dataSource]="dataSourceBase" matSort multiTemplateDataRows class="mat-elevation-z8"
+                class="demo-table">
 
-            <!-- Position Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header="">Name</th>
-                <td mat-cell *matCellDef="let element">{{element.name}}</td>
-            </ng-container>
+                <!-- Position Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Name' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="surname">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Surname</th>
-                <td mat-cell *matCellDef="let element">{{element.surname}}</td>
-            </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="surname">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Surname' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{element.surname}}</td>
+                </ng-container>
 
-            <!-- Weight Column -->
-            <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
-                <td mat-cell *matCellDef="let element">{{element.position}}</td>
-            </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Position' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{element.position}}</td>
+                </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="dateOfBirth">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of birth</th>
-                <td mat-cell *matCellDef="let element">{{element.dateOfBirth}}</td>
-            </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="dateOfBirth">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.DateOfBirth' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{element.dateOfBirth}}</td>
+                </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="rating">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
-                <td mat-cell *matCellDef="let element">
-                    <fu-starcomponent [rating]='element.rating'></fu-starcomponent>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="club">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Club' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{element.club !=null ? element.club.clubName : ""}}</td>
+                </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="price">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
-                <td mat-cell *matCellDef="let element">{{element.price | currency:'EUR':'symbol':'1.2-2'}}</td>
-            </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef [hidden]="isVisibleByRole">{{'HOME.Actions' | translate}}</th>
+                    <td mat-cell *matCellDef="let row" [hidden]="isVisibleByRole">
+                        <button mat-button [hidden]="isVisibleByRole" (click)="updateFootballer(row)"
+                        matTooltip="{{ 'HOME.Update' | translate }}">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-button [hidden]="isVisibleByRole" (click)="deleteFootballer(row)"
+                            style="width: 30px;" matTooltip="{{ 'HOME.Delete' | translate }}">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="club">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Club</th>
-                <td mat-cell *matCellDef="let element">{{element.club !=null ? element.club.clubName : ""}}</td>
-            </ng-container>
+                <ng-container matColumnDef="expandedDetail">
+                    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsBase.length">
+                        <div class="example-element-detail"
+                            [@detailExpand]="element == expandedElement && canExpand ? 'expanded' : 'collapsed'">
+                            <div class="example-element-diagram">
 
-            <ng-container matColumnDef="status" >
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-                <td mat-cell *matCellDef="let element">{{element.status}}</td>
-            </ng-container>
+                                <mat-card class="example-card">
+
+                                    <mat-card-title-group>
+                                        <img mat-card-lg-image src={{element.pictureUrl}}>
+                                        <mat-card-title>{{element.name}} {{element.surname}}</mat-card-title>
+                                        <mat-card-subtitle>{{'HOME.DateOfBirth' | translate}}: {{element.dateOfBirth}}</mat-card-subtitle>
+                                        <mat-card-subtitle>{{'HOME.Position' | translate}}: {{element.position}}</mat-card-subtitle>
+                                        <mat-card-subtitle>{{'HOME.Price' | translate}}: {{element.price | currency:'EUR':'symbol':'1.2-2'}}
+                                        </mat-card-subtitle>
+                                        <mat-card-subtitle>{{'HOME.Club' | translate}}: {{element.club !=null ? element.club.clubName : ""}}
+                                        </mat-card-subtitle>
+                                        <mat-card-subtitle>{{'HOME.Status' | translate}}: {{element.status}}</mat-card-subtitle>
+                                    </mat-card-title-group>
+                                    <mat-card-content>
+
+                                        <mat-label>{{'HOME.Rating' | translate}}: <fu-starcomponent [rating]='element.rating'>
+                                            </fu-starcomponent>
+                                        </mat-label>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+
+                        </div>
+                    </td>
+                </ng-container>
 
 
-
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef [hidden]="isVisibleByRole">Actions</th>
-                <td mat-cell *matCellDef="let row" [hidden]="isVisibleByRole">
-                    <button mat-button [hidden]="isVisibleByRole" (click)="updateFootballer(row)" matTooltip="Update footballer"><mat-icon>edit</mat-icon></button>
-                    <button mat-button  [hidden]="isVisibleByRole"(click)="openDetails(row)" matTooltip="Open footballer details"><mat-icon>details</mat-icon></button>
-                    <button mat-button [hidden]="isVisibleByRole" (click)="deleteFootballer(row)" style="width: 30px;" matTooltip="Delete footballer"> <mat-icon>delete</mat-icon></button>
-                </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumnsBase"></tr>
-            <tr mat-row  [class.demo-row-is-clicked]="clickedRows.has(row)"
-                *matRowDef="let row; columns: displayedColumnsBase;"></tr>
-        </table>
-        <mat-paginator #paginator [length]="100" showFirstLastButtons="true"
-        [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25, 100]"
-        aria-label="Select page">
-      </mat-paginator>
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsBase"></tr>
+                <tr mat-row *matRowDef="let element; columns: displayedColumnsBase;" class="example-element-row"
+                    [class.example-expanded-row]="expandedElement === element"
+                    (click)="expandedElement = expandedElement === element ? null : element">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            </table>
+            <h6 class="detailsText" >{{'HOME.TableInfo' | translate}}</h6>
+            
+            <mat-paginator #paginator [length]="100" showFirstLastButtons="true" [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+            </mat-paginator>
         </div>
-    </div>
+       
+   
 </div>

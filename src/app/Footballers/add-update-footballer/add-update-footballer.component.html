@@ -9,30 +9,30 @@
         <form [formGroup]="addUpdateForm">
             <div>
                 <mat-form-field [floatLabel]="'auto'">
-                    <mat-label>Name</mat-label>
+                    <mat-label>{{'HOME.Name' | translate}}</mat-label>
                     <input matInput formControlName="name">
                     <span class="text-danger" *ngIf="name && name.invalid">
-                        Name is required
+                        {{'HOME.MandatoryField' | translate}}
                     </span>
                 </mat-form-field>
             </div>
 
             <div>
                 <mat-form-field [floatLabel]="'auto'">
-                    <mat-label>Surname</mat-label>
+                    <mat-label>{{'HOME.Surname' | translate}}</mat-label>
                     <input matInput formControlName="surname">
                     <span class="text-danger" *ngIf="surname && surname.invalid">
-                        Surname is required
+                        {{'HOME.MandatoryField' | translate}}
                     </span>
                 </mat-form-field>
             </div>
 
             <div>
                 <mat-form-field [floatLabel]="'auto'">
-                    <mat-label>Position</mat-label>
+                    <mat-label>{{'HOME.Position' | translate}}</mat-label>
                     <input matInput formControlName="position">
                     <span class="text-danger" *ngIf="position && position.invalid">
-                        Position is required
+                        {{'HOME.MandatoryField' | translate}}
                     </span>
 
                 </mat-form-field>
@@ -40,10 +40,10 @@
 
             <div>
                 <mat-form-field [floatLabel]="'auto'">
-                    <mat-label>Birth</mat-label>
+                    <mat-label>{{'HOME.DateOfBirth' | translate}}</mat-label>
                     <input matInput formControlName="dateOfBirth">
                     <span class="text-danger" *ngIf="dateOfBirth && dateOfBirth.invalid">
-                        Date is required
+                        {{'HOME.MandatoryField' | translate}}
                     </span>
 
                 </mat-form-field>
@@ -51,20 +51,20 @@
 
             <div>
                 <mat-form-field [floatLabel]="'auto'">
-                    <mat-label>Rating</mat-label>
+                    <mat-label>{{'HOME.Rating' | translate}}</mat-label>
                     <input matInput type="number" formControlName="rating" required>
                     <span class="text-danger" *ngIf="rating && rating.invalid">
-                        Rating is required and must be between 0 and 6
+                        {{'HOME.RatingMandatory' | translate}}
                     </span>
                 </mat-form-field>
             </div>
 
             <div>
                 <mat-form-field [floatLabel]="'auto'">
-                    <mat-label>Price</mat-label>
+                    <mat-label>{{'HOME.Price' | translate}}</mat-label>
                     <input matInput type="number" formControlName="price">
                     <span class="text-danger" *ngIf="price && price.invalid">
-                        Price is required
+                        {{'HOME.MandatoryField' | translate}}
                     </span>
 
                 </mat-form-field>
@@ -72,19 +72,23 @@
 
             <div>
                 <mat-form-field [floatLabel]="'auto'">
-                    <mat-label>Club</mat-label>
+                    <mat-label>{{'HOME.PictureUrl' | translate}}</mat-label>
+                    <input matInput  formControlName="pictureUrl">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>{{'HOME.Club' | translate}}</mat-label>
                     <mat-select formControlName="club" aria-required="true">
                         <mat-option *ngFor="let n of lisClubs" [value]="n">{{n.clubName}}
                         </mat-option>
                     </mat-select>
                     <span class="text-danger" *ngIf="club && club.invalid">
-                        Club is required
+                        {{'HOME.MandatoryField' | translate}}
                     </span>
                 </mat-form-field>
             </div>
-
-           
-
           
             <mat-toolbar color="primary">
                 <mat-toolbar-row>
@@ -94,7 +98,7 @@
 
                             Ok
                         </button> <button mat-fab color="warn" style="width:100px;" (click)="cancel()">
-                            <mat-icon>cancel</mat-icon>Cancel
+                            <mat-icon>cancel</mat-icon>{{'HOME.Cancel' | translate}}
                         </button></span>
                 </mat-toolbar-row>
             </mat-toolbar>

@@ -8,8 +8,8 @@
     <div>
         <mat-form-field [floatLabel]="'auto'">
             <mat-label>{{'HOME.Name' | translate}}</mat-label>
-            <input matInput formControlName="clubName">
-            <span class="text-danger" *ngIf="clubName && clubName.invalid">
+            <input matInput formControlName="name">
+            <span class="text-danger" *ngIf="name && name.invalid">
                 {{'HOME.MandatoryField' | translate}}
             </span>
         </mat-form-field>
@@ -17,9 +17,9 @@
 
     <div>
         <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.City' | translate}}</mat-label>
-            <input matInput formControlName="city">
-            <span class="text-danger" *ngIf="city && city.invalid">
+            <mat-label>{{'HOME.Surname' | translate}}</mat-label>
+            <input matInput formControlName="surname">
+            <span class="text-danger" *ngIf="surname && surname.invalid">
                 {{'HOME.MandatoryField' | translate}}
             </span>
         </mat-form-field>
@@ -27,9 +27,9 @@
 
     <div>
         <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.Budget' | translate}}</mat-label>
-            <input matInput type="number" formControlName="budget">
-            <span class="text-danger" *ngIf="budget && budget.invalid">
+            <mat-label>{{'HOME.UserName' | translate}}</mat-label>
+            <input matInput  formControlName="userName">
+            <span class="text-danger" *ngIf="userName && userName.invalid">
                 {{'HOME.MandatoryField' | translate}}
             </span>
         </mat-form-field>
@@ -37,9 +37,9 @@
 
     <div>
         <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.Founded' | translate}}</mat-label>
-            <input matInput  formControlName="founded">
-            <span class="text-danger" *ngIf="founded && founded.invalid">
+            <mat-label>{{'HOME.Password' | translate}}</mat-label>
+            <input matInput  formControlName="password">
+            <span class="text-danger" *ngIf="password && password.invalid">
                 {{'HOME.MandatoryField' | translate}}
             </span>
         </mat-form-field>
@@ -47,20 +47,15 @@
 
     <div>
         <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.Owner' | translate}}</mat-label>
-            <input matInput  formControlName="owner">
-            <span class="text-danger" *ngIf="owner && owner.invalid">
+            <mat-label>{{'HOME.Role' | translate}}</mat-label>
+            <input matInput  formControlName="role">
+            <span class="text-danger" *ngIf="role && role.invalid">
                 {{'HOME.MandatoryField' | translate}}
             </span>
         </mat-form-field>
     </div>
 
-    <div>
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.PictureUrl' | translate}}</mat-label>
-            <input matInput  formControlName="pictureUrl">
-        </mat-form-field>
-    </div>
+   
 </form>
 
 <h2 style="text-align:center;"><button mat-fab color="primary" style="width:100px; margin-right:10px"
