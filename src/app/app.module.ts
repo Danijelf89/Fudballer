@@ -41,6 +41,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { AddUpdateUserComponent } from './users/add-update-user/add-update-user.component'
 import { ClubsFacade } from './Clubs/clubs-facade';
+import { Authguardadmin } from './authguardadmin.service';
 
 export function tokkentGetter(){
   return localStorage.getItem("jwt")
@@ -103,7 +104,7 @@ export function HttpLoaderFactory(http : HttpClient){
       { path: 'welcomePage/footballersList', component: FootballersList , canActivate: [AuthguardService]},
       { path: 'welcomePage', component: WelcomeComponent , canActivate: [AuthguardService]},
       { path: 'welcomePage/clubList', component: ClubsListComponent , canActivate: [AuthguardService]},
-      { path: 'welcomePage/users', component: UsersComponent , canActivate: [AuthguardService]},
+      { path: 'welcomePage/users', component: UsersComponent , canActivate: [Authguardadmin]},
       { path: 'logIn', component: LoginComponent},
     ]),
 
@@ -116,7 +117,7 @@ export function HttpLoaderFactory(http : HttpClient){
     }),
     BrowserAnimationsModule
   ],
-  providers: [FootballersService, AuthguardService, ClubsFacade],
+  providers: [FootballersService, AuthguardService, Authguardadmin,ClubsFacade],
   bootstrap: [AppComponent]
 })
 export class AppModule {
