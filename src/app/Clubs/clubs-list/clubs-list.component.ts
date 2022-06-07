@@ -16,6 +16,7 @@ import { AddUpdateClubComponent } from '../add-update-club/add-update-club.compo
 import { Club } from '../club';
 import { ClubDetailsComponent } from '../club-details/club-details.component';
 import { TranslateService } from '@ngx-translate/core'
+import { ClubsFacade } from '../clubs-facade';
 
 @Component({
   selector: 'fu-clubs-list',
@@ -32,7 +33,7 @@ import { TranslateService } from '@ngx-translate/core'
 })
 export class ClubsListComponent extends Base implements OnInit {
 
-  constructor(private changeDetectorRefs: ChangeDetectorRef, public service: FootballersService, public mat: MatDialog, 
+  constructor(protected facade:ClubsFacade, private changeDetectorRefs: ChangeDetectorRef, public service: FootballersService, public mat: MatDialog, 
     public snack: MatSnackBar, public translate: TranslateService ) {
     super(mat, snack);
 
@@ -55,16 +56,33 @@ export class ClubsListComponent extends Base implements OnInit {
   ngOnInit(): void {
 
     this.getClubs();
+
+    this.subscriptions.add(this.facade.footballers$.subscribe(foo => {
+      //this.updateDataSource(foo)
+      console.log('get foo pozvan', foo);
+    }))
+
     this.isVisibleByRole = localStorage.getItem("role") != null && localStorage.getItem("role") == "Admin" ? false : true;
   }
 
+  updateDataSource(users:Club[]){
+    this.dataSourceBase = new MatTableDataSource<Club>(users)
+    this.dataSourceBase.paginator = this.paginator
+    this.dataSourceBase.sort = this.sort
+
+    console.log('pozvan data source', users);
+   
+  }
+
   ngAfterViewInit(){
-    this.dataSourceBase.paginator = this.paginator;
-    
-    this.dataSourceBase.sort = this.sort;
+    this.subscriptions.add(this.facade.clubs$.subscribe(clubs => {
+      this.updateDataSource(clubs)
+      console.log('update', clubs);
+    }))
 
    
   }
+
   
   deleteClub(item: Club) {
     let dialogRef = this.mat.open(DeleteComponent, { data: { message: this.translate.instant('HOME.DeleteClub'), name: item.clubName }, width: '500px', disableClose: true });
@@ -77,20 +95,15 @@ export class ClubsListComponent extends Base implements OnInit {
 
   openListOfFootballers(item: Club) {
 
-    this.service.getClubsFootballers(item.id).subscribe(res =>{
-      this.listOfFootballers = res;
-      this.mat.open(ClubDetailsComponent, { data: this.listOfFootballers});
-    })
-
-    
+    this.facade.getFootbalers(item);
   }
 
   updateClub(item : any) {
     let di = this.dialog.open(AddUpdateClubComponent, { data: { club: item, operation: this.translate.instant('HOME.UpdateClub') }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
       if (Object.keys(res.item).length !== 0) {
-        this.update(this.service.updateClub(res.item), this.clubs, res.item);
-
+       this.facade.updatClub(res.item);
+      
       
       }
     });

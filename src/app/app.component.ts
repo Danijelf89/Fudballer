@@ -80,11 +80,6 @@ export class AppComponent extends Base implements OnInit, OnChanges {
     this.translate.use(langselect).subscribe(res => {
       this.refrehMessage();
     });
-
-
-
-
-
   }
 
   openSettings() {

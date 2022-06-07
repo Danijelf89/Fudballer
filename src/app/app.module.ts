@@ -40,6 +40,7 @@ import { UsersComponent } from './users/users.component';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { AddUpdateUserComponent } from './users/add-update-user/add-update-user.component'
+import { ClubsFacade } from './Clubs/clubs-facade';
 
 export function tokkentGetter(){
   return localStorage.getItem("jwt")
@@ -115,7 +116,7 @@ export function HttpLoaderFactory(http : HttpClient){
     }),
     BrowserAnimationsModule
   ],
-  providers: [FootballersService, AuthguardService],
+  providers: [FootballersService, AuthguardService, ClubsFacade],
   bootstrap: [AppComponent]
 })
 export class AppModule {
