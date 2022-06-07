@@ -95,14 +95,19 @@ export class ClubsListComponent extends Base implements OnInit {
 
   openListOfFootballers(item: Club) {
 
-    this.facade.getFootbalers(item);
+    this.service.getClubsFootballers(item.id).subscribe(res =>{
+      this.listOfFootballers = res;
+      this.mat.open(ClubDetailsComponent, { data: this.listOfFootballers});
+    })
   }
 
   updateClub(item : any) {
     let di = this.dialog.open(AddUpdateClubComponent, { data: { club: item, operation: this.translate.instant('HOME.UpdateClub') }, width: '500px', disableClose: true });
     di.afterClosed().subscribe(res => {
       if (Object.keys(res.item).length !== 0) {
-       this.facade.updatClub(res.item);
+        this.update(this.service.updateClub(res.item), this.clubs, res.item);
+
+      
       
       
       }
