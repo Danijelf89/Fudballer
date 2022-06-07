@@ -13,8 +13,13 @@ import { TranslateService } from '@ngx-translate/core'
 export class Base {
 
     constructor(public dialog: MatDialog, public snackBar: MatSnackBar) {
+<<<<<<< HEAD
       test
  sa
+=======
+      
+
+>>>>>>> parent of ad80b9f (test)
     }
 
     dataSourceBase = new MatTableDataSource<any>();
