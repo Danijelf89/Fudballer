@@ -42,6 +42,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { AddUpdateUserComponent } from './users/add-update-user/add-update-user.component'
 import { ClubsFacade } from './Clubs/clubs-facade';
 import { Authguardadmin } from './authguardadmin.service';
+import {MatMenuModule} from '@angular/material/menu';
 
 export function tokkentGetter(){
   return localStorage.getItem("jwt")
@@ -92,6 +93,7 @@ export function HttpLoaderFactory(http : HttpClient){
     FlexLayoutModule,
     MatToolbarModule,
     MatCardModule,
+    MatMenuModule,
     TranslateModule.forRoot({
       loader : {
         provide : TranslateLoader,
