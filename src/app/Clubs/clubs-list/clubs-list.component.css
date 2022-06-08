@@ -44,6 +44,10 @@
     font-weight: bold;
 }
 
+.span {
+  margin: auto;
+}
+
 .mat-row:hover {
     background-color: rgba(235, 13, 13, 0.795);
 }
@@ -82,3 +86,9 @@ table {
     margin: 0;
     height: 100%;
   }
+
+
+  .example-container{
+    display: flex;
+    flex-direction: column;
+}

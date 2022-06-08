@@ -4,16 +4,21 @@
     margin: 5px;
 }
 
-.rounded{
-    border-radius:50px;
-   
-    height: 40px;
-    text-align: center;
-  }
+.example-container{
+  display: flex;
+  flex-direction: column;
+}
 
+.example-container > * {
+  width: 100%;
+}
 
-  input:invalid:required {
-    border-color: red;
-    border-width: 3px;
-    border-radius:100px;
-  }
+.example-buttons{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.span {
+  margin: auto;
+}
