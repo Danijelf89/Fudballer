@@ -17,3 +17,10 @@
 .span {
     margin: auto;
 }
+
+.example-buttons{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+

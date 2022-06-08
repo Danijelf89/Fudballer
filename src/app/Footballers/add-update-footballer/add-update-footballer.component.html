@@ -1,97 +1,107 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span class="span">{{operationsName}}</span>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-dialog-content [formGroup]="addUpdateForm">
-    <div class="example-container">
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.Name' | translate}}</mat-label>
-            <input matInput formControlName="name">
-            <span class="text-danger" *ngIf="name && name.invalid">
-                {{'HOME.MandatoryField' | translate}}
-            </span>
-        </mat-form-field>
-  
+<div fxLayout="center center" fxFlexFill class="main-div">
+    <mat-card fxFlex="200">
+        <mat-toolbar class="example-container" color="primary">
+            <mat-toolbar-row>
+                <span class="span">{{operationsName}}</span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-dialog-content [formGroup]="addUpdateForm" fxLayoutAlign="stretch" fxLayout="column">
+            <div class="example-container">
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>{{'HOME.Name' | translate}}</mat-label>
+                    <input matInput formControlName="name">
+                    <span class="text-danger" *ngIf="name && name.invalid">
+                        {{'HOME.MandatoryField' | translate}}
+                    </span>
+                </mat-form-field>
 
-   
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.Surname' | translate}}</mat-label>
-            <input matInput formControlName="surname">
-            <span class="text-danger" *ngIf="surname && surname.invalid">
-                {{'HOME.MandatoryField' | translate}}
-            </span>
-        </mat-form-field>
-   
 
-   
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.Position' | translate}}</mat-label>
-            <input matInput formControlName="position">
-            <span class="text-danger" *ngIf="position && position.invalid">
-                {{'HOME.MandatoryField' | translate}}
-            </span>
 
-        </mat-form-field>
-   
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>{{'HOME.Surname' | translate}}</mat-label>
+                    <input matInput formControlName="surname">
+                    <span class="text-danger" *ngIf="surname && surname.invalid">
+                        {{'HOME.MandatoryField' | translate}}
+                    </span>
+                </mat-form-field>
 
-   
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.DateOfBirth' | translate}}</mat-label>
-            <input matInput formControlName="dateOfBirth">
-            <span class="text-danger" *ngIf="dateOfBirth && dateOfBirth.invalid">
-                {{'HOME.MandatoryField' | translate}}
-            </span>
 
-        </mat-form-field>
-   
 
-  
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.Rating' | translate}}</mat-label>
-            <input matInput type="number" formControlName="rating" required>
-            <span class="text-danger" *ngIf="rating && rating.invalid">
-                {{'HOME.RatingMandatory' | translate}}
-            </span>
-        </mat-form-field>
-   
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>{{'HOME.Position' | translate}}</mat-label>
+                    <input matInput formControlName="position">
+                    <span class="text-danger" *ngIf="position && position.invalid">
+                        {{'HOME.MandatoryField' | translate}}
+                    </span>
 
-   
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.Price' | translate}}</mat-label>
-            <input matInput type="number" formControlName="price">
-            <span class="text-danger" *ngIf="price && price.invalid">
-                {{'HOME.MandatoryField' | translate}}
-            </span>
+                </mat-form-field>
 
-        </mat-form-field>
-   
 
-   
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.PictureUrl' | translate}}</mat-label>
-            <input matInput  formControlName="pictureUrl">
-        </mat-form-field>
-   
 
-   
-        <mat-form-field [floatLabel]="'auto'">
-            <mat-label>{{'HOME.Club' | translate}}</mat-label>
-            <mat-select formControlName="club" aria-required="true">
-                <mat-option *ngFor="let n of lisClubs" [value]="n">{{n.clubName}}
-                </mat-option>
-            </mat-select>
-            <span class="text-danger" *ngIf="club && club.invalid">
-                {{'HOME.MandatoryField' | translate}}
-            </span>
-        </mat-form-field>
-    </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-button color="primary" (click)="save()" >
-        <mat-icon>save</mat-icon> Save
-    </button>
-    <button mat-button color="primary" (click)="cancel()">
-        <mat-icon>cancel</mat-icon> Cancel
-    </button>
-</mat-dialog-actions>
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>{{'HOME.DateOfBirth' | translate}}</mat-label>
+                    <input matInput formControlName="dateOfBirth">
+                    <span class="text-danger" *ngIf="dateOfBirth && dateOfBirth.invalid">
+                        {{'HOME.MandatoryField' | translate}}
+                    </span>
+
+                </mat-form-field>
+
+
+
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>{{'HOME.Rating' | translate}}</mat-label>
+                    <input matInput type="number" formControlName="rating" required>
+                    <span class="text-danger" *ngIf="rating && rating.invalid">
+                        {{'HOME.RatingMandatory' | translate}}
+                    </span>
+                </mat-form-field>
+
+
+
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>{{'HOME.Price' | translate}}</mat-label>
+                    <input matInput type="number" formControlName="price">
+                    <span class="text-danger" *ngIf="price && price.invalid">
+                        {{'HOME.MandatoryField' | translate}}
+                    </span>
+
+                </mat-form-field>
+
+
+
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>{{'HOME.PictureUrl' | translate}}</mat-label>
+                    <input matInput formControlName="pictureUrl">
+                </mat-form-field>
+
+
+
+                <mat-form-field [floatLabel]="'auto'">
+                    <mat-label>{{'HOME.Club' | translate}}</mat-label>
+                    <mat-select formControlName="club" aria-required="true">
+                        <mat-option *ngFor="let n of lisClubs" [value]="n">{{n.clubName}}
+                        </mat-option>
+                    </mat-select>
+                    <span class="text-danger" *ngIf="club && club.invalid">
+                        {{'HOME.MandatoryField' | translate}}
+                    </span>
+                </mat-form-field>
+            </div>
+
+            <div class="example-buttons">
+                <button mat-button color="primary" (click)="save()">
+                    <mat-icon>save</mat-icon> Save
+                </button>
+                <button mat-button color="primary" (click)="cancel()">
+                    <mat-icon>cancel</mat-icon> Cancel
+                </button>
+
+            </div>
+           
+        </mat-dialog-content>
+
+
+    </mat-card>
+
+</div>
