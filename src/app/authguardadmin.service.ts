@@ -17,6 +17,8 @@ export class Authguardadmin implements CanActivate{
       if (token && this.jwtHelper.isTokenExpired(token)) {
         localStorage.removeItem('userName');
         localStorage.removeItem('role');
+        localStorage.removeItem('name');
+        localStorage.removeItem('surname');
         this.router.navigate(["/"]);
         this.mat.open(LoginComponent);
         return true;

@@ -1,7 +1,4 @@
-.Footer{
-   
-    background-color: aliceblue;
-}
+
 
 .welcomeHeader{
     text-align: center;
@@ -24,6 +21,11 @@ nav ul li{
 
 .span {
     margin: auto;
+}
+
+.Footer{
+   
+    background-color: aliceblue;
 }
 
 

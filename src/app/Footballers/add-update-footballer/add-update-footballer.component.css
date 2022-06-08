@@ -1,22 +1,19 @@
-.addUpdateHeader {
-    text-align: center;
-    font-size: large;
-    margin: 5px;
-
+.example-container{
+    display: flex;
+    flex-direction: column;
 }
 
-.main-div mat-card{
-    padding: 0px;
+.example-container > * {
+    width: 100%;
 }
 
-.login{
- padding: 20px;   
-}
-
-.span {
-    margin: auto;
-}
 
 .comboBox {
     width: 40%;
+}
+
+
+
+.span {
+    margin: auto;
 }

@@ -3,10 +3,15 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 
+
+.footballersMain{
+    margin-bottom: 70%;
+}
+
 .footballerHeader {
     margin-top: 5px;
     margin-bottom: 2%;
-    height: 15%;
+    min-height: 15%;
     text-align: center;
     font-size: larger;
     font-weight: 100;
@@ -27,9 +32,6 @@
 
 
 .demo-table {
-    width: 100%;
-
-
     border: 100px;
     border-color: red;
     background-color: aliceblue;
@@ -113,3 +115,11 @@ table {
   .detailsText{
     margin-left: 40%;     
 }
+
+
+
+.paginator{
+  margin-bottom: 500px;
+  margin-top: 500px;
+}
+
