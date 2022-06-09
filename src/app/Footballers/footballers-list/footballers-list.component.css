@@ -3,52 +3,11 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 
-
-.footballersMain{
-    margin-bottom: 70%;
-}
-
-.footballerHeader {
-    margin-top: 5px;
-    margin-bottom: 2%;
-    min-height: 15%;
-    text-align: center;
-    font-size: larger;
-    font-weight: 100;
-}
-
-
-.tableHeader {
-    padding: 2px;
-    border: 2px solid blue;
-    border-radius: 5px;
-}
-
-.tableRows {
-    border: 1px solid red;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-
 .demo-table {
+  width: 100%;
     border: 100px;
     border-color: red;
     background-color: aliceblue;
-    justify-content: center;
-
-}
-
-.mat-elevation-z8 {
-    width: 70%;
-}
-
-.child {
-
-
-    /* Center horizontally*/
-    margin: 0 auto;
-
 }
 
 .mat-row .mat-cell {
@@ -73,10 +32,6 @@
     background-color: rgba(61, 13, 235, 0.329);
 }
 
-
-table {
-    width: 100%;
-  }
   
   tr.example-detail-row {
     height: 0;
@@ -112,14 +67,8 @@ table {
     width: 100%;
   }
 
-  .detailsText{
-    margin-left: 40%;     
-}
-
-
-
-.paginator{
-  margin-bottom: 500px;
-  margin-top: 500px;
-}
+  marquee {
+    font-size: medium;
+    color: green;
+  }
 
