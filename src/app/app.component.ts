@@ -55,8 +55,12 @@ export class AppComponent implements OnInit {
   }
 
   logIn() {
-    let dialog = this.mat.open(LoginComponent);
-    dialog.afterClosed().subscribe(() => {
+    let dialog = this.mat.open(LoginComponent, {disableClose: true});
+    dialog.afterClosed().subscribe(res => {
+      if(!res.success){
+        return;
+      }
+
       this.name = localStorage.getItem("name")!;
       this.surname = localStorage.getItem("surname")!;
       this.role = localStorage.getItem("role")!;
@@ -64,6 +68,7 @@ export class AppComponent implements OnInit {
       this.hideSignIn = true;
 
       this.refrehMessage();
+     
     })
   }
 

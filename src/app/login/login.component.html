@@ -1,43 +1,38 @@
-<div fxLayout="center center" fxFlexFill class="main-div">
-    <mat-card fxFlex="200">
-        <mat-toolbar color="primary">
-            <mat-toolbar-row>
-                <span class="span">{{'HOME.LogIn' | translate}}</span>
-            </mat-toolbar-row>
-        </mat-toolbar>
-
-        <div *ngIf="invalidLogin" class="alert alert-danger">{{'HOME.InvalidUsernameOrPass' | translate}}</div>
-
-        <form fxLayoutAlign="stretch" fxLayout="column" class="login" [formGroup]="loginForm">
-            <div>
-                <mat-form-field [floatLabel]="'auto'">
-                    <mat-label>{{'HOME.UserName' | translate}}</mat-label>
-                    <input matInput formControlName="userName">
-                    <span class="text-danger" *ngIf="userName && userName.invalid">
-                        {{'HOME.MandatoryField' | translate}}
-                    </span>
-                </mat-form-field>
-            </div>
-
-            <div>
-                <mat-form-field [floatLabel]="'auto'">
-                    <mat-label>{{'HOME.Password' | translate}}</mat-label>
-                    <input matInput type="password" formControlName="password">
-                    <span class="text-danger" *ngIf="password && password.invalid">
-                        {{'HOME.MandatoryField' | translate}}
-                    </span>
-                </mat-form-field>
-            </div>
-            <button mat-button (click)="ok()" color="primary"> {{'HOME.LogIn' | translate}}</button>
-        </form>
-
-      
-
-    </mat-card>
-
-
-  
-
+<div fxLayout="center center" fxFlexFill class="main-div" fxLayout="row wrap">
+    <div fxFlex.xs="100%" fxFlex.md="100%" fxflex="100%">
+        <mat-card>
+            <mat-toolbar color="primary">
+                <mat-toolbar-row>
+                    <span class="span">{{'HOME.LogIn' | translate}}</span>
+                </mat-toolbar-row>
+            </mat-toolbar>
+    
+            <div *ngIf="invalidLogin" class="alert alert-danger">{{'HOME.InvalidUsernameOrPass' | translate}}</div>
+    
+            <form fxLayoutAlign="stretch"  fxLayout="column" class="login" [formGroup]="loginForm">
+                <div>
+                    <mat-form-field [floatLabel]="'auto'">
+                        <mat-label>{{'HOME.UserName' | translate}}</mat-label>
+                        <input matInput formControlName="userName">
+                        <span class="text-danger" *ngIf="userName && userName.invalid">
+                            {{'HOME.MandatoryField' | translate}}
+                        </span>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field [floatLabel]="'auto'">
+                        <mat-label>{{'HOME.Password' | translate}}</mat-label>
+                        <input matInput type="password" formControlName="password">
+                        <span class="text-danger" *ngIf="password && password.invalid">
+                            {{'HOME.MandatoryField' | translate}}
+                        </span>
+                    </mat-form-field>
+                </div>
+                <button mat-button (click)="ok()" color="primary"> {{'HOME.LogIn' | translate}}</button>
+                <button mat-button (click)="cancel()" color="primary"> {{'HOME.Cancel' | translate}}</button>
+            </form>
+        </mat-card>
+    </div>
 </div>
 
 

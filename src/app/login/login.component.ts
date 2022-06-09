@@ -11,15 +11,15 @@ import { FootballersService } from '../Footballers/footballers.service';
 })
 export class LoginComponent implements OnInit {
 
-  invalidLogin : boolean = false;
+  invalidLogin: boolean = false;
 
-  constructor(@Optional() public dialogRef: MatDialogRef<LoginComponent>, private router : Router,private con: FootballersService) { }
+  constructor(@Optional() public dialogRef: MatDialogRef<LoginComponent>, private router: Router, private con: FootballersService) { }
 
   loginForm = new FormGroup({
     userName: new FormControl("", Validators.required),
     password: new FormControl("", Validators.required)
   })
-   
+
 
   ngOnInit(): void {
   }
@@ -32,14 +32,18 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  ok(){
-    this.con.getAuthorisation(this.loginForm.value).subscribe(res =>{
+  ok() {
+    if(!this.loginForm.valid){
+      return;
+    }
+
+    this.con.getAuthorisation(this.loginForm.value).subscribe(res => {
       const token = (<any>res).token;
       const name = res.name;
       const surname = res.surname;
 
-console.log('name', name);
-console.log('surname', surname);
+      console.log('name', name);
+      console.log('surname', surname);
 
       localStorage.setItem("jwt", token);
       localStorage.setItem("name", name);
@@ -47,18 +51,18 @@ console.log('surname', surname);
       localStorage.setItem("role", res.role);
 
       this.invalidLogin = false;
-      this.dialogRef.close(this.loginForm.value);
+      this.dialogRef.close({success : true});
       this.router.navigate(['welcomePage']);
     },
-    err=>{
-      console.log('error pri loginu');
-      this.invalidLogin = true;
+      err => {
+        console.log('error pri loginu');
+        this.invalidLogin = true;
 
-    });
+      });
   }
 
-  cancel(){
-    this.dialogRef.close();
+  cancel() {
+    this.dialogRef.close({success : false});
   }
 
 }
