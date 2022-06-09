@@ -1,15 +1,6 @@
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:600;);
-
-
-
-
-.welcomeHeader{
-    text-align: center;
-}
-
-
-body {
+.body {
   margin-top: 5px;
   background-color: #212121;
   width: 100%;
@@ -128,5 +119,10 @@ body {
   -webkit-transform: translate(-50%, -50%) scale(1);
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+}
+
+.wrappedDiv{
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
