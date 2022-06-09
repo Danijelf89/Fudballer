@@ -44,8 +44,8 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onLanguageChanged(langselect: any) {
-    this.translate.use(langselect).subscribe(res => {
+  onLanguageChanged(event : any) {
+    this.translate.use(event.value).subscribe(() => {
       this.refrehMessage();
     });
   }
@@ -60,7 +60,6 @@ export class AppComponent implements OnInit {
       this.name = localStorage.getItem("name")!;
       this.surname = localStorage.getItem("surname")!;
       this.role = localStorage.getItem("role")!;
-
       this.hideLogOut = false;
       this.hideSignIn = true;
 
@@ -83,7 +82,7 @@ export class AppComponent implements OnInit {
     this.route.navigate(["/"]);
     this.hideLogOut = true;
     this.hideSignIn = false;
-    
+
     this.refrehMessage();
   }
 }

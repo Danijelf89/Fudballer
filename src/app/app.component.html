@@ -9,7 +9,7 @@
 
     <div fxLayoutAlign="end center" fxHide fxShow.xs>
       <label style="float: right">
-        <mat-select #langselect (selectionChange)="onLanguageChanged(langselect.value)" placeholder="{{'HOME.Language' | translate}}">
+        <mat-select  (selectionChange)="onLanguageChanged($event)" placeholder="{{'HOME.Language' | translate}}">
           <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}
           </mat-option>
         </mat-select>
@@ -33,7 +33,7 @@
 
     <div fxLayoutAlign="end center" fxShow fxHide.xs>
       <label style="float: right">
-        <mat-select #langselect (selectionChange)="onLanguageChanged(langselect.value)" placeholder="{{'HOME.Language' | translate}}">
+        <mat-select  (selectionChange)="onLanguageChanged($event)" placeholder="{{'HOME.Language' | translate}}">
           <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}
           </mat-option>
         </mat-select>
