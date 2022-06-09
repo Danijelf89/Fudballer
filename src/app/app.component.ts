@@ -13,67 +13,35 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent extends Base implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
 
-  showSignIn: boolean = true;
-  showLogOut: boolean = true;
-
+  hideSignIn: boolean = true;
+  hideLogOut: boolean = true;
   name: string = '';
   surname: string = '';
   role: string = '';
-  showLogin: boolean = false;
   message: string = '';
 
-
-
-  constructor(private snack : MatSnackBar, private route: Router, public mat: MatDialog, public translate: TranslateService)  {
-    super(mat, snack);
+  constructor(private route: Router, public mat: MatDialog, public translate: TranslateService) {
 
     translate.addLangs(['en', 'sr']);
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang?.match(/en|sr/) ? browserLang : 'en');
-
-
-
-
-
-    console.log('called con');
-  }
-
- 
-  settingsTooltip: string = '';
-  languagePlaceholder : string = '';
-
-  isVisibleByRole: boolean = true;
-
-  ngOnChanges() {
-    console.log('on changes called');
   }
 
   ngOnInit(): void {
 
-    this.showLogOut = localStorage.getItem("jwt") ? true : false;
-    this.showSignIn = localStorage.getItem("jwt") ? false : true;
+    this.hideLogOut = localStorage.getItem("jwt") ? false : true;
+    this.hideSignIn = localStorage.getItem("jwt") ? true : false;
 
-    this.name = localStorage.getItem("name")!;
-    this.surname = localStorage.getItem("surname")!;
-
-    //this.user = user!;
-
-    let role = localStorage.getItem("role");
-
-    this.role = role != null ? role : '';
-
-    this.showLogin = false;
+    this.name = localStorage.getItem("name")! != null ? localStorage.getItem("name")! : "";
+    this.surname = localStorage.getItem("surname")! != null ? localStorage.getItem("surname")! : ""
+    this.role = localStorage.getItem("role")! != null ? localStorage.getItem("role")! : "";
 
     this.translate.get('HOME.Settings').subscribe((text: string) => {
-      this.settingsTooltip = text;
-      this.languagePlaceholder = this.translate.instant('HOME.Language');
       this.refrehMessage();
     });
-
-    this.isVisibleByRole = localStorage.getItem("name") != null && localStorage.getItem("name") != "" ? false : true;
   }
 
   onLanguageChanged(langselect: any) {
@@ -88,25 +56,15 @@ export class AppComponent extends Base implements OnInit, OnChanges {
 
   logIn() {
     let dialog = this.mat.open(LoginComponent);
-    dialog.afterClosed().subscribe(res => {
+    dialog.afterClosed().subscribe(() => {
+      this.name = localStorage.getItem("name")!;
+      this.surname = localStorage.getItem("surname")!;
+      this.role = localStorage.getItem("role")!;
 
-     this.name = localStorage.getItem("name")!;
-
-    this.surname = localStorage.getItem("surname")!;
-
-     
-
-      let role = localStorage.getItem("role");
-
-      this.role = role != null ? role : '';
-
-      this.showLogOut = localStorage.getItem("jwt") ? true : false;
-      this.showSignIn = localStorage.getItem("jwt") ? false : true;
+      this.hideLogOut = false;
+      this.hideSignIn = true;
 
       this.refrehMessage();
-
-      this.isVisibleByRole = localStorage.getItem("name") != null && localStorage.getItem("name") != "" ? false : true;
-
     })
   }
 
@@ -116,18 +74,16 @@ export class AppComponent extends Base implements OnInit, OnChanges {
 
   logout() {
     localStorage.removeItem("jwt");
-    localStorage.removeItem("userName");
+    localStorage.removeItem("name");
+    localStorage.removeItem("surname");
     localStorage.removeItem("role");
     this.name = '';
     this.surname = '';
     this.role = '';
     this.route.navigate(["/"]);
-    this.showLogOut = localStorage.getItem("jwt") ? true : false;
-    this.showSignIn = localStorage.getItem("jwt") ? false : true;
-    this.showLogin = false;
-
+    this.hideLogOut = true;
+    this.hideSignIn = false;
+    
     this.refrehMessage();
-
-    this.isVisibleByRole = localStorage.getItem("userName") != null && localStorage.getItem("userName") != "" ? false : true;
   }
 }

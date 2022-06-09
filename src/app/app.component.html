@@ -1,73 +1,57 @@
-<div class="glavni" fxLayout="row wrap">
-  <div  fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%">
+<div class="mainDiv" fxLayout="row wrap">
+  <div fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%">
     <div>
-      <button mat-button matTooltip="{{'HOME.Home' | translate}}" [hidden]="isVisibleByRole"
-      [routerLink]="['welcomePage']" style="float: left">
-      <mat-icon>home</mat-icon>
-    </button>
+      <button mat-button matTooltip="{{'HOME.Home' | translate}}" [hidden]="hideLogOut"
+        [routerLink]="['welcomePage']" style="float: left">
+        <mat-icon>home</mat-icon>
+      </button>
     </div>
-    
-      <div fxLayoutAlign="end center" fxHide fxShow.xs>
 
-        <label style="float: right">
-          <mat-select #langselect (selectionChange)="onLanguageChanged(langselect.value)" [placeholder]="languagePlaceholder">
-            <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}
-            </mat-option>
-          </mat-select>
-    
-        </label>
+    <div fxLayoutAlign="end center" fxHide fxShow.xs>
+      <label style="float: right">
+        <mat-select #langselect (selectionChange)="onLanguageChanged(langselect.value)" placeholder="{{'HOME.Language' | translate}}">
+          <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}
+          </mat-option>
+        </mat-select>
+      </label>
 
-
-       
-
-        <button mat-button [matMenuTriggerFor] = "menu">
-          <mat-icon>menu</mat-icon>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item matTooltip="{{'HOME.LogIn' | translate }}" [hidden]="hideSignIn" (click)="logIn()">
+          <mat-icon>dashboard</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item matTooltip="{{ 'HOME.LogIn' | translate }}"  *ngIf="showSignIn" (click)="logIn()" >
-            <mat-icon>dashboard</mat-icon>
-          </button>
-          <button mat-menu-item  matTooltip="{{ 'HOME.LogOut' | translate }}" *ngIf="showLogOut" (click)="logout()" >
-            <mat-icon>dashboard</mat-icon>
-          </button>
-          <button mat-menu-item matTooltip="{{ 'HOME.Settings' | translate }}" (click)="openSettings()" >
-            <mat-icon>settings</mat-icon>
-          </button>
-        </mat-menu>
+        <button mat-menu-item matTooltip="{{'HOME.LogOut' | translate }}" [hidden]="hideLogOut" (click)="logout()">
+          <mat-icon>dashboard</mat-icon>
+        </button>
+        <button mat-menu-item matTooltip="{{'HOME.Settings' | translate }}" [hidden]="hideLogOut" (click)="openSettings()">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </mat-menu>
+    </div>
 
-      
-      </div>
+    <div fxLayoutAlign="end center" fxShow fxHide.xs>
+      <label style="float: right">
+        <mat-select #langselect (selectionChange)="onLanguageChanged(langselect.value)" placeholder="{{'HOME.Language' | translate}}">
+          <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}
+          </mat-option>
+        </mat-select>
+      </label>
 
-      <div fxLayoutAlign="end center" fxHide.xs>
-
-        <ul>
-          <button mat-button matTooltip="Login" *ngIf="showSignIn" (click)="logIn()" style="float: right">
-            <mat-icon>dashboard</mat-icon>
-          </button>
-          <button mat-button matTooltip="LogOut" *ngIf="showLogOut" (click)="logout()" style="float: right">
-            <mat-icon>dashboard</mat-icon>
-          </button>
-          <button mat-button [matTooltip]="settingsTooltip" (click)="openSettings()" style="float: right">
-            <mat-icon>settings</mat-icon>
-          </button>
-          <label style="float: right">
-            <mat-select #langselect (selectionChange)="onLanguageChanged(langselect.value)" [placeholder]="languagePlaceholder">
-              <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}
-              </mat-option>
-            </mat-select>
-      
-          </label>
-        </ul>
-      
-
-      
-      </div>
-
+      <ul>
+        <button mat-button matTooltip="{{'HOME.LogIn' | translate }}" [hidden]="hideSignIn" (click)="logIn()">
+          <mat-icon>dashboard</mat-icon>
+        </button>
+        <button mat-button matTooltip="{{'HOME.LogOut' | translate }}" [hidden]="hideLogOut" (click)="logout()">
+          <mat-icon>dashboard</mat-icon>
+        </button>
+        <button mat-button matTooltip="{{'HOME.Settings' | translate }}" [hidden]="hideLogOut" (click)="openSettings()">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </ul>
+    </div>
   </div>
-
-
-  
-
 
   <div fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%">
     <mat-toolbar>
@@ -84,11 +68,4 @@
   <div class="Footer" fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%">
     {{'HOME.Footer' | translate}}
   </div>
-
 </div>
-
-
-
-
-
-
