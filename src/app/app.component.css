@@ -8,7 +8,7 @@ nav ul li{
 }
 
 .mainDiv{
-    background-color: white;
+    background-color: rgba(128, 128, 128, 0.39);
 }
 
 .span {
@@ -18,6 +18,20 @@ nav ul li{
 .Footer{
     background-color: aliceblue;
 }
+
+.header{
+    color: blue;
+    background-color: black;
+}
+
+.routerDiv{
+    background-color:white;
+}
+
+.body{
+    color: red;
+}
+
 
 
   

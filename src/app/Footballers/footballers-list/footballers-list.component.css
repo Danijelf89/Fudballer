@@ -8,6 +8,13 @@
     border: 100px;
     border-color: red;
     background-color: aliceblue;
+    
+}
+
+.header{
+  color: blue;
+  background-color: black;
+  margin-bottom: 1px;
 }
 
 .mat-row .mat-cell {
@@ -68,7 +75,18 @@
   }
 
   marquee {
-    font-size: medium;
-    color: green;
+    font-size: 20px;
+    color: rgb(0, 8, 255);
+    font-weight: bolder;
+    border-color: blue;
+    border-width: 1em;
+    background-color: black;
+    margin-bottom: 1px;
+  }
+
+  .paginator{
+    background-color: white;
+    margin-bottom: 1%;
+    margin-top: 0.5%;
   }
 
