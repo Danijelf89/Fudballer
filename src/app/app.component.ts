@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   surname: string = '';
   role: string = '';
   message: string = '';
+  selectedlanguage : any;
 
   constructor(private route: Router, public mat: MatDialog, public translate: TranslateService) {
 
@@ -45,7 +46,10 @@ export class AppComponent implements OnInit {
   }
 
   onLanguageChanged(event : any) {
-    this.translate.use(event.value).subscribe(() => {
+
+console.log('language', event);
+
+    this.translate.use(event).subscribe(() => {
       this.refrehMessage();
     });
   }

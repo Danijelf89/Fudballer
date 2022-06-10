@@ -15,7 +15,6 @@ export class Authguardadmin implements CanActivate{
       const role = localStorage.getItem("role");
   
       if (token && this.jwtHelper.isTokenExpired(token)) {
-        localStorage.removeItem('userName');
         localStorage.removeItem('role');
         localStorage.removeItem('name');
         localStorage.removeItem('surname');

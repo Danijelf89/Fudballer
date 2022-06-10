@@ -18,7 +18,6 @@ export class AuthguardService implements CanActivate {
       return true;
     }
 
-    localStorage.removeItem('userName');
     localStorage.removeItem('role');
     localStorage.removeItem('name');
     localStorage.removeItem('surname');
