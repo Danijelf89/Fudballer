@@ -51,6 +51,7 @@
         "UsersInfo" : "Korisnicke podatke moze menjati samo korisnik sa ulogom Admin-a",
         "AddUser" : "Dodaj novog korisnika",
         "UpdateUser" : "Izmeni korisnika",
-        "DeleteUser" : "Da li ste sigurni da zelite da obrisete ovog korisnika?"
+        "DeleteUser" : "Da li ste sigurni da zelite da obrisete ovog korisnika?",
+        "Welcome" : "Dobrodosli na stranicu za upravljenje fudbalerima"
     }
 }

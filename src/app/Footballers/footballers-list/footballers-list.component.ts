@@ -33,7 +33,7 @@ export class FootballersList extends Base implements OnInit {
 
     this.displayedColumnsBase = ['name', 'surname', 'position', 'dateOfBirth', 'club', 'actions'];
   }
-
+  @ViewChild(MatSort) sort! : MatSort;
   listOfFootballer: IFootballers[] = [];
   subscriptions: Subscription = new Subscription;
   isVisibleByRole: boolean = true;
@@ -42,6 +42,12 @@ export class FootballersList extends Base implements OnInit {
   ngOnInit() {
     this.getFootballers();
     this.isVisibleByRole = localStorage.getItem("role") != null && localStorage.getItem("role") == "Admin" ? false : true;
+  }
+
+  ngAfterViewInit(){
+    this.dataSourceBase.paginator = this.paginator;
+    
+    this.dataSourceBase.sort = this.sort;
   }
 
   deleteFootballer(item: IFootballers) {

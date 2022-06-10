@@ -1,7 +1,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:600;);
 .body {
-  margin-top: 5px;
+  
   background-color: #212121;
   width: 100%;
   height: 100%;
@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  
 }
 
 .container {
@@ -124,5 +125,15 @@
 .wrappedDiv{
   margin-top: 1%;
   margin-bottom: 1%;
+}
+
+marquee {
+  font-size: 20px;
+  color: rgb(0, 8, 255);
+  font-weight: bolder;
+  border-color: blue;
+  border-width: 1em;
+  background-color: black;
+  margin-bottom: 1px;
 }
 

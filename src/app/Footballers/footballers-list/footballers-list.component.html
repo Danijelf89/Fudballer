@@ -20,7 +20,7 @@
             <marquee >{{'HOME.TableInfo' | translate}}</marquee>
         </div>
         <div fxLayoutAlign="center stretch">
-            <table mat-table [dataSource]="dataSourceBase" matSort multiTemplateDataRows
+            <table mat-table [dataSource]="dataSourceBase" matSort multiTemplateDataRows 
                 class="mat-elevation-z8 demo-table">
 
                 <!-- Position Column -->
@@ -114,6 +114,7 @@
         </div>
         <div fxLayoutAlign="end center" class="paginator">
             <mat-paginator #paginator [length]="100" showFirstLastButtons="true" [pageSize]="10"
+           
                 [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
             </mat-paginator>
         </div>

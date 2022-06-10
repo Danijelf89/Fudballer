@@ -16,7 +16,8 @@ nav ul li{
 }
 
 .Footer{
-    background-color: aliceblue;
+    background-color: black;
+    color: blue;
 }
 
 .header{
@@ -32,6 +33,21 @@ nav ul li{
     color: red;
 }
 
+.mat-option.mat-selected.mat-placeholder{
+    background: red;
+    color:red;
+  }
+
+
+  .mat-select-panel {
+    background: yellow;
+    
+}
+
+
+.not-empty-select.mat-selected {
+    color: green !important;
+  }
 
 
   
