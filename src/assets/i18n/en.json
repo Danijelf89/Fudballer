@@ -52,6 +52,7 @@
         "AddUser" : "Add new user",
         "UpdateUser" : "Update user",
         "DeleteUser" : "Are you sure you want to delete this user?",
-        "Welcome" : "Welcome to the Footballer web application"
+        "Welcome" : "Welcome to the Footballer web application",
+        "TableInfoClub": "Click on the row to show club details"
     }
 }

@@ -22,7 +22,7 @@ export class AuthguardService implements CanActivate {
     localStorage.removeItem('name');
     localStorage.removeItem('surname');
     this.router.navigate(["/"]);
-    this.mat.open(LoginComponent);
+   
     return false;
   }
 }

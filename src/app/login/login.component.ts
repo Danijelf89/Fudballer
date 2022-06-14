@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("surname", surname);
       localStorage.setItem("role", res.role);
 
+      console.log('token', localStorage.getItem("jwt"));
+
       this.invalidLogin = false;
       this.dialogRef.close({success : true});
       this.router.navigate(['welcomePage']);

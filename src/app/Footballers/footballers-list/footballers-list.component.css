@@ -11,12 +11,6 @@
     
 }
 
-.header{
-  color: blue;
-  background-color: black;
-  margin-bottom: 1px;
-}
-
 .mat-row .mat-cell {
     border-bottom: 1px solid transparent;
     border-top: 1px solid transparent;
@@ -88,5 +82,11 @@
     background-color: white;
     margin-bottom: 1%;
     margin-top: 0.5%;
+  }
+
+  .header{
+    color: blue;
+    background-color: black;
+    margin-bottom: 1px;
   }
   

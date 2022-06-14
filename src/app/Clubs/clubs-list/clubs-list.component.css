@@ -92,3 +92,32 @@ table {
     display: flex;
     flex-direction: column;
 }
+
+marquee {
+  font-size: 20px;
+  color: rgb(0, 8, 255);
+  font-weight: bolder;
+  border-color: blue;
+  border-width: 1em;
+  background-color: black;
+  margin-bottom: 1px;
+}
+
+.paginator{
+  background-color: white;
+  margin-bottom: 1%;
+  margin-top: 0.5%;
+}
+
+.header{
+  color: blue;
+  background-color: black;
+  margin-bottom: 1px;
+}
+
+.testSlika{
+ 
+background-image: url("https://thumbs.dreamstime.com/b/night-stadium-arena-soccer-field-d-render-57408871.jpg");
+
+
+}

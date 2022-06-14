@@ -46,7 +46,6 @@ export class FootballersList extends Base implements OnInit {
 
   ngAfterViewInit(){
     this.dataSourceBase.paginator = this.paginator;
-    
     this.dataSourceBase.sort = this.sort;
   }
 

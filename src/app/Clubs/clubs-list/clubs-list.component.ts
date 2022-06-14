@@ -39,51 +39,26 @@ export class ClubsListComponent extends Base implements OnInit {
 
   @ViewChild(MatSort) sort! : MatSort;
   clickedRows = new Set<Club>();
-
   clubs: Club[] = [];
   subscriptions: Subscription = new Subscription;
-  selectedClub = {} as Club;
-
   expandedElement = {} as Club;
-
   listOfFootballers : IFootballers[] = [];
-
   isVisibleByRole : boolean = true;
   
   ngOnInit(): void {
-
     this.getClubs();
-
-    this.subscriptions.add(this.facade.footballers$.subscribe(foo => {
-      //this.updateDataSource(foo)
-      console.log('get foo pozvan', foo);
-    }))
-
     this.isVisibleByRole = localStorage.getItem("role") != null && localStorage.getItem("role") == "Admin" ? false : true;
   }
 
-  updateDataSource(users:Club[]){
-    this.dataSourceBase = new MatTableDataSource<Club>(users)
-    this.dataSourceBase.paginator = this.paginator
-    this.dataSourceBase.sort = this.sort
-
-    console.log('pozvan data source', users);
-   
-  }
-
   ngAfterViewInit(){
-    this.subscriptions.add(this.facade.clubs$.subscribe(clubs => {
-      this.updateDataSource(clubs)
-      console.log('update', clubs);
-    }))
-
-   
+    this.dataSourceBase.paginator = this.paginator;
+    
+    this.dataSourceBase.sort = this.sort;
   }
 
-  
   deleteClub(item: Club) {
     let dialogRef = this.mat.open(DeleteComponent, { data: { message: this.translate.instant('HOME.DeleteClub'), name: item.clubName }, width: '500px', disableClose: true });
-    dialogRef.afterClosed().subscribe((res : boolean) => {
+    this.subscriptions =  dialogRef.afterClosed().subscribe((res : boolean) => {
       if (res === true) {
         super.delete(this.service.deleteClub(item.id), this.clubs, item.id); 
       }
@@ -91,8 +66,7 @@ export class ClubsListComponent extends Base implements OnInit {
   }
 
   openListOfFootballers(item: Club) {
-
-    this.service.getClubsFootballers(item.id).subscribe(res =>{
+    this.subscriptions = this.service.getClubsFootballers(item.id).subscribe(res =>{
       this.listOfFootballers = res;
       this.mat.open(ClubDetailsComponent, { data: this.listOfFootballers});
     })
@@ -100,46 +74,28 @@ export class ClubsListComponent extends Base implements OnInit {
 
   updateClub(item : any) {
     let di = this.dialog.open(AddUpdateClubComponent, { data: { club: item, operation: this.translate.instant('HOME.UpdateClub') }, width: '500px', disableClose: true });
-    di.afterClosed().subscribe(res => {
+    this.subscriptions =  di.afterClosed().subscribe(res => {
       if (Object.keys(res.item).length !== 0) {
         this.update(this.service.updateClub(res.item), this.clubs, res.item);
-
-      
-      
-      
       }
     });
   }
 
-  
-
   addClub() {
     let di = this.dialog.open(AddUpdateClubComponent, { data: { club: {}, operation: this.translate.instant('HOME.AddClub') }, width: '500px', disableClose: true });
-    di.afterClosed().subscribe(res => {
+    this.subscriptions =  di.afterClosed().subscribe(res => {
       if (Object.keys(res.item).length !== 0) {
         this.add(this.service.addNewClub(res.item), this.clubs, res.item);
       }
     });
   }
 
-  onclickedRow(item :Club){
-    console.log(item);
-    this.selectedClub = item;
-  }
-
   getClubs() {
-    //this.dialogRef = this.dialog.open(SpinnerComponentComponent, { disableClose: true });
-
     let spinnDialog = this.startSpinner();
     this.subscriptions = this.service.getClubs().subscribe(res => {
       this.clubs = res;
-
       this.sortListByDate(this.clubs);
       this.dataSourceBase.data = this.clubs;
-
-      console.log('clubs on init', this.clubs);
-
-     
     });
    this.closeSpinner(spinnDialog);
   }

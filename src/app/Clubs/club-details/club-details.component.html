@@ -1,28 +1,16 @@
-
-<div class="content">
 <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let element of listOfFootballers">
         <mat-card class="mat-elevation-z4">
-
             <mat-card-title-group>
-               
                 <mat-card-title>{{element.name}} {{element.surname}}</mat-card-title>
                 <mat-card-subtitle>{{'HOME.Position' | translate}}: {{element.position}}</mat-card-subtitle>
-               
             </mat-card-title-group>
             <img mat-card-lg-image src={{element.pictureUrl}}>
             <mat-card-content>
-
                 <mat-label>{{'HOME.Rating' | translate}}: <fu-starcomponent [rating]='element.rating'>
                     </fu-starcomponent>
                 </mat-label>
             </mat-card-content>
-           
         </mat-card>
     </div>
-
 </div>
-
-</div>
-
-

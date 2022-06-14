@@ -52,6 +52,7 @@
         "AddUser" : "Dodaj novog korisnika",
         "UpdateUser" : "Izmeni korisnika",
         "DeleteUser" : "Da li ste sigurni da zelite da obrisete ovog korisnika?",
-        "Welcome" : "Dobrodosli na stranicu za upravljenje fudbalerima"
+        "Welcome" : "Dobrodosli na stranicu za upravljenje fudbalerima",
+        "TableInfoClub" : "Kliknite na red da prikazete podatke"
     }
 }

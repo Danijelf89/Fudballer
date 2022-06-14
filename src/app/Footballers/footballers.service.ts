@@ -18,7 +18,7 @@ export class FootballersService {
      }
 
      deleteFootballer(id: number): Observable<any> {
-
+          console.log('http client', this.HttpClient.request);
           return this.HttpClient.delete(environment.deleteFootballerURL + id);
      }
 
@@ -26,7 +26,7 @@ export class FootballersService {
           return this.HttpClient.post<IFootballers>(environment.addFootballerUrl, fotballer);
      }
 
-     updateFootballer(footballer: IFootballers) :Observable<any> {
+     updateFootballer(footballer: IFootballers): Observable<any> {
           return this.HttpClient.put<IFootballers>(environment.updateFootballerUrl, footballer)
      }
 
@@ -44,27 +44,27 @@ export class FootballersService {
           return this.HttpClient.post<Club>(environment.addClubUrl, club);
      }
 
-     updateClub(club: Club) : Observable<any> {
+     updateClub(club: Club): Observable<any> {
           return this.HttpClient.put<Club>(environment.updateClubUrl, club)
      }
 
-     getClubsFootballers(clubId : number) : Observable<IFootballers[]>{
+     getClubsFootballers(clubId: number): Observable<IFootballers[]> {
           return this.HttpClient.get<IFootballers[]>(environment.getClubsFootbalersUrl + clubId);
      }
 
-     getAuthorisation(data : any) : Observable<any>{
+     getAuthorisation(data: any): Observable<any> {
           return this.HttpClient.post<any>("https://localhost:44307/auth/login", data);
      }
 
      //users
-     getUsers() : Observable<User[]>{
+     getUsers(): Observable<User[]> {
           return this.HttpClient.get<User[]>(environment.getUsersUrl);
      }
      addNewUser(user: User): Observable<User> {
           console.log('na servisu add', user);
           return this.HttpClient.post<User>(environment.addNewUserUrl, user);
      }
-     updateUser(user: User) : Observable<any> {
+     updateUser(user: User): Observable<any> {
           return this.HttpClient.put<User>(environment.updateUser, user)
      }
 

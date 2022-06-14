@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
   surname: string = '';
   role: string = '';
   message: string = '';
-  selectedlanguage : any;
+  selectedlanguage: any;
 
-  constructor(private route: Router, public mat: MatDialog, public translate: TranslateService) {
+  constructor(private route: Router, public mat: MatDialog, public translate: TranslateService, private snack: MatSnackBar) {
 
     translate.addLangs(['en', 'sr']);
     translate.setDefaultLang('en');
@@ -32,6 +32,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    if (localStorage.getItem("jwt")) {
+      this.route.navigate(['welcomePage']);
+    }
 
     this.hideLogOut = localStorage.getItem("jwt") ? false : true;
     this.hideSignIn = localStorage.getItem("jwt") ? true : false;
@@ -45,9 +49,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onLanguageChanged(event : any) {
-
-console.log('language', event);
+  onLanguageChanged(event: any) {
 
     this.translate.use(event).subscribe(() => {
       this.refrehMessage();
@@ -59,9 +61,31 @@ console.log('language', event);
   }
 
   logIn() {
-    let dialog = this.mat.open(LoginComponent, {disableClose: true});
+
+    if (localStorage.getItem("jwt")) {
+      this.snack.open("User:" + " " + localStorage.getItem("name")! + " " + localStorage.getItem("surname")! + " is already loged in", "", {
+        duration: 5000,
+        verticalPosition: 'bottom', // 'top' | 'bottom'
+        horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
+        panelClass: ['white-snackbar']
+
+      });
+
+      this.name = localStorage.getItem("name")!;
+      this.surname = localStorage.getItem("surname")!;
+      this.hideLogOut = localStorage.getItem("jwt") ? false : true;
+      this.hideSignIn = localStorage.getItem("jwt") ? true : false;
+
+      this.refrehMessage();
+      this.route.navigate(['welcomePage']);
+
+      return;
+    }
+
+
+    let dialog = this.mat.open(LoginComponent, { disableClose: true });
     dialog.afterClosed().subscribe(res => {
-      if(!res.success){
+      if (!res.success) {
         return;
       }
 
@@ -72,7 +96,7 @@ console.log('language', event);
       this.hideSignIn = true;
 
       this.refrehMessage();
-     
+
     })
   }
 
