@@ -43,6 +43,7 @@ import { AddUpdateUserComponent } from './users/add-update-user/add-update-user.
 import { ClubsFacade } from './Clubs/clubs-facade';
 import { Authguardadmin } from './authguardadmin.service';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
 
 export function tokkentGetter(){
   return localStorage.getItem("jwt")
@@ -94,6 +95,7 @@ export function HttpLoaderFactory(http : HttpClient){
     MatToolbarModule,
     MatCardModule,
     MatMenuModule,
+    MatSidenavModule,
     TranslateModule.forRoot({
       loader : {
         provide : TranslateLoader,

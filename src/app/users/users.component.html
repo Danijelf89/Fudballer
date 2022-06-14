@@ -1,43 +1,82 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div fxLayout="row" style="margin-top: 0.5%">
-    <div fxLayout="column" style="margin-right: 2%;">
-        <div fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxShow fxHide.xs
-            style="background-color: white; border: 3px solid orange;">
-            <div style="margin-bottom: 10%;">
-                <button mat-fab color="primary" style="width: 80px;" [routerLink]="['clubList']">
-                    Clubs
-                </button>
-            </div>
-            <div>
-                <button mat-fab color="primary" 
-                    style="width: 80px;" [routerLink]="['footballersList']">
-                    Footballers
-                </button>
-            </div>
-        </div>
 
-        <div fxLayout="column" fxHide fxShow.xs style="margin-right: 2%">
+    <div fxLayout="row" fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxShow fxHide.xs
+        style="background-color: white; border: 3px solid orange; margin-right: 0.5%;">
 
-            <button mat-button [matMenuTriggerFor]="menu">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
+        <mat-sidenav-container>
+            <mat-sidenav #sidenav mode="side" opened=true>
+                <div style="background-color: black; color: blue; margin-bottom: 1%;">
+                    <mat-card-header>
+                        Clubs
+                    </mat-card-header>
+                </div>
+                <div style="margin-bottom: 10%;">
+                    <button mat-fab color="primary" [routerLink]="['clubList']" style="width: 100px">
+                        Clubs
+                    </button>
+                </div>
+                <div style="background-color: black; color: blue; margin-bottom: 1%;">
+                    <mat-card-header>
+                        Footballers
+                    </mat-card-header>
+                </div>
+                <div>
+                    <button mat-fab color="primary" style="width: 100px" [routerLink]="['footballersList']">
+                        Footbalers
+                    </button>
+                </div>
 
-                <div style="margin-bottom: 10%;" fxLayoutAlign="center stretch">
-                    <button mat-fab color="primary" [routerLink]="['clubList']">
+            </mat-sidenav>
+        </mat-sidenav-container>
+    </div>
+
+
+
+
+    <div fxLayout="row wrap" fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxHide fxShow.xs
+        style="background-color: white; margin-right: 2%; margin-top: 2%;">
+
+
+
+
+        <mat-sidenav-container>
+
+            <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+                <div style="margin-bottom: 10%;">
+                    <button mat-fab color="primary" [routerLink]="['clubList']" style="width: 100px">
                         Clubs
                     </button>
                 </div>
 
-                <div fxLayoutAlign="center stretch">
-                    <button mat-fab color="primary" [routerLink]="['footballersList']">
+                <div>
+                    <button mat-fab color="primary" style="width: 100px" [routerLink]="['footballersList']">
                         Footbalers
                     </button>
                 </div>
-            </mat-menu>
-        </div>
+
+            </mat-sidenav>
+        </mat-sidenav-container>
+
+
+
+
+
+
+
+
+
+
     </div>
+
+
+    <div fxHide fxShow.xs>
+        <button mat-button (click)="opened = !opened" style="height: 5px;">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+
 
     <div fxLayout="row wrap" fxFlexFill>
         <div fxFlexFill fxFlex="90%" fxFlex.md="80%" fxFlex.sm="80%" fxFlex.xs="80%" class="header">

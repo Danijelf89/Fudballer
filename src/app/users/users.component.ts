@@ -31,6 +31,7 @@ export class UsersComponent extends Base implements OnInit {
 
   clickedRows = new Set<User>();
   isVisibleByRole: boolean = true;
+  opened = false;
 
   ngOnInit(): void {
     this.getUsers();
