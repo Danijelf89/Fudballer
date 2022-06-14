@@ -88,4 +88,7 @@ export class UsersComponent extends Base implements OnInit {
     dialog.close();
   }
 
+  usersLink(){
+    
+  }
 }

@@ -1,66 +1,126 @@
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="footballersMain">
-    <div class="mainTableAndHeaders">
-        <div class="card-header footballerHeader">
-            {{'HOME.UsersInfo' | translate}}<button  mat-button  style="float: right;" (click)="addUser()" matTooltip="Add new user"><mat-icon>library_add</mat-icon></button>
+<div fxLayout="row" style="margin-top: 0.5%">
+    <div fxLayout="column" style="margin-right: 2%;">
+        <div fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxShow fxHide.xs
+            style="background-color: white; border: 3px solid orange;">
+            <div style="margin-bottom: 10%;">
+                <button mat-fab color="primary" style="width: 80px;" [routerLink]="['clubList']">
+                    Clubs
+                </button>
+            </div>
+            <div>
+                <button mat-fab color="primary" 
+                    style="width: 80px;" [routerLink]="['footballersList']">
+                    Footballers
+                </button>
+            </div>
         </div>
-        <div class="card-header child mat-elevation-z8" >
-        <table mat-table [dataSource]="dataSourceBase" matSort class="demo-table">
 
-            <!-- Position Column -->
-            <ng-container matColumnDef="username">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.UserName' | translate}}</th>
-                <td mat-cell *matCellDef="let element">{{element.userName}}</td>
-            </ng-container>
+        <div fxLayout="column" fxHide fxShow.xs style="margin-right: 2%">
 
-             <!-- Weight Column -->
-             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Name' | translate}}</th>
-                <td mat-cell *matCellDef="let element">{{element.name}}</td>
-            </ng-container>
+            <button mat-button [matMenuTriggerFor]="menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
 
-              <!-- Weight Column -->
-              <ng-container matColumnDef="surname">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Surname' | translate}}</th>
-                <td mat-cell *matCellDef="let element">{{element.surname}}</td>
-            </ng-container>
+                <div style="margin-bottom: 10%;" fxLayoutAlign="center stretch">
+                    <button mat-fab color="primary" [routerLink]="['clubList']">
+                        Clubs
+                    </button>
+                </div>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="password">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Password' | translate}}</th>
-                <td mat-cell *matCellDef="let element">{{element.password}}</td>
-            </ng-container>
-
-            <!-- Weight Column -->
-            <ng-container matColumnDef="role">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Role' | translate}}</th>
-                <td mat-cell *matCellDef="let element">{{element.role}}</td>
-            </ng-container>
-
-            
-
-           
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>{{'HOME.Actions' | translate}}</th>
-                <td mat-cell *matCellDef="let row" >
-                    <button mat-button  (click)="updateUser(row)" matTooltip="{{ 'HOME.Update' | translate }}"><mat-icon>edit</mat-icon></button>
-                    <button mat-button  (click)="openDetails(row)" matTooltip="{{ 'HOME.Details' | translate }}"><mat-icon>details</mat-icon></button>
-                    <button mat-button  (click)="deleteUser(row)" style="width: 30px;" matTooltip="{{ 'HOME.Delete' | translate }}"> <mat-icon>delete</mat-icon></button>
-                </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumnsBase"></tr>
-            <tr mat-row  [class.demo-row-is-clicked]="clickedRows.has(row)"
-                *matRowDef="let row; columns: displayedColumnsBase;"></tr>
-        </table>
-        <mat-paginator #paginator [length]="100" showFirstLastButtons="true"
-        [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25, 100]"
-        aria-label="Select page">
-      </mat-paginator>
+                <div fxLayoutAlign="center stretch">
+                    <button mat-fab color="primary" [routerLink]="['footballersList']">
+                        Footbalers
+                    </button>
+                </div>
+            </mat-menu>
         </div>
+    </div>
+
+    <div fxLayout="row wrap" fxFlexFill>
+        <div fxFlexFill fxFlex="90%" fxFlex.md="80%" fxFlex.sm="80%" fxFlex.xs="80%" class="header">
+            <div fxLayoutAlign="center center marq">
+
+                <marquee>{{'HOME.UsersInfo' | translate}}</marquee>
+            </div>
+
+            <div fxLayoutAlign="end center">
+                <button [hidden]="isVisibleByRole" mat-button (click)="addUser()"
+                    matTooltip="{{ 'HOME.Add' | translate }}">
+                    <mat-icon>library_add</mat-icon>
+                </button>
+            </div>
+
+
+            <div fxLayoutAlign="center stretch">
+                <table mat-table [dataSource]="dataSourceBase" matSort multiTemplateDataRows
+                    class="mat-elevation-z8 demo-table" fxflex.xs="5%" fxFlexFill>
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="username">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.UserName' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.userName}}</td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Name' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="surname">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Surname' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.surname}}</td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="password">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Password' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.password}}</td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="role">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'HOME.Role' | translate}}</th>
+                        <td mat-cell *matCellDef="let element">{{element.role}}</td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef>{{'HOME.Actions' | translate}}</th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-button (click)="updateUser(row)" matTooltip="{{ 'HOME.Update' | translate }}">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-button (click)="openDetails(row)" matTooltip="{{ 'HOME.Details' | translate }}">
+                                <mat-icon>details</mat-icon>
+                            </button>
+                            <button mat-button (click)="deleteUser(row)" style="width: 30px;"
+                                matTooltip="{{ 'HOME.Delete' | translate }}">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsBase"></tr>
+                    <tr mat-row [class.demo-row-is-clicked]="clickedRows.has(row)"
+                        *matRowDef="let row; columns: displayedColumnsBase;"></tr>
+                </table>
+
+
+            </div>
+            <div>
+                <mat-paginator #paginator [length]="100" showFirstLastButtons="true" [pageSize]="10"
+                    [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+                </mat-paginator>
+
+            </div>
+
+        </div>
+
+
     </div>
 </div>

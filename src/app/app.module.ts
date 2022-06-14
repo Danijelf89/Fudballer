@@ -108,6 +108,8 @@ export function HttpLoaderFactory(http : HttpClient){
       { path: 'welcomePage/clubList', component: ClubsListComponent , canActivate: [AuthguardService]},
       { path: 'welcomePage/users', component: UsersComponent , canActivate: [Authguardadmin]},
       { path: 'logIn', component: LoginComponent},
+      { path: 'welcomePage/users/clubList', component: ClubsListComponent , canActivate: [AuthguardService]},
+      { path: 'welcomePage/users/footballersList', component: FootballersList , canActivate: [AuthguardService]},
     ]),
 
     JwtModule.forRoot({
