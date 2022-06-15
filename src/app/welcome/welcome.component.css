@@ -2,18 +2,18 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:600;);
 .body {
   
-  background-color: #212121;
+  background-color: white;
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  
   justify-content: center;
   flex-wrap: wrap;
   
 }
 
 .container {
-  background-color: #000;
+  background-color: silver;
   display: inline-block;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
@@ -96,6 +96,7 @@
   left: 0;
   right: 0;
   z-index: 3;
+  width: 100%;
 }
 
 .container:hover > img,
@@ -124,16 +125,15 @@
 
 .wrappedDiv{
   margin-top: 1%;
-  margin-bottom: 1%;
+ 
 }
 
 marquee {
   font-size: 20px;
   color: rgb(0, 8, 255);
   font-weight: bolder;
-  border-color: blue;
-  border-width: 1em;
-  background-color: black;
+  border: 1px solid black;
+  background-color: white;
   margin-bottom: 1px;
 }
 

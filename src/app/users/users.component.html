@@ -1,101 +1,68 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<div fxLayout="row" style="margin-top: 0.5%">
-
-    <div fxLayout="row" fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxShow fxHide.xs
-        style="background-color: white; border: 3px solid orange; margin-right: 0.5%;">
-
-        <mat-sidenav-container>
-            <mat-sidenav #sidenav mode="side" opened=true>
-                <div style="background-color: black; color: blue; margin-bottom: 1%;">
-                    <mat-card-header>
-                        Clubs
-                    </mat-card-header>
-                </div>
-                <div style="margin-bottom: 10%;">
-                    <button mat-fab color="primary" [routerLink]="['clubList']" style="width: 100px">
-                        Clubs
-                    </button>
-                </div>
-                <div style="background-color: black; color: blue; margin-bottom: 1%;">
-                    <mat-card-header>
-                        Footballers
-                    </mat-card-header>
-                </div>
-                <div>
-                    <button mat-fab color="primary" style="width: 100px" [routerLink]="['footballersList']">
-                        Footbalers
-                    </button>
-                </div>
-
-            </mat-sidenav>
-        </mat-sidenav-container>
+<div fxLayout="row wrap" >
+    <div class="marque" fxFlex = "100%">
+        <marquee>{{'HOME.UsersInfo' | translate}}</marquee>
     </div>
-
-
-
-
-    <div fxLayout="row wrap" fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxHide fxShow.xs
-        style="background-color: white; margin-right: 2%; margin-top: 2%;">
-
-
-
-
-        <mat-sidenav-container>
-
-            <mat-sidenav #sidenav mode="side" [(opened)]="opened">
-                <div style="margin-bottom: 10%;">
-                    <button mat-fab color="primary" [routerLink]="['clubList']" style="width: 100px">
-                        Clubs
-                    </button>
-                </div>
-
-                <div>
-                    <button mat-fab color="primary" style="width: 100px" [routerLink]="['footballersList']">
-                        Footbalers
-                    </button>
-                </div>
-
-            </mat-sidenav>
-        </mat-sidenav-container>
-
-
-
-
-
-
-
-
-
-
-    </div>
-
-
-    <div fxHide fxShow.xs>
+    
+    <div fxHide fxShow.xs fxFlex.xs="50px">
         <button mat-button (click)="opened = !opened" style="height: 5px;">
             <mat-icon>menu</mat-icon>
         </button>
     </div>
+</div>
 
+<div fxLayout="row" style="margin-top: 0.5%; width: 100%; height: 100%;">
+    <div fxLayout="row wrap" fxShow fxHide.xs
+        style="margin-right: 0.5%; margin-top: 0.5%; margin-bottom: 1%; border: 1px solid black;">
+        <mat-sidenav-container fxLayoutAlign="center center" style="margin-top:15%;">
+            <mat-sidenav mode="side" opened=true>
+                    <div style="margin-bottom: 10%;" fxLayoutAlign="center center">
+                        <button fxLayoutAlign="center center" mat-fab color="primary" [routerLink]="['clubList']"
+                            style="width: 100px">
+                            Clubs
+                        </button>
+                    </div>
+                        <button mat-fab color="primary" style="width: 100px" [routerLink]="['footballersList']">
+                            Footbalers
+                        </button>
+            </mat-sidenav>
+        </mat-sidenav-container>
+    </div>
 
-    <div fxLayout="row wrap" fxFlexFill>
-        <div fxFlexFill fxFlex="90%" fxFlex.md="80%" fxFlex.sm="80%" fxFlex.xs="80%" class="header">
-            <div fxLayoutAlign="center center marq">
+    <div fxLayout="row wrap" fxHide fxShow.xs style="margin-right: 0.5%; margin-top: 2%;">
+        <div>
+            <mat-drawer-container>
+                <mat-sidenav #sidenav class="side-nav-left"  role="directory" [opened]="opened">
+                    <div class="backdrop" (click)="opened = !opened"></div>
+                    <div class="side-nav-content">
+                        <button mat-fab color="primary" [routerLink]="['clubList']" style="margin-bottom: 50%; width: 100px">
+                            Clubs
+                        </button>
+                        <button mat-fab color="primary" [routerLink]="['footballersList']" style="width: 100px;">
+                            Footballers
+                        </button>
+                    </div>
+                </mat-sidenav>
+            </mat-drawer-container>
+        </div>
+    </div>
 
-                <marquee>{{'HOME.UsersInfo' | translate}}</marquee>
+    <div fxLayout="column wrap" fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxFlexFill>
+        <div class="header" fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%">
+            <div style="border: 1px solid silver;">
+                <div fxFlex="100%" fxLayoutAlign="center center" style="color: blue;">
+                    <h5 fxLayoutAlign="center start"> {{'HOME.FootbalerTitle' | translate}} </h5>
+                </div>
+                <div fxLayoutAlign="end center">
+                    <button mat-button (click)="addUser()" style="color: blue;"
+                        matTooltip="{{ 'HOME.Add' | translate }}">
+                        <mat-icon>library_add</mat-icon>
+                    </button>
+                </div>
             </div>
-
-            <div fxLayoutAlign="end center">
-                <button [hidden]="isVisibleByRole" mat-button (click)="addUser()"
-                    matTooltip="{{ 'HOME.Add' | translate }}">
-                    <mat-icon>library_add</mat-icon>
-                </button>
-            </div>
-
-
-            <div fxLayoutAlign="center stretch">
+            <div style="border: 1px solid black">
                 <table mat-table [dataSource]="dataSourceBase" matSort multiTemplateDataRows
-                    class="mat-elevation-z8 demo-table" fxflex.xs="5%" fxFlexFill>
+                    class="mat-elevation-z8 demo-table" fxFlexFill>
 
                     <!-- Position Column -->
                     <ng-container matColumnDef="username">
@@ -148,18 +115,13 @@
                     <tr mat-row [class.demo-row-is-clicked]="clickedRows.has(row)"
                         *matRowDef="let row; columns: displayedColumnsBase;"></tr>
                 </table>
+                <div>
+                    <mat-paginator #paginator [length]="100" showFirstLastButtons="true" [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+                    </mat-paginator>
 
-
+                </div>
             </div>
-            <div>
-                <mat-paginator #paginator [length]="100" showFirstLastButtons="true" [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
-                </mat-paginator>
-
-            </div>
-
         </div>
-
-
     </div>
 </div>

@@ -33,6 +33,15 @@ export class UsersComponent extends Base implements OnInit {
   isVisibleByRole: boolean = true;
   opened = false;
 
+
+  
+
+  toggleSideBar() {
+
+    this.opened = !this.opened;
+    console.log(this.opened);
+  }
+
   ngOnInit(): void {
     this.getUsers();
   }

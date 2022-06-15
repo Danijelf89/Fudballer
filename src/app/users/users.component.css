@@ -7,21 +7,53 @@
     background-color: white;
     margin-bottom: 0.5%;
     margin-top: 0.5%;
-    margin-right: 2%;
-    border:3px solid orange;
+    margin-right: 1px;
+    
   }
 
   marquee {
     font-size: 20px;
     color: red;
-    font-weight: bolder;
-    border-color: blue;
-    border-width: 1em;
-    background-color: black;
-    margin-bottom: 1px;
+    border: 1px solid black;
+    background-color: white;
+    margin-bottom: 0.3%;
   }
 
- 
+ .side-nav-left {
+    position: fixed !important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent;
+}
+
+.side-nav-content {
+    z-index: 1002;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: calc(100% - 60px);
+    padding: 3px;
+    overflow: auto;
+    overflow-y: none;
+    box-shadow: 0 2px 14px 0 rgba(130, 130, 130, 0.5);
+    background: #FFF;
+    color: #555555 !important;
+}
+
+.backdrop {
+    position: fixed !important;
+    z-index: 1001;
+    height: 100%;
+    width: 100%;
+}
+
+.mat-drawer {
+    box-shadow: unset !important;
+}
 
 
 .tableHeader {
@@ -39,8 +71,6 @@
 
 .demo-table {
    
-      border: 100px;
-      border-color: red;
       background-color: aliceblue;
       
   }

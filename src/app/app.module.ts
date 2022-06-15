@@ -14,7 +14,7 @@ import { IgxComboModule } from "igniteui-angular";
 import { ClubsListComponent } from './Clubs/clubs-list/clubs-list.component';
 import { ClubDetailsComponent } from './Clubs/club-details/club-details.component';
 import { AddUpdateClubComponent } from './Clubs/add-update-club/add-update-club.component';
-import { MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { DeleteComponent } from './shared/delete/delete.component';
@@ -33,23 +33,23 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { LoginComponent } from './login/login.component';
-import {JwtModule} from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import { AuthguardService } from './authguard.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UsersComponent } from './users/users.component';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AddUpdateUserComponent } from './users/add-update-user/add-update-user.component'
 import { ClubsFacade } from './Clubs/clubs-facade';
 import { Authguardadmin } from './authguardadmin.service';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 
-export function tokkentGetter(){
+export function tokkentGetter() {
   return localStorage.getItem("jwt")
 }
 
-export function HttpLoaderFactory(http : HttpClient){
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 
 }
@@ -71,7 +71,7 @@ export function HttpLoaderFactory(http : HttpClient){
     LoginComponent,
     UsersComponent,
     AddUpdateUserComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -97,33 +97,36 @@ export function HttpLoaderFactory(http : HttpClient){
     MatMenuModule,
     MatSidenavModule,
     TranslateModule.forRoot({
-      loader : {
-        provide : TranslateLoader,
-        useFactory : HttpLoaderFactory,
-        deps : [HttpClient]
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     }),
-   
+
     RouterModule.forRoot([
-      { path: 'welcomePage/footballersList', component: FootballersList , canActivate: [AuthguardService]},
-      { path: 'welcomePage', component: WelcomeComponent , canActivate: [AuthguardService]},
-      { path: 'welcomePage/clubList', component: ClubsListComponent , canActivate: [AuthguardService]},
-      { path: 'welcomePage/users', component: UsersComponent , canActivate: [Authguardadmin]},
-      { path: 'logIn', component: LoginComponent},
-      { path: 'welcomePage/users/clubList', component: ClubsListComponent , canActivate: [AuthguardService]},
-      { path: 'welcomePage/users/footballersList', component: FootballersList , canActivate: [AuthguardService]},
+      { path: 'welcomePage/footballersList', component: FootballersList, canActivate: [AuthguardService] },
+      { path: 'welcomePage', component: WelcomeComponent, canActivate: [AuthguardService] },
+      { path: 'welcomePage/clubList', component: ClubsListComponent, canActivate: [AuthguardService] },
+      { path: 'welcomePage/users', component: UsersComponent, canActivate: [Authguardadmin] },
+      { path: 'logIn', component: LoginComponent },
+      { path: 'welcomePage/users/clubList', component: ClubsListComponent, canActivate: [AuthguardService] },
+      { path: 'welcomePage/users/footballersList', component: FootballersList, canActivate: [AuthguardService] },
+
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      
     ]),
 
     JwtModule.forRoot({
-        config:{
-          tokenGetter : tokkentGetter,
-          allowedDomains : ["localhost:44307"],
-          disallowedRoutes : []
-        }
+      config: {
+        tokenGetter: tokkentGetter,
+        allowedDomains: ["localhost:44307"],
+        disallowedRoutes: []
+      }
     }),
     BrowserAnimationsModule
   ],
-  providers: [FootballersService, AuthguardService, Authguardadmin,ClubsFacade],
+  providers: [FootballersService, AuthguardService, Authguardadmin, ClubsFacade],
   bootstrap: [AppComponent]
 })
 export class AppModule {
