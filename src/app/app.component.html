@@ -10,10 +10,16 @@
     <div fxLayoutAlign="end center" fxHide fxShow.xs>
       <div style="background-color: white; color: blue; margin-bottom: 1%;">
         <label style="float: right">
-          <mat-select  style="color: blue"  [(value)]="selectedlanguage" (selectionChange)="onLanguageChanged(selectedlanguage)" placeholder="{{'HOME.Language' | translate}}">
-            <mat-option style="color: blue"  *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}
-            </mat-option>
-          </mat-select>
+          <div class="main" (click)="contentDropdown = !contentDropdown">
+            <img src={{selectedlanguage.src}} alt={{selectedlanguage.alt}}>
+          </div>
+          <div class="content" *ngIf="contentDropdown">
+            <ul>
+              <li *ngFor="let lang of languages" (click)="changeLanguage(lang)">
+                <img src="{{lang.src}}" alt="{{lang.alt}}" > {{lang.lang}}
+              </li>
+            </ul>
+          </div>
         </label>
       </div>
     
@@ -38,10 +44,16 @@
     <div fxLayoutAlign="end center" fxShow fxHide.xs >
       <div style="background-color: white; color: blue; margin-bottom: 1%;" fxLayoutAlign="end center">
         <label style="float: right">
-          <mat-select  style="color: blue"  [(value)]="selectedlanguage" (selectionChange)="onLanguageChanged(selectedlanguage)" placeholder="{{'HOME.Language' | translate}}">
-            <mat-option style="color: blue"  *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}
-            </mat-option>
-          </mat-select>
+          <div class="main" (click)="contentDropdown = !contentDropdown">
+            <img src={{selectedlanguage.src}} alt={{selectedlanguage.alt}}>
+          </div>
+          <div class="content" *ngIf="contentDropdown">
+            <ul>
+              <li *ngFor="let lang of languages" (click)="changeLanguage(lang)">
+                <img src="{{lang.src}}" alt="{{lang.alt}}" > {{lang.lang}}
+              </li>
+            </ul>
+          </div>
         </label>
       </div>
 

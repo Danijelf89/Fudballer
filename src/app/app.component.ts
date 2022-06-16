@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TranslateService } from '@ngx-translate/core'
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
+import { Languagesmodel } from './languagesmodel';
+
 
 const homeUrl = 'http://localhost:4200/';
 
@@ -22,21 +25,28 @@ export class AppComponent implements OnInit {
   role: string = '';
   message: string = '';
   selectedlanguage: any;
-  
- 
+  contentDropdown: boolean = false;
 
-  constructor(private route: Router, public atctiv : ActivatedRoute, public mat: MatDialog, public translate: TranslateService, private snack: MatSnackBar) {
+  selectedLanguagesrc: string = '';
+  selectedLangAlt: string = '';
 
-    translate.addLangs(['en', 'sr']);
-    translate.setDefaultLang('en');
+  languages: Languagesmodel[] = [{
+    src: '../assets/eng.png',
+    alt: "img1",
+    lang: 'en',
+  },
+  {
+    src: '../assets/flag-round-250-serbia.png',
+    alt: "img2",
+    lang: 'sr',
+  }]
+
+
+  constructor(private route: Router, private toastr: ToastrService, public mat: MatDialog, public translate: TranslateService, private snack: MatSnackBar) {
+
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang?.match(/en|sr/) ? browserLang : 'en');
-
-    
-  
   }
-
-  
 
   ngOnInit(): void {
 
@@ -44,12 +54,32 @@ export class AppComponent implements OnInit {
       this.route.navigate(['welcomePage']);
     }
 
+    if (localStorage.getItem('language') === '') {
+      localStorage.setItem("language", "en");
+      var index = this.languages.findIndex(x => x.lang === localStorage.getItem('language'));
+      this.selectedlanguage = this.languages[index];
+      //this.selectedLanguagesrc = this.languages[index].src;
+      //this.selectedLangAlt = this.languages[index].alt;
+      this.translate.use(localStorage.getItem('language')!).subscribe(() => {
+        this.refrehMessage();
+      });
+    }
+
+    else {
+      var index = this.languages.findIndex(x => x.lang === localStorage.getItem('language'));
+      this.selectedlanguage = this.languages[index];
+      //this.selectedLanguagesrc = this.languages[index].src;
+      //this.selectedLangAlt = this.languages[index].alt;
+      
+      this.translate.use(localStorage.getItem('language')!).subscribe(() => {
+        this.refrehMessage();
+      });
+    }
+
     this.hideLogOut = localStorage.getItem("jwt") ? false : true;
     this.hideSignIn = localStorage.getItem("jwt") ? true : false;
 
-    this.name = localStorage.getItem("name")! != null ? localStorage.getItem("name")! : "";
-    this.surname = localStorage.getItem("surname")! != null ? localStorage.getItem("surname")! : ""
-    this.role = localStorage.getItem("role")! != null ? localStorage.getItem("role")! : "";
+    this.refreshData();
 
     this.translate.get('HOME.Settings').subscribe((text: string) => {
       this.refrehMessage();
@@ -58,10 +88,16 @@ export class AppComponent implements OnInit {
 
   
 
-  onLanguageChanged(event: any) {
-    this.translate.use(event).subscribe(() => {
+  changeLanguage(lang: Languagesmodel) {
+   this.selectedlanguage = lang;
+
+    this.translate.use(lang.lang).subscribe(() => {
       this.refrehMessage();
+      localStorage.setItem("language", lang.lang);
     });
+
+    this.contentDropdown = false;
+    console.log('selektovan lang', this.selectedlanguage);
   }
 
   openSettings() {
@@ -70,18 +106,11 @@ export class AppComponent implements OnInit {
 
   logIn() {
     if (localStorage.getItem("jwt")) {
-      this.snack.open("User:" + " " + localStorage.getItem("name")! + " " + localStorage.getItem("surname")! + " is already loged in", "", {
-        duration: 5000,
-        verticalPosition: 'bottom', // 'top' | 'bottom'
-        horizontalPosition: 'center', //'start' | 'center' | 'end' | 'left' | 'right'
-        panelClass: ['white-snackbar']
-
-      });
-
-      this.name = localStorage.getItem("name")!;
-      this.surname = localStorage.getItem("surname")!;
+      this.refreshData();
       this.hideLogOut = localStorage.getItem("jwt") ? false : true;
       this.hideSignIn = localStorage.getItem("jwt") ? true : false;
+
+      this.toastr.info('User is already loged in', 'Info');
 
       this.refrehMessage();
       this.route.navigate(['welcomePage']);
@@ -96,15 +125,25 @@ export class AppComponent implements OnInit {
         return;
       }
 
-      this.name = localStorage.getItem("name")!;
-      this.surname = localStorage.getItem("surname")!;
-      this.role = localStorage.getItem("role")!;
+      this.refreshData();
       this.hideLogOut = false;
       this.hideSignIn = true;
+
+      this.toastr.success(this.name + " " + this.surname, 'Welcome');
 
       this.refrehMessage();
 
     })
+  }
+
+  dropDownLang() {
+    this.contentDropdown = true;
+  }
+
+  refreshData() {
+    this.name = localStorage.getItem("name")!;
+    this.surname = localStorage.getItem("surname")!;
+    this.role = localStorage.getItem("role")!;
   }
 
   refrehMessage() {
@@ -116,6 +155,9 @@ export class AppComponent implements OnInit {
     localStorage.removeItem("name");
     localStorage.removeItem("surname");
     localStorage.removeItem("role");
+
+    this.toastr.success('Goodbye');
+
     this.name = '';
     this.surname = '';
     this.role = '';

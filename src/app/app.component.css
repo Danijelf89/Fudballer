@@ -1,3 +1,5 @@
+@import '~ngx-toastr/toastr';
+
 nav ul{
     list-style-type: none;
     text-align: left;
@@ -12,6 +14,39 @@ nav ul li{
     width: 100%;
     height: 100%;
     
+}
+
+.main{
+    background-color: white;
+   
+    width: 50px;
+    cursor: pointer;
+    padding: 10px;
+    
+}
+
+.content{
+    background-color: white;
+   
+    width: 50px;
+    cursor: pointer;
+    position: absolute;
+   
+}
+
+.content ul{
+    padding: 0;
+    margin: 0;
+
+}
+
+.content ul li{
+    list-style-type: none;
+    border-bottom: 1px solid silver;
+}
+
+.content ul li:hover{
+   background: #c0c0c0fd;
 }
 
 .mainMainDiv{

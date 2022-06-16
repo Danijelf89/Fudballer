@@ -44,6 +44,7 @@ import { ClubsFacade } from './Clubs/clubs-facade';
 import { Authguardadmin } from './authguardadmin.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { ToastrModule } from 'ngx-toastr';
 
 export function tokkentGetter() {
   return localStorage.getItem("jwt")
@@ -96,6 +97,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatCardModule,
     MatMenuModule,
     MatSidenavModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
