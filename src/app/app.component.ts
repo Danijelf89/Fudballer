@@ -1,12 +1,12 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog} from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TranslateService } from '@ngx-translate/core'
-import { extend } from 'hammerjs';
-import { Base } from './shared/base';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+const homeUrl = 'http://localhost:4200/';
 
 @Component({
   selector: 'fu-root',
@@ -22,18 +22,25 @@ export class AppComponent implements OnInit {
   role: string = '';
   message: string = '';
   selectedlanguage: any;
+  
+ 
 
-  constructor(private route: Router, public mat: MatDialog, public translate: TranslateService, private snack: MatSnackBar) {
+  constructor(private route: Router, public atctiv : ActivatedRoute, public mat: MatDialog, public translate: TranslateService, private snack: MatSnackBar) {
 
     translate.addLangs(['en', 'sr']);
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang?.match(/en|sr/) ? browserLang : 'en');
+
+    
+  
   }
+
+  
 
   ngOnInit(): void {
 
-    if (localStorage.getItem("jwt")) {
+    if (localStorage.getItem("jwt") && window.location.href === homeUrl) {
       this.route.navigate(['welcomePage']);
     }
 
@@ -49,8 +56,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onLanguageChanged(event: any) {
+  
 
+  onLanguageChanged(event: any) {
     this.translate.use(event).subscribe(() => {
       this.refrehMessage();
     });
@@ -61,7 +69,6 @@ export class AppComponent implements OnInit {
   }
 
   logIn() {
-
     if (localStorage.getItem("jwt")) {
       this.snack.open("User:" + " " + localStorage.getItem("name")! + " " + localStorage.getItem("surname")! + " is already loged in", "", {
         duration: 5000,

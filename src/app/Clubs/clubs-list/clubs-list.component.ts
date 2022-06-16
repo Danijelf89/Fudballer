@@ -14,6 +14,7 @@ import { Club } from '../club';
 import { ClubDetailsComponent } from '../club-details/club-details.component';
 import { TranslateService } from '@ngx-translate/core'
 import { ClubsFacade } from '../clubs-facade';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'fu-clubs-list',
@@ -30,7 +31,7 @@ import { ClubsFacade } from '../clubs-facade';
 })
 export class ClubsListComponent extends Base implements OnInit {
 
-  constructor(protected facade:ClubsFacade, private changeDetectorRefs: ChangeDetectorRef, public service: FootballersService, public mat: MatDialog, 
+  constructor( protected facade:ClubsFacade, private changeDetectorRefs: ChangeDetectorRef, public service: FootballersService, public mat: MatDialog, 
     public snack: MatSnackBar, public translate: TranslateService ) {
     super(mat, snack);
 
@@ -48,6 +49,8 @@ export class ClubsListComponent extends Base implements OnInit {
   ngOnInit(): void {
     this.getClubs();
     this.isVisibleByRole = localStorage.getItem("role") != null && localStorage.getItem("role") == "Admin" ? false : true;
+
+   
   }
 
   ngAfterViewInit(){
