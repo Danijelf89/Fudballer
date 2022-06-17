@@ -1,4 +1,4 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <div fxLayout="row wrap" >
     <div class="marque" fxFlex = "100%">
         <marquee>{{'HOME.UsersInfo' | translate}}</marquee>
@@ -13,18 +13,32 @@
 
 <div fxLayout="row" style="margin-top: 0.5%; width: 100%; height: 100%;">
     <div fxLayout="row wrap" fxShow fxHide.xs
-        style="margin-right: 0.5%; margin-top: 0.5%; margin-bottom: 1%; border: 1px solid black;">
-        <mat-sidenav-container fxLayoutAlign="center center" style="margin-top:15%;">
+        >
+        <mat-sidenav-container fxLayoutAlign="center center" style="margin-right:15%;">
             <mat-sidenav mode="side" opened=true>
-                    <div style="margin-bottom: 10%;" fxLayoutAlign="center center">
-                        <button fxLayoutAlign="center center" mat-fab color="primary" [routerLink]="['clubList']"
-                            style="width: 100px">
-                            Clubs
-                        </button>
-                    </div>
-                        <button mat-fab color="primary" style="width: 100px" [routerLink]="['footballersList']">
-                            Footbalers
-                        </button>
+               <div>
+                   <img src="../../assets/vector-users-icon.jpg">
+               </div>
+               
+                <div style="padding-left: 15px;">
+                    <a mat-list-item [routerLink]="['clubList']" routerLinkActive="list-item-active">
+                        <mat-icon>dashboard</mat-icon>
+                    </a>
+                    {{'HOME.Clubs' | translate}}
+                </div>
+                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
+
+                <div style="padding-left: 15px;">
+                    <a mat-list-item [routerLink]="['footballersList']" routerLinkActive="list-item-active">
+                        <mat-icon>dashboard</mat-icon>
+                    </a>{{'HOME.FootbalerTitle' | translate}}
+                </div>
+
+                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
             </mat-sidenav>
         </mat-sidenav-container>
     </div>
@@ -35,12 +49,29 @@
                 <mat-sidenav #sidenav class="side-nav-left"  role="directory" [opened]="opened">
                     <div class="backdrop" (click)="opened = !opened"></div>
                     <div class="side-nav-content">
-                        <button mat-fab color="primary" [routerLink]="['clubList']" style="margin-bottom: 50%; width: 100px">
-                            Clubs
-                        </button>
-                        <button mat-fab color="primary" [routerLink]="['footballersList']" style="width: 100px;">
-                            Footballers
-                        </button>
+                       
+                        <div>
+                            <img src="../../assets/vector-users-icon.jpg">
+                        </div>
+                        <div>
+                            <a mat-list-item [routerLink]="['clubList']" routerLinkActive="list-item-active">
+                                <mat-icon>dashboard</mat-icon>
+                            </a>
+                            {{'HOME.Clubs' | translate}}
+                        </div>
+                        <mat-divider></mat-divider>
+                        <mat-divider></mat-divider>
+                        <mat-divider></mat-divider>
+        
+                        <div>
+                            <a mat-list-item [routerLink]="['footballersList']" routerLinkActive="list-item-active">
+                                <mat-icon>dashboard</mat-icon>
+                            </a>{{'HOME.FootbalerTitle' | translate}}
+                        </div>
+        
+                        <mat-divider></mat-divider>
+                        <mat-divider></mat-divider>
+                        <mat-divider></mat-divider>
                     </div>
                 </mat-sidenav>
             </mat-drawer-container>
@@ -51,7 +82,7 @@
         <div class="header" fxFlex="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%">
             <div style="border: 1px solid silver;">
                 <div fxFlex="100%" fxLayoutAlign="center center" style="color: blue;">
-                    <h5 fxLayoutAlign="center start"> {{'HOME.FootbalerTitle' | translate}} </h5>
+                    <h5 fxLayoutAlign="center start"> {{'HOME.Users' | translate}} </h5>
                 </div>
                 <div fxLayoutAlign="end center">
                     <button mat-button (click)="addUser()" style="color: blue;"
@@ -119,7 +150,6 @@
                     <mat-paginator #paginator [length]="100" showFirstLastButtons="true" [pageSize]="10"
                         [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
                     </mat-paginator>
-
                 </div>
             </div>
         </div>

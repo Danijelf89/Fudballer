@@ -8,7 +8,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 import { Languagesmodel } from './languagesmodel';
 
-
 const homeUrl = 'http://localhost:4200/';
 
 @Component({
@@ -26,9 +25,6 @@ export class AppComponent implements OnInit {
   message: string = '';
   selectedlanguage: any;
   contentDropdown: boolean = false;
-
-  selectedLanguagesrc: string = '';
-  selectedLangAlt: string = '';
 
   languages: Languagesmodel[] = [{
     src: '../assets/eng.png',
@@ -58,8 +54,6 @@ export class AppComponent implements OnInit {
       localStorage.setItem("language", "en");
       var index = this.languages.findIndex(x => x.lang === localStorage.getItem('language'));
       this.selectedlanguage = this.languages[index];
-      //this.selectedLanguagesrc = this.languages[index].src;
-      //this.selectedLangAlt = this.languages[index].alt;
       this.translate.use(localStorage.getItem('language')!).subscribe(() => {
         this.refrehMessage();
       });
@@ -67,10 +61,7 @@ export class AppComponent implements OnInit {
 
     else {
       var index = this.languages.findIndex(x => x.lang === localStorage.getItem('language'));
-      this.selectedlanguage = this.languages[index];
-      //this.selectedLanguagesrc = this.languages[index].src;
-      //this.selectedLangAlt = this.languages[index].alt;
-      
+      this.selectedlanguage = this.languages[index]; 
       this.translate.use(localStorage.getItem('language')!).subscribe(() => {
         this.refrehMessage();
       });
@@ -97,7 +88,6 @@ export class AppComponent implements OnInit {
     });
 
     this.contentDropdown = false;
-    console.log('selektovan lang', this.selectedlanguage);
   }
 
   openSettings() {

@@ -43,8 +43,10 @@ import { AddUpdateUserComponent } from './users/add-update-user/add-update-user.
 import { ClubsFacade } from './Clubs/clubs-facade';
 import { Authguardadmin } from './authguardadmin.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { ToastrModule } from 'ngx-toastr';
+import { TestComponent } from './test/test.component';
 
 export function tokkentGetter() {
   return localStorage.getItem("jwt")
@@ -72,6 +74,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     UsersComponent,
     AddUpdateUserComponent,
+    TestComponent,
 
   ],
   imports: [
@@ -97,6 +100,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatCardModule,
     MatMenuModule,
     MatSidenavModule,
+
+    MatListModule,
+
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     TranslateModule.forRoot({
@@ -117,6 +123,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       { path: 'welcomePage/users/footballersList', component: FootballersList, canActivate: [AuthguardService] },
 
       { path: '', redirectTo: '/', pathMatch: 'full' },
+
+      { path: 'welcomePage/test', component: TestComponent, canActivate: [Authguardadmin] },
       
     ]),
 

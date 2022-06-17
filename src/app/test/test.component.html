@@ -1,0 +1,47 @@
+<div class="mainDiv">
+    <div class="leftDiv">
+        <div class="leftDivHeader">
+            <mat-card-header>Add player</mat-card-header>
+        </div>
+    
+     <mat-divider></mat-divider>
+     <mat-divider></mat-divider>
+     <div class="leftPlayer">
+        <button mat-button >
+            <mat-icon>face</mat-icon>
+        </button>
+       <label>Player</label>
+    </div>
+    </div>
+
+    <div class="rightDiv">
+        <div class="header">
+            <label>Igra</label>
+        </div>
+
+        <div class="matCard"  fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+            <mat-card class="mat-elevation-z4">
+                <mat-card-title-group>
+                    <mat-card-title>Aneta Cebovic</mat-card-title>
+                    <mat-card-subtitle>Pozicija 1</mat-card-subtitle>
+                    <img mat-card-lg-image src="https://problemparrots.co.uk/wp-content/uploads/Budgie.jpg">
+                </mat-card-title-group>
+               
+               
+                <mat-card-content [formGroup]="payerForm">
+                  
+                        <mat-label>Bodova: {{pointsSum}}
+                        </mat-label>
+    
+                        <input type="number" formControlName="points" style="width: 25%;">
+                        
+                  
+                   
+                </mat-card-content>
+                <div class="addButton">
+                    <button mat-button (click)="Addpoints()"><mat-icon>library_add</mat-icon></button>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
