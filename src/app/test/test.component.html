@@ -1,47 +1,57 @@
 <div class="mainDiv">
     <div class="leftDiv">
+
         <div class="leftDivHeader">
-            <mat-card-header>Add player</mat-card-header>
+
+            <ion-header>
+                Add player
+            </ion-header>
         </div>
-    
-     <mat-divider></mat-divider>
-     <mat-divider></mat-divider>
-     <div class="leftPlayer">
-        <button mat-button >
-            <mat-icon>face</mat-icon>
-        </button>
-       <label>Player</label>
-    </div>
+
+        <div class="leftConten">
+            <ion-button mat-button (click)="addNewPlayer()">
+                <ion-icon name="add-outline"></ion-icon>
+            </ion-button>
+            <ion-label>
+                Player
+            </ion-label>
+        </div>
     </div>
 
     <div class="rightDiv">
         <div class="header">
-            <label>Igra</label>
+            <ion-header>
+                Igra
+            </ion-header>
         </div>
+        <div class="test" fxLayout="row wrap">
+            <div class="matCard" fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="40%" fxFlex.md="40%"
+                *ngFor="let element of Playersmodel">
+                <ion-card>
+                    <ion-card-header>
+                        <div class="cardHeader">
+                            <ion-img src={{element.pictureUrl}}></ion-img>
+                            <ion-card-title>{{element.name}} {{element.surname}}</ion-card-title>
+                            <ion-card-subtitle>1</ion-card-subtitle>
+                        </div>
+                    </ion-card-header>
 
-        <div class="matCard"  fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
-            <mat-card class="mat-elevation-z4">
-                <mat-card-title-group>
-                    <mat-card-title>Aneta Cebovic</mat-card-title>
-                    <mat-card-subtitle>Pozicija 1</mat-card-subtitle>
-                    <img mat-card-lg-image src="https://problemparrots.co.uk/wp-content/uploads/Budgie.jpg">
-                </mat-card-title-group>
-               
-               
-                <mat-card-content [formGroup]="payerForm">
-                  
-                        <mat-label>Bodova: {{pointsSum}}
-                        </mat-label>
-    
-                        <input type="number" formControlName="points" style="width: 25%;">
-                        
-                  
-                   
-                </mat-card-content>
-                <div class="addButton">
-                    <button mat-button (click)="Addpoints()"><mat-icon>library_add</mat-icon></button>
-                </div>
-            </mat-card>
+                    <ion-card-content [formGroup]="payerForm">
+                        <div>
+                            <ion-label>Bodova: {{element.points}}
+                            </ion-label>
+                        </div>
+                        <div>
+                            <input type="number" formControlName="points" style="width: 25%;" required>
+                        </div>
+                    </ion-card-content>
+                    <div class="addButton">
+                        <ion-button color="primary" mat-button (click)="Addpoints(element)">
+                            <ion-icon name="add-outline"></ion-icon>
+                        </ion-button>
+                    </div>
+                </ion-card>
+            </div>
         </div>
     </div>
 </div>

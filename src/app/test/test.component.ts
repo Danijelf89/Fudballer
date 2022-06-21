@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Playersmodel } from '../playersmodel';
 
 @Component({
   selector: 'fu-test',
@@ -8,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class TestComponent implements OnInit {
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   pointsSum: number = 0;
 
@@ -16,11 +18,39 @@ export class TestComponent implements OnInit {
   }
 
   payerForm = new FormGroup({
-    points: new FormControl(Validators.required),
+    points: new FormControl(0,[Validators.required, Validators.min(1)]),
   });
 
-  Addpoints(){
-    this.pointsSum = this.pointsSum + this.payerForm.value.points;
+  Playersmodel : Playersmodel[] = [];
+
+
+
+
+
+
+  Addpoints(item : Playersmodel){
+
+    if(!this.payerForm.valid){
+
+
+    }
+    item.points = item.points + this.payerForm.value.points;
+
+    if(item.points > 1000){
+      this.toastr.success(item.name + " " + item.surname, 'WINNER!!!!');
+
+    }
+  }
+
+  addNewPlayer(){
+    this.Playersmodel.push({
+      id:1,
+      name : 'Aneta',
+      surname : "Cebovic",
+      points : 0,
+      pointsSum : 0,
+      pictureUrl : "https://problemparrots.co.uk/wp-content/uploads/Budgie.jpg"
+    });
   }
 
 }

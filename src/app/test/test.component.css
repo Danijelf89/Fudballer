@@ -2,80 +2,84 @@
     display:flex;
     flex-direction: row;
     border: 2px solid black;
-    width: 100%;
-    height: 90%;
+    height: 98vh;
+    width: 100vw;
+}
+
+.leftDivHeader{
+    align-items: center;
 }
 
 .leftDiv{
-    border: 2px solid red;
-   
-    width: 10%;
+    border: 2px solid black;
     display:flex;
     flex-direction: column;
     margin-right: 1%;
     margin-top: 1%;
-    text-align: start;
+    
     background-color: silver;
 }
 
+.cardHeader{
+    display:flex;
+    flex-direction: column;
+}
+
+.leftConten{
+    display:flex;
+    flex-direction: column;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+}
+
 .rightDiv{
-    border: 2px solid green;
+    border: 2px solid black;
     padding: 5px;
     width: 100%;
+    height: 90%;
     margin-top: 1%;
     margin-right: 1%;
     display:flex;
     flex-direction: column;
+    overflow-y:scroll;
+    overflow-x:scroll;
     
-}
-
-.mat-card-content{
-    display:flex;
-    flex-direction: column;
-}
-
-.matCard{
-    margin: 1%;
-    width: 25%;
+    
 }
 
 .addButton{
     text-align: end;
 }
 
-.mat-icon{
-   
-    margin-right: 1px;
-    
-}
-.mat-button{
-    
-    color: blue;
-}
 
-.leftPlayer{
-    text-align: start;
-    color: blue;
-    border: 1px solid black;
-}
-
-.leftPlayer.label{
-    text-align: center;
-    color: red;
-}
 
 .leftDivHeader{
     border: 1px solid black;
     background-color: orange;
     color: blue;
-    padding-left: 0;
-    margin: 0;
+    
     text-align: center;
+    display:flex; 
 }
 
+
 .header{
-    background-color: orange;
-    border: 1px solid black;
+    border: 2px solid black;
+   background-color: orange;
     height: 5%;
     text-align: center;
 }
+
+.mat-card-lg-image{
+    width: 70%;
+}
+
+:root {
+    --ion-color-primary: #006600;
+    --ion-color-primary-rgb: 0, 102, 0;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #005a00;
+    --ion-color-primary-tint: #1a751a;
+  }

@@ -47,6 +47,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { ToastrModule } from 'ngx-toastr';
 import { TestComponent } from './test/test.component';
+import { IonicModule } from '@ionic/angular';
 
 export function tokkentGetter() {
   return localStorage.getItem("jwt")
@@ -135,7 +136,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         disallowedRoutes: []
       }
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    IonicModule.forRoot()
   ],
   providers: [FootballersService, AuthguardService, Authguardadmin, ClubsFacade],
   bootstrap: [AppComponent]
