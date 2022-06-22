@@ -5,4 +5,5 @@ export interface Playersmodel {
     points : number;
     pointsSum : number;
     pictureUrl : string;
+    positionCurrentGame : number;
 }

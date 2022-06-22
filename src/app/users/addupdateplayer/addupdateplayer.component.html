@@ -1,0 +1,35 @@
+<div class="main" >
+
+
+    <form [formGroup]="payerForm">
+      <ion-item lines="full">
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="name" type="text" required></ion-input>
+        <span class="text-danger" *ngIf="name && name.invalid">
+            {{'HOME.MandatoryField' | translate}}
+        </span>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Surname</ion-label>
+        <ion-input formControlName="surname" type="text" required></ion-input>
+        <span class="text-danger" *ngIf="surname && surname.invalid">
+            {{'HOME.MandatoryField' | translate}}
+        </span>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Picture url</ion-label>
+        <ion-input formControlName="pictureUrl" type="text"></ion-input>
+      </ion-item>
+
+     
+    </form>
+    <ion-item-divider></ion-item-divider>
+    <ion-row class="ion-justify-content-center">
+        <ion-row>
+           <ion-button color="danger" expand="block" (click)="save()"><ion-icon name="save-sharp"></ion-icon></ion-button>
+           <ion-button color="danger" onclick="Cancell()" expand="block"><ion-icon name="close-sharp"></ion-icon></ion-button>
+         </ion-row>
+       </ion-row>
+
+</div>
+  

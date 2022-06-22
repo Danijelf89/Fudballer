@@ -42,7 +42,7 @@
                         <div class="cardHeader">
                             <ion-img src={{element.pictureUrl}}></ion-img>
                             <ion-card-title>{{element.name}} {{element.surname}}</ion-card-title>
-                            <ion-card-subtitle>1</ion-card-subtitle>
+                            <ion-card-subtitle>{{element.positionCurrentGame}}</ion-card-subtitle>
                         </div>
                     </ion-card-header>
 
@@ -52,7 +52,7 @@
                             </ion-label>
                         </div>
                         <div>
-                            <input type="number" formControlName="points" style="width: 25%;" required>
+                            <input type="number" formControlName="points" style="width: 40%;" required>
                         </div>
                     </ion-card-content>
                     <div class="addButton">
