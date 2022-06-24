@@ -10,6 +10,8 @@
     align-items: center;
 }
 
+
+
 .leftDiv{
     border: 2px solid black;
     display:flex;
@@ -34,8 +36,8 @@
 }
 
 .test{
-    height: 50vh;
-    border: 2px solid black;
+    
+    border: 2px solid purple;
     display: flex;
     flex-direction: column;
     overflow-y:scroll;
@@ -49,7 +51,7 @@
    display: flex;
    flex-direction: column;
    
-   height: 40vh;
+   
   
    overflow-y:scroll;
    overflow-x:scroll;
@@ -71,7 +73,13 @@
 }
 
 .addButton{
-    text-align: end;
+   align-items: flex-end;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    position: relative;
 }
 
 

@@ -12,7 +12,7 @@ import { Club } from '../Clubs/club';
 import { IFootballers } from '../Footballers/footballers.model';
 import { FootballersService } from '../Footballers/footballers.service';
 import { Playersmodel } from '../playersmodel';
-import { AddupdateplayerComponent } from '../users/addupdateplayer/addupdateplayer.component';
+import { AddupdateplayerComponent } from './addupdateplayer/addupdateplayer.component';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class TestComponent implements OnInit {
       points: 0,
       pointsSum: 0,
       pictureUrl: "https://problemparrots.co.uk/wp-content/uploads/Budgie.jpg",
-      positionCurrentGame : 1
+      positionCurrentGame: 1
     },
     {
       id: 2,
@@ -55,8 +55,8 @@ export class TestComponent implements OnInit {
       surname: "Filipovic",
       points: 0,
       pointsSum: 0,
-      pictureUrl: "https://problemparrots.co.uk/wp-content/uploads/Budgie.jpg",
-      positionCurrentGame : 2
+      pictureUrl: "https://media1.popsugar-assets.com/files/thumbor/YX-2J4ndcYxiFDtqpJ0Ed8NkMfM/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2014/08/08/878/n/1922507/9ed5cdef48c5ef69_thumb_temp_image32304521407524949/i/Funny-Cat-GIFs.jpg",
+      positionCurrentGame: 2
     }
 
     ];
@@ -86,42 +86,25 @@ export class TestComponent implements OnInit {
   Addpoints(item: Playersmodel) {
 
     console.log('pre', this.Playersmodel.length);
-
     var index = this.Playersmodel.findIndex(x => x.id === item.id);
-
     this.Playersmodel[index].points = this.payerForm.value.points + this.Playersmodel[index].points;
+    this.sortAndPosition();
 
-    
+    this.payerForm.setValue({ points: 0 })
 
-    this.payerForm.reset(this.payerForm.value.points = 0);
-this.sortAndPosition();
-
-
-    
-
-    if(item.points > 1000){
-    this.toastr.success(item.name + " " + item.surname, 'WINNER!!!!');
-
+    if (item.points > 1000) {
+      this.showToast(`WINNER!! ${item.name}  ${item.surname}`, 'primary');
     }
   }
 
-  sortAndPosition(){
-    let tempForSort =this.Playersmodel.map((x) => x);
+  sortAndPosition() {
 
-    tempForSort.sort((a, b) => b.points - a.points);
-    
-        
-    
-        tempForSort.forEach(childObj=> {
-          
-          var index = this.Playersmodel.findIndex(x => x.id === childObj.id);
-    
-          this.Playersmodel[index].positionCurrentGame = this.defaultPosi;
-          this.defaultPosi ++;
-         
-       });
-    
-        this.defaultPosi = 1;
+    this.Playersmodel.sort((a, b) => b.points - a.points).forEach(obj => {
+      obj.positionCurrentGame = this.defaultPosi;
+      this.defaultPosi++;
+    });
+
+    this.defaultPosi = 1;
   }
 
 
@@ -130,31 +113,54 @@ this.sortAndPosition();
     let di = this.mat.open(AddupdateplayerComponent, { data: { player: {}, operation: "Add" } });
     di.afterClosed().subscribe(res => {
       if (Object.keys(res.result).length > 0) {
+        res.result.id = this.getLastId();
         this.Playersmodel.push(res.result);
         this.dataSourceBase = new MatTableDataSource(this.Playersmodel);
-        this.showToast();
+        this.showToast('New player has been added', 'success');
 
         this.sortAndPosition();
-
       }
     })
 
 
   }
 
-  async showToast() {
+  getLastId(): number {
+    let copy = this.Playersmodel.map((x) => x);
+
+    let maxid = Math.max.apply(Math, copy.map(x => x.id));
+    maxid++;
+    return maxid;
+  }
+
+  deletePlayer(id: number){
+    var index = this.Playersmodel.findIndex(x => x.id === id);
+    this.Playersmodel.splice(index, 1);
+    this.sortAndPosition();
+  }
+
+  async showToast(messsage: string, color: string) {
     const t = await this.toastController.create({
-      message: 'New player has been added',
+      message: messsage,
       duration: 2000,
       position: 'top',
-      color: 'success',
+      color: color,
 
     });
     t.present();
   }
 
+  showLocation(){
+    if(!navigator.geolocation){
+console.log('location is not supported');
+return;
+    }
+    navigator.geolocation.getCurrentPosition((position)=>{
+      console.log(`lat: ${position.coords.latitude}`);
+    })
+  }
+
 }
-function cloneDeep(Playersmodel: Playersmodel[]) {
-  throw new Error('Function not implemented.');
-}
+
+
 

@@ -48,7 +48,7 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { ToastrModule } from 'ngx-toastr';
 import { TestComponent } from './test/test.component';
 import { IonicModule } from '@ionic/angular';
-import { AddupdateplayerComponent } from './users/addupdateplayer/addupdateplayer.component';
+import { AddupdateplayerComponent } from './test/addupdateplayer/addupdateplayer.component';
 
 export function tokkentGetter() {
   return localStorage.getItem("jwt")

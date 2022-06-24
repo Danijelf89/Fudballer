@@ -25,6 +25,15 @@
             Standings
             </ion-label>
         </div>
+
+        <div class="leftConten">
+            <ion-button mat-button (click)="showLocation()">
+                <ion-icon name="locate-sharp"></ion-icon>
+            </ion-button>
+            <ion-label>
+            Locate
+            </ion-label>
+        </div>
     </div>
 
     <div class="rightDiv">
@@ -34,13 +43,14 @@
             </ion-header>
         </div>
        
-        <div class="test" fxLayout="row wrap" >
-            <div class="matCard" fxFlex="15%" fxFlex.xs="100%" fxFlex.sm="50%" fxFlex.md="20%"
+        <div class="test" fxLayout="row wrap" 
+        [style.height]="showHideStandings == false ? '100%' : '100%'">
+            <div class="matCard" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="40%" fxFlex.md="40%"
                 *ngFor="let element of Playersmodel">
-                <ion-card>
+                <ion-card  fxFlex.xs="100%">
                     <ion-card-header>
                         <div class="cardHeader">
-                            <ion-img src={{element.pictureUrl}}></ion-img>
+                            <ion-img fxFlex="200px"  src={{element.pictureUrl}}></ion-img>
                             <ion-card-title>{{element.name}} {{element.surname}}</ion-card-title>
                             <ion-card-subtitle>{{element.positionCurrentGame}}</ion-card-subtitle>
                         </div>
@@ -54,12 +64,22 @@
                         <div>
                             <input type="number" formControlName="points" style="width: 40%;" required>
                         </div>
+                        <div class="buttons">
+                            <div >
+                                <ion-button color="danger" (click)="deletePlayer(element.id)">
+                                    <ion-icon name="trash-bin-sharp"></ion-icon>
+        
+                                </ion-button>
+                            </div>
+                            <span fxFlex></span>
+                            <div class="addButton" fxLayoutAlign="end center">
+                                <ion-button color="primary" mat-button (click)="Addpoints(element)">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                </ion-button>
+                            </div>
+                        </div>
                     </ion-card-content>
-                    <div class="addButton">
-                        <ion-button color="primary" mat-button (click)="Addpoints(element)">
-                            <ion-icon name="add-outline"></ion-icon>
-                        </ion-button>
-                    </div>
+                   
                 </ion-card>
             </div>
 
@@ -71,8 +91,8 @@
                 Standings
               </ion-header>
         </div>
-        <div class="divIspod" fxShow  fxHide.xs [hidden]="showHideStandings">
-            <table mat-table [dataSource]="dataSourceBase" matSort multiTemplateDataRows class="mat-elevation-z8"
+        <div class="divIspod" fxShow  fxHide.xs [hidden]="showHideStandings" fxFlex="100%" >
+            <table  mat-table [dataSource]="dataSourceBase" matSort multiTemplateDataRows class="mat-elevation-z8"
             class="demo-table" >
             <!-- Position Column -->
             <ng-container matColumnDef="name">
@@ -88,7 +108,7 @@
 
             <ng-container matColumnDef="toalPoints">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
-                <td mat-cell *matCellDef="let element">{{element.points}}</td>
+                <td mat-cell *matCellDef="let element">{{element.pointsSum}}</td>
             </ng-container>
 
             <!-- Weight Column -->

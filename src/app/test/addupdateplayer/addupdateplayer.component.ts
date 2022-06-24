@@ -20,7 +20,7 @@ export class AddupdateplayerComponent implements OnInit {
   payerForm = new FormGroup({
     name: new FormControl("", Validators.required),
     surname: new FormControl("", Validators.required),
-    pictureUrl: new FormControl("", Validators.required),
+    pictureUrl: new FormControl(""),
     points: new FormControl(0),
   });
 
@@ -49,9 +49,10 @@ export class AddupdateplayerComponent implements OnInit {
     }
 
     this.dialogRef.close({result : this.payerForm.value});
+  }
 
-
-
+  cancell(){
+    this.dialogRef.close({result : {}});
   }
 
 }
